@@ -1,0 +1,44 @@
+<?php
+/** @var Contact_Block_Create $class */
+$class = new Contact_Block_Create();
+$contact = $class->getFieldValue();
+?>
+<form action="<?php echo Core_App::getBaseUrl() ?>contact/save/" method="post"
+      role="form" id="form_create" data-toggle="validator">
+    <?php if (isset($contact['id'])): ?>
+        <input type="hidden" name="update" value="1">
+        <input type="hidden" name="id" value="<?php echo $contact['id'] ?>">
+    <?php endif; ?>
+    <div class="form-group">
+        <label for="name">Name contact:</label>
+        <input class="form-control require" id="name"
+               type="text" <?php if (isset($contact['name'])) echo 'value="' . $contact['name'] . '"' ?>
+               name="name" placeholder="Contact name" required/>
+        <div class="help-block with-errors"></div>
+    </div>
+    <?php foreach ($class->getFormFields($class->getId()) as $field): ?>
+        <?php if ($field['type_input'] != 'textarea'): ?>
+            <div class="form-group">
+                <label for="control_<?php echo $field['id'] ?>"><?php echo $field['name'] ?>:</label>
+                <input id="control_<?php echo $field['id'] ?>" type="<?php echo $field['type_input'] ?>"
+                       name="attrib[<?php echo $field['id'] ?>]"
+                    <?php if ($field['placeholder']) echo 'placeholder = "' . $field['placeholder'] . '"' ?>
+                    <?php if (isset($contact[$field['id']])) echo 'value="' . $contact[$field['id']] . '"' ?>
+                    <?php echo $field['required'] ?>
+                       class="form-control"
+                >
+                <div class="help-block with-errors"></div>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($field['type_input'] == 'textarea'): ?>
+            <div class="form-group">
+                <label for="control_<?php echo $field['id'] ?>"><?php echo $field['name'] ?></label> :
+                        <textarea id="control_<?php echo $field['id'] ?>" name="attrib[<?php echo $field['id'] ?>]"
+                                  class="form-control"><?php if (isset($contact[$field['id']])) echo $contact[$field['id']] ?></textarea>
+                <div class="help-block with-errors"></div>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <input class="btn btn-success" type="submit" id="save" value="Save">
+</form>

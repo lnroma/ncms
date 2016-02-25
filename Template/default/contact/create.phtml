@@ -1,0 +1,86 @@
+<?php
+/** @var Contact_Block_Create $this */
+?>
+    <?php if ($this->getCountField()->cnt == 0): ?>
+        <div class="page-header">
+            <h1>create your contact</h1>
+            <p class="lead">Your not have attribute for create contact you can adding the attribute by this form</p>
+        </div>
+    <?php else: ?>
+        <div class="page-header">
+            <h1>create your contact</h1>
+        </div>
+        <?php  $this->getChunk('contact/forms/create.phtml'); ?>
+    <?php endif; ?>
+
+    <div class="modal fade" id="crAttr" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create new attribute</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div id="formAttr" role="form" class="form-horizontal">
+                        <!--    <div id="attrib">-->
+                        <input type="hidden" name="url" value="<?php Core_App::getBaseUrl() ?>/contact/create/">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">Name attribute:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="name" type="text" placeholder="name" name="name"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Placeholder:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="place" type="text" placeholder="placeholder"
+                                       name="placeholder">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <label>
+                                    <select id="type_input" name="type_input" class="form-control">
+                                        <option value="text">text</option>
+                                        <option value="email">Email validation as mail</option>
+                                        <option value="url">Site url vildation as url</option>
+                                        <option value="textarea">textarea</option>
+                                    </select> Chose input type
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="requir" type="checkbox" name="required" value="required"> Required
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="sing" class="checkbox" type="checkbox" name="show_in_greed"
+                                               value="1">
+                                        Show in greed
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" onclick='ajaxAttrib()'>Save attribute by ajax</button>
+                        <!--    </div>-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear">&nbsp;</div>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#crAttr">Add new attribute</button>

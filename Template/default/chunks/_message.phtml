@@ -1,0 +1,13 @@
+<?php if (isset($_SESSION['message'])): ?>
+    <?php if (!is_null($_SESSION['message'])): ?>
+        <div class="alert
+            <?php if($_SESSION['type'] == 'success') echo 'alert-success' ?>
+            <?php if($_SESSION['type'] == 'error') echo 'alert-danger' ?>
+            <?php if($_SESSION['type'] == 'info') echo 'alert-info' ?>
+            <?php if($_SESSION['type'] == 'warning') echo 'alert-warning' ?>
+            ">
+            <?php echo $_SESSION['message'] ?>
+            <?php $_SESSION['message'] = null ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
