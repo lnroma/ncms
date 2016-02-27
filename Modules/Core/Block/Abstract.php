@@ -75,6 +75,7 @@ class Core_Block_Abstract {
 
     public function __call($name, $arguments)
     {
+//        var_dump($this->_data);die;
         // TODO: Implement __call() method.
         if($name == 'setData') {
             $this->_data[$arguments[0]] = $arguments[1];

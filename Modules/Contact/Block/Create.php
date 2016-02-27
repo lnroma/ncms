@@ -38,10 +38,13 @@ class Contact_Block_Create extends Core_Block_Abstract {
     }
 
     public function getFieldValue($id = null) {
-        if(!isset(Core_App::getParams()['id'])) {
-            return array();
-        } else {
+
+        if(isset(Core_App::getParams()['id'])) {
             $id = Core_App::getParams()['id'];
+        }
+
+        if(is_null($id)) {
+            return array();
         }
 
         $contModel = new Contact_Model_Contact();

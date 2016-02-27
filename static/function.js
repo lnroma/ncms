@@ -12,28 +12,26 @@ function showFormAttributeCreate() {
 
 
 function ajaxAttrib() {
-    var name = document.getElementById('name');
-    var place = document.getElementById('place');
-    var typeInput = _getSelectedType();
-    var requir = document.getElementById('requir').checked ? 1 : 0;
-    var sing = document.getElementById('sing').checked ? 1 : 0;
-    var req = new XMLHttpRequest();
-    req.addEventListener('load',doneajax);
-    req.open('POST','/contact/index/saveAttrib/ajax/true',true);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    console.log(sing);
-    req.send("name="+name.value
-            +"&place="+place.value
-            +"&type_input="+typeInput
-            +"&required=1"+requir
-            +"&placeholder="+place.value
-            +"&show_in_greed="+sing);
+    var formData = $('#formAttrCreate').serialize();
+    $.ajax({
+        url:'/contact/index/saveAttrib/ajax/true',
+        dataType:'json',
+        type:'POST',
+        data:formData,
+        success:function(data) {
+            $('#closeBtn').trigger('click');
+            $('#form_create .form-group').last().after(data.html);
+            console.log(data);
+        }
+    });
+    console.log(formData);
+
 }
 
 /** wrap ajax to form **/
-function doneajax() {
-    console.log(this.response);
-    var json = JSON.parse(this.response);
+function doneajax(response) {
+    //console.log(this.response);
+    var json = JSON.parse(response);
     var wrapForm = document.getElementById('js-wrapper');
     var wrapper = document.createElement('input');
     wrapper.setAttribute('type','text');

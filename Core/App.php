@@ -17,6 +17,8 @@ class Core_App {
     static private $_modulConfig = null;
     static private $_controllObject = null;
     static private $_allModulesConfiguration = null;
+    static private $_controllecClass = null;
+    static private $_loadingClasses = array();
     /**
      * set root path
      * @param $basePath
@@ -101,7 +103,7 @@ class Core_App {
 
         self::$_modulConfig = $configModul;
 
-        self::$_controllObject = self::_loadController($configModul,$params);
+        self::$_controllObject = self::loadController($configModul,$params);
 
         return true;
     }
@@ -121,29 +123,60 @@ class Core_App {
      * @return mixed
      * @throws Exception_Notfound
      */
-    static protected function _loadController($modulConfig,$params) {
+    static public function loadController($modulConfig,$params) {
 
         if(!isset($modulConfig['controllers'])) {
             throw new Exception_Notfound('Page not found');
         }
 
         $controllersModul = $modulConfig['controllers'].'_'.ucfirst($params['controllerName']);
-        $controllersName = $params['controllerName'];
 
-        $object = new $controllersModul;
+        if(!class_exists($controllersModul)) {
+            throw new Exception_Notfound('Not found class controller');
+        }
 
+        $object = self::getControllerClass($controllersModul);
+
+        return self::_callControllerAction($object,$params);
+    }
+
+    /**
+     * get controller once in load class
+     * @param $controller
+     * @return null
+     */
+    static public function getControllerClass($controller) {
+        if(is_null(self::$_controllecClass)) {
+            self::$_controllecClass = new $controller;
+        }
+        return self::$_controllecClass;
+    }
+
+    /**
+     * call controller action
+     * @param $objectController
+     * @param $params
+     * @return mixed
+     * @throws Exception_Notfound
+     */
+    static protected function _callControllerAction($objectController,$params) {
         $params = Core_App::getParams();
+
         $action = $params['action'].'Action';
-//        var_dump($controllersModul,$action,$controllersName);die;
-        if(!method_exists($object,$action)) {
+
+        if(!method_exists($objectController,$action)) {
             throw new Exception_Notfound('Page not found');
         }
 
-        call_user_func(array($object,$action));
+        call_user_func(array($objectController,$action));
 
-        return $object;
+        return $objectController;
     }
 
+    /**
+     * get config module
+     * @return null
+     */
     static public function getConfigModul() {
         return self::$_modulConfig;
     }
@@ -218,7 +251,11 @@ class Core_App {
         } else {
             $result['action'] = 'index';
         }
-
+        $result = self::adminControllerGenerate($result);
+        // alliasses
+        $result = self::routeAliassisGenerate($result);
+        //router load event
+        $result = self::dispathEvent('router_load',$result);
         // generate params
         for ( $i=3; $i<count($params); $i++ ) {
             if( $i%2 != 0 ) {
@@ -229,6 +266,40 @@ class Core_App {
         }
 
         return $result;
+    }
+
+    /**
+     * generate alias for admin controllers
+     * @param $params
+     */
+    static private function adminControllerGenerate($params) {
+        if($params['controller'] == Config_App::getConfig()['adminurl']) {
+            $params['controller'] = 'admin';
+        }
+        return $params;
+    }
+
+    static private function routeAliassisGenerate($params) {
+        $aliasis = Config_Route::getConfig();
+        $path = str_replace($_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']);
+        $path = trim($path,'/?');
+        if(!isset($aliasis[$path])) {
+            return $params;
+        }
+        $pathArr = explode('/',$aliasis[$path]);
+        $params['controller'] = $pathArr[0];
+        $params['controllerName'] = $pathArr[1];
+        $params['action'] = $pathArr[2];
+        return $params;
+    }
+
+    /**
+     * todo for generate rout single page
+     * @param $params
+     * @return mixed
+     */
+    static private function pageRoutGenerate($params) {
+        return $params;
     }
 
     static public function getAllModulesConfig() {
@@ -243,6 +314,40 @@ class Core_App {
             self::$_allModulesConfiguration = $tmpConfig;
         }
         return self::$_allModulesConfiguration;
+    }
+
+    /**
+     * get session data by key
+     * @param $key
+     * @return null
+     */
+    static public function getSessionData($key) {
+        if(isset($_SESSION[$key])) {
+            return $_SESSION[$key];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * dispath event for observer
+     * @param $eventKey
+     * @param $data
+     * @return mixed
+     */
+    static public function dispathEvent($eventKey,$data) {
+        $modules = self::getAllModulesConfig();
+
+        foreach($modules as $_mod) {
+            if(isset($_mod[$eventKey])) {
+               $data = call_user_func(array(
+                    new $_mod[$eventKey]['observer'],
+                    $_mod[$eventKey]['method']
+                ),$data);
+            }
+        }
+
+        return $data;
     }
 }
 

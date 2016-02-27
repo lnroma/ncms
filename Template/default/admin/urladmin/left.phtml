@@ -1,0 +1,16 @@
+<div class="panel panel-success">
+    <div class="panel-heading">Adding render rule</div>
+    <div class="panel-body">
+        <form action="<?php echo Core_App::getBaseUrl().Config_App::getConfig()['adminurl'].'/url/add'?>" method="post" role="form">
+            <div class="form-group">
+                <label for="from_url">From url</label>
+                <input id="from_url" class="form-control" type="text" name="from_url" required>
+            </div>
+            <div class="form-group">
+                <label for="to_url">To url</label>
+                <input id="to_url" class="form-control" type="text" name="to_url" required>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>

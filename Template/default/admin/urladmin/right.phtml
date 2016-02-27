@@ -1,0 +1,29 @@
+<div class="panel panel-success">
+    <div class="panel-heading">Rout grid</div>
+    <div class="panel-body">
+        <?php if(count($this->getAllRewrite()) > 0) : ?>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>id</td>
+                    <td>Url from</td>
+                    <td>Url to</td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($this->getAllRewrite() as $_rew): ?>
+                    <tr>
+                        <td><?php echo $_rew['id'] ?></td>
+                        <td><?php echo $_rew['from_url'] ?></td>
+                        <td><?php echo $_rew['to_url'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php else: ?>
+            You don't have any rewritesgit
+        <?php endif; ?>
+    </div>
+</div>

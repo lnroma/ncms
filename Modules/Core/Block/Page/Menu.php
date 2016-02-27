@@ -7,6 +7,9 @@
  */
 class Core_Block_Page_Menu extends Core_Block_Abstract {
 
+    /**
+     * Core_Block_Page_Menu constructor.
+     */
     public function __construct()
     {
         $this
@@ -18,12 +21,15 @@ class Core_Block_Page_Menu extends Core_Block_Abstract {
      * get modules menu
      * @return array
      */
-    public function getMenuModules() {
+    public function getMenuModules($keyMenu = 'menu_frontend') {
         $config = Core_App::getAllModulesConfig();
         $tmp = array();
 
         foreach($config as $_conf) {
-            $tmp = array_merge($_conf['menu_frontend'],$tmp);
+            if(!isset($_conf[$keyMenu])) {
+                continue;
+            }
+            $tmp = array_merge($_conf[$keyMenu],$tmp);
         }
 
         $arraySortable = array();
@@ -37,6 +43,10 @@ class Core_Block_Page_Menu extends Core_Block_Abstract {
         return $arraySortable;
     }
 
+    /**
+     * get current active
+     * @return mixed
+     */
     public function getCurrentActive() {
         $config = Core_App::getAllModulesConfig();
         $request = Core_App::getParams();

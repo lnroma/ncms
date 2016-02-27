@@ -12,6 +12,7 @@ class Contact_Controller_Create extends Core_Controller_Abstract {
      */
     public function indexAction() {
         $this
+            ->setKey('page')
             ->setPage('main')
             ->setContent('Create')
             ->render();
@@ -22,6 +23,7 @@ class Contact_Controller_Create extends Core_Controller_Abstract {
      */
     public function addAttributeAction() {
         $this
+            ->setKey('page')
             ->setPage('main')
             ->setContent('Attribute')
             ->render();

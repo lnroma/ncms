@@ -17,7 +17,6 @@ class Contact_Controller_Index extends Core_Controller_Abstract
         $post['required'] = Core_App::getPost('required')?Core_App::getPost('required'):'';
         $post['placeholder'] = Core_App::getPost('placeholder')?Core_App::getPost('placeholder'):'';
         $post['show_in_greed'] = Core_App::getPost('show_in_greed')?Core_App::getPost('show_in_greed'):0 ;
-
         $modelAttrib = new Contact_Model_Contacts_Attribute();
 
         $id = NULL;
@@ -32,10 +31,23 @@ class Contact_Controller_Index extends Core_Controller_Abstract
         $_SESSION['message'] = "The attribute is saved!";
         $_SESSION['type'] = "success";
 
+
         if(Core_App::getParams()['ajax']) {
+            // load field by id
+            $html = '
+                <div class="form-group">
+                <label for="control_'.$id.'">'.$post['name'].':</label>
+                <input id="control_'.$id.' " type="'.$post['type_input'].'"
+                       name="attrib['.$id.']" ';
+                if ($post['placeholder']) $html .= 'placeholder = "' . $post['placeholder'] . '" ';
+            $html .= $post['required'] .' class="form-control"></input>
+                <div class="help-block with-errors"></div>
+            </div>';
+
             echo json_encode(
                   array(
                    'done' => true,
+                   'html' => $html,
                    'id' => $id,
                    'name' => $post['name'],
                    'place' => $post['placeholder'],

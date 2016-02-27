@@ -23,6 +23,7 @@
                 </div>
 
                 <div class="modal-body">
+                    <form id="formAttrCreate">
                     <div id="formAttr" role="form" class="form-horizontal">
                         <!--    <div id="attrib">-->
                         <input type="hidden" name="url" value="<?php Core_App::getBaseUrl() ?>/contact/create/">
@@ -72,12 +73,13 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success" onclick='ajaxAttrib()'>Save attribute by ajax</button>
+                    </form>
                         <!--    </div>-->
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success" onclick='ajaxAttrib()'>Save attribute by ajax</button>
+                    <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
