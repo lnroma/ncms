@@ -16,6 +16,7 @@ Modules/Hello/Controller/Hello.php
     public function indexAction() {
         $this
             ->setPage('main') // it's page template for your module the template location in `page` directory
+            ->setKey('page') // key for different use on admin(admin_page) and on frontend(page)
             ->setContent('Hello') // this is block for render in content main page
             ->render(); // and after render this page
     }
