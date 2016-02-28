@@ -32,6 +32,11 @@ class Admin_Config_Config
                         'description' => 'Login in admin',
                         'activeMenu' => 'Configuration'
                     ),
+                    'config' => array(
+                        'title' => 'Config your applet',
+                        'description' => 'Config your applet',
+                        'activeMenu'  => 'Configuration'
+                    )
                 ),
                 'dashboard' => array(
                     'index' => array(

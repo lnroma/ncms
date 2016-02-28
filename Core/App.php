@@ -86,6 +86,9 @@ class Core_App {
      * @return bool
      */
     static public function runApplet() {
+
+        self::dispathEvent('run_application_before',array());
+
         $params = self::getParams();
 
         if(!isset(self::getModulesConfig()[$params['controller']])) {
@@ -104,6 +107,8 @@ class Core_App {
         self::$_modulConfig = $configModul;
 
         self::$_controllObject = self::loadController($configModul,$params);
+
+        self::dispathEvent('run_application_after',array());
 
         return true;
     }
@@ -358,13 +363,16 @@ class Core_App {
 function __autoload($className) {
     $classPath = explode('_',$className);
     $classFile = Core_App::getRootPath().trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR).'.php';
-    if(!file_exists($classFile)) {
-        include_once(
-            Core_App::getRootPath().
-            'Modules/'
-            .trim(implode(DIRECTORY_SEPARATOR,$classPath),
-                DIRECTORY_SEPARATOR).'.php');
-    } else {
+    $classFileModules = Core_App::getRootPath().'Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR).'.php';
+    $classFileUserModules = Core_App::getRootPath().'Local/Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR).'.php';
+    if(file_exists($classFileUserModules)) {
+        include_once($classFileUserModules);
+    } elseif(file_exists($classFileModules)) {
+        include_once($classFileModules);
+    } elseif(file_exists($classFile)) {
         include_once($classFile);
     }
+//    else {
+//        throw new Exception_Notfound('File class not found:'.$classFile.'|'.$classFileModules.'|'.$classFileUserModules);
+//    }
 }

@@ -23,7 +23,37 @@
             </table>
         </div>
         <?php else: ?>
-            You don't have any rewritesgit
+            You don't have any rewrite
+        <?php endif; ?>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">301 redirect</div>
+    <div class="panel-body">
+        <?php if(count($this->getAllRedirect()) > 0) : ?>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>Url from</td>
+                        <td>Url to</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($this->getAllRedirect() as $_red): ?>
+                        <tr>
+                            <td><?php echo $_red['id'] ?></td>
+                            <td><?php echo $_red['from_url'] ?></td>
+                            <td><?php echo $_red['to_url'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            You don't have any redirect
         <?php endif; ?>
     </div>
 </div>

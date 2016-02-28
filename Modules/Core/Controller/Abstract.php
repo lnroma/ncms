@@ -44,23 +44,6 @@ class Core_Controller_Abstract {
     }
 
     /**
-     * set content to columnt content
-     * @param $content
-     * @return $this
-     */
-//    public function setContent($content) {
-//        $this->setBlock($content);
-//        /** @var Core_Block_Abstract $blockObj */
-//        $blockObj = new $this->__block;
-//        ob_start();
-//        $blockObj->toHtml();
-//        $cont = ob_get_contents();
-//        ob_end_clean();
-//        $this->getBlockClass()->setData('content',$cont);
-//        return $this;
-//    }
-
-    /**
      * render block class
      * @return $this
      */

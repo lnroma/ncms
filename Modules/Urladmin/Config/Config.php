@@ -19,6 +19,14 @@ class Urladmin_Config_Config
                 'observer' => 'Urladmin_Model_Observer',
                 'method'   => 'aliasUrl'
             ),
+            'run_application_before' => array(
+                'observer' => 'Urladmin_Model_Observer',
+                'method'   => 'redirect301'
+            ),
+            'get_url_helper' => array(
+                'observer' => 'Urladmin_Model_Observer',
+                'method'   => 'getUrlForPage'
+            ),
             'menu_admin' => array(
                 array(
                     'rout' => Config_App::getConfig()['adminurl'] . '/url/',

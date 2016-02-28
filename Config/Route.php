@@ -12,9 +12,10 @@ class Config_Route
         return array(
             $adminRout.'/login' => 'admin/index/login',
             $adminRout.'/login/check' => 'admin/index/check',
-            $adminRout.'/config' => 'admin/index/config',
-            $adminRout.'/url' => 'urladmin/url/index',
-            $adminRout.'/url/add' => 'urladmin/url/add'
+            $adminRout.'/config/index' => 'admin/index/config',
+            $adminRout.'/url/index' => 'urladmin/url/index',
+            $adminRout.'/url/add' => 'urladmin/url/add',
+            $adminRout.'/pages/index' => 'pages/index/index'
         );
     }
 }

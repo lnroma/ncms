@@ -1,0 +1,26 @@
+<div class="page-header">
+    <h1>Create new menu item</h1>
+</div>
+<form role="form" action="<?php echo Core_Helper::getUrl('pages/index/saveMenu') ?>" method="post">
+    <div class="form-group">
+        <label for="parent">Parent menu:</label>
+        <select class="form-control" name="parent" id="parent">
+            <option value="main">Main menu</option>
+            <?php foreach($this->getMenu() as $menu): ?>
+                <option value="<?php echo $menu['key'] ?>"><?php echo $menu['title'] ?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="key">Unique key:</label>
+        <input id="key" name="key" class="form-control" type="text" required placeholder="Menu key">
+    </div>
+    <input type="hidden" name="back_url" value="<?php echo Core_Helper::getUrl('pages/index/addMenu')?>">
+    <div class="form-group">
+        <label for="title">Title menu:</label>
+        <input id="title" name="title" class="form-control" type="text" required placeholder="Menu name">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save menu</button>
+    </div>
+</form>

@@ -31,7 +31,11 @@ class Config_Modules
             'urladmin' => array(
                 'config_class' => 'Urladmin_Config_Config',
                 'enable' => true
-            )
+            ),
+            'pages' => array(
+                'config_class' => 'Pages_Config_Config',
+                'enable' => true
+            ),
         );
     }
 

@@ -1,0 +1,11 @@
+<?php /** @var Core_Block_Abstract $this */ ?>
+<head>
+    <?php $this->getChunk('admin/chunks/_head.phtml', 'Core_Block_Page_Head') ?>
+</head>
+<body>
+<?php $this->getChunk('admin/chunks/_menu.phtml', 'Admin_Block_Page_Menu') ?>
+<div class="container">
+    <?php echo $this->getData('content') ?>
+</div>
+</body>
+<?php $this->getChunk('admin/chunks/_footer.phtml') ?>
