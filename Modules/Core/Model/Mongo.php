@@ -7,7 +7,7 @@
  */
 class Core_Model_Mongo {
 
-    static private $_db = null;
+    static private $_connect = null;
 
     private function __construct()
     {
@@ -16,13 +16,21 @@ class Core_Model_Mongo {
     /**
      * @return MongoDB|null
      */
-    static function getDb() {
-        if(!is_null(self::$_db)) {
-            return self::$_db;
+    static function getConnect() {
+        if(!is_null(self::$_connect)) {
+            return self::$_connect;
         }
-        $mongo = new MongoClient(Config_Db::getConf()['mongodb']['connect']);
-        self::$_db = $mongo->{Config_Db::getConf()['mongodb']['db']};
-        return self::$_db;
+        self::$_connect = new MongoClient(Config_Db::getConf()['mongodb']['connect']);
+        return self::$_connect;
+    }
+
+    /**
+     * get db connect
+     * @return MongoCollection
+     */
+    static function getDb() {
+        $con = self::getConnect();
+        return $con->{Config_Db::getConf()['mongodb']['db']};
     }
 
 }

@@ -12,4 +12,10 @@ class Pages_Block_Edit extends Core_Block_Abstract {
         $this->setTemplate('admin/pages/edit');
     }
 
+    public function getPages() {
+        $db = Core_Model_Mongo::getDb();
+        $collection = $db->selectCollection('pages');
+        return $collection->find();
+    }
+
 }

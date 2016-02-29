@@ -2,7 +2,7 @@
     <h1>Create new menu item</h1>
 </div>
 
-<form role="form" action="<?php echo Core_Helper::getUrl('pages/index/saveMenu') ?>" method="post">
+<form role="form" action="<?php echo Core_Helper::getUrl('pages/index/savePage') ?>" method="post">
     <div class="row">
         <div class="col-sm-4">
             <ul class="easy-tree">
@@ -10,12 +10,13 @@
                 <ul>
                     <?php foreach ($this->getMenu() as $key => $menu): ?>
                         <li><?php echo $menu['title'] ?>
-                            <a href="<?php echo Core_Helper::getUrl('pages/index/addMenu') ?>/id/<?php echo $key ?>">delete</a> </li>
+                            <a href="<?php echo Core_Helper::getUrl('pages/index/addMenu') ?>/id/<?php echo $key ?>">delete</a>
+                        </li>
                         <?php if (isset($menu['child'])): ?>
                             <ul>
-                            <?php foreach ($menu['child'] as $_child): ?>
-                                <li><?php echo $_child['title'] ?></li>
-                            <?php endforeach; ?>
+                                <?php foreach ($menu['child'] as $_child): ?>
+                                    <li><?php echo $_child['title'] ?></li>
+                                <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -24,25 +25,36 @@
         </div>
         <div class="col-sm-8">
             <div class="form-group">
-                <label for="parent">Parent menu:</label>
-                <select class="form-control" name="parent" id="parent">
+                <label for="parent">Menu:</label>
+                <select class="form-control" name="menu_key" id="parent">
                     <option value="main">Main menu</option>
                     <?php foreach ($this->getMenu() as $menu): ?>
                         <option value="<?php echo $menu['key'] ?>"><?php echo $menu['title'] ?></option>
+                        <?php if (isset($menu['child'])): ?>
+                            <?php foreach($menu['child'] as $_child): ?>
+                                <option value="<?php echo $_child['key']?>"><?php echo $_child['title']?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
-                <label for="key">Unique key:</label>
+                <label for="key">Url key:</label>
                 <input id="key" name="key" class="form-control" type="text" required placeholder="Menu key">
             </div>
-            <input type="hidden" name="back_url" value="<?php echo Core_Helper::getUrl('pages/index/addMenu') ?>">
+            <input type="hidden" name="back_url" value="<?php echo Core_Helper::getUrl('pages/index/addPage') ?>">
             <div class="form-group">
                 <label for="title">Title menu:</label>
                 <input id="title" name="title" class="form-control" type="text" required placeholder="Menu name">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success">Save menu</button>
+                <label for="content">Content:</label>
+                <textarea class="form-control" name="content" id="content">
+
+                </textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Save page</button>
             </div>
         </div>
     </div>

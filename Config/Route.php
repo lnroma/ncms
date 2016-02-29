@@ -14,6 +14,7 @@ class Config_Route
             $adminRout.'/login/check' => 'admin/index/check',
             $adminRout.'/config/index' => 'admin/index/config',
             $adminRout.'/url/index' => 'urladmin/url/index',
+            $adminRout.'/url/' => 'urladmin/url/index',
             $adminRout.'/url/add' => 'urladmin/url/add',
             $adminRout.'/pages/index' => 'pages/index/index'
         );

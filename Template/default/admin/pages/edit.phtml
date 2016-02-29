@@ -11,13 +11,19 @@
     <table class="table table-striped">
         <thead class="table-success">
         <tr>
-            <td>Id</td>
             <td>Title</td>
             <td>Url</td>
             <td>Action</td>
         </tr>
         </thead>
         <tbody>
+            <?php foreach($this->getPages() as $key => $_page): ?>
+                <tr>
+                    <td><?php echo $_page['title']?></td>
+                    <td><?php echo $_page['key']?></td>
+                    <td>Edit | Delete</td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>
