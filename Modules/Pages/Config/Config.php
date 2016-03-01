@@ -16,7 +16,10 @@ class Pages_Config_Config
             'controllers' => 'Pages_Controller',
             'router_load' => array(
                 'observer' => 'Pages_Model_Observer',
-                'method' => 'aliasForPage'
+                'method' => array(
+                    'aliasForPage',
+                    'aliasMenu'
+                )
             ),
             'menu_admin' => array(
                 array(
@@ -60,6 +63,11 @@ class Pages_Config_Config
                         'title' => 'Blog page',
                         'description' => 'Blog page',
                         'activeMenu' => 'Pages'
+                    ),
+                    'menu' => array(
+                        'title' => 'Blog page menu',
+                        'description'  => 'Blog page',
+                        'activeMenu'   => 'Pages'
                     )
                 )
             )

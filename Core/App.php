@@ -344,11 +344,19 @@ class Core_App {
         $modules = self::getAllModulesConfig();
 
         foreach($modules as $_mod) {
+            $methods = array();
             if(isset($_mod[$eventKey])) {
-               $data = call_user_func(array(
-                    new $_mod[$eventKey]['observer'],
-                    $_mod[$eventKey]['method']
-                ),$data);
+                if(!is_array($_mod[$eventKey]['method'])) {
+                    $methods[] = $_mod[$eventKey]['method'];
+                } else {
+                    $methods = array_merge($methods,$_mod[$eventKey]['method']);
+                }
+                foreach($methods as $_method) {
+                    $data = call_user_func(array(
+                        new $_mod[$eventKey]['observer'],
+                        $_method
+                    ), $data);
+                }
             }
         }
 
@@ -362,9 +370,16 @@ class Core_App {
  */
 function __autoload($className) {
     $classPath = explode('_',$className);
-    $classFile = Core_App::getRootPath().trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR).'.php';
-    $classFileModules = Core_App::getRootPath().'Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR).'.php';
-    $classFileUserModules = Core_App::getRootPath().'Local/Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR).'.php';
+    // generate paths to file
+    $classFile = Core_App::getRootPath().
+        trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR)
+        .'.php';
+    $classFileModules = Core_App::getRootPath().
+        'Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR)
+        .'.php';
+    $classFileUserModules = Core_App::getRootPath()
+        .'Local/Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR)
+        .'.php';
     if(file_exists($classFileUserModules)) {
         include_once($classFileUserModules);
     } elseif(file_exists($classFileModules)) {
@@ -372,7 +387,4 @@ function __autoload($className) {
     } elseif(file_exists($classFile)) {
         include_once($classFile);
     }
-//    else {
-//        throw new Exception_Notfound('File class not found:'.$classFile.'|'.$classFileModules.'|'.$classFileUserModules);
-//    }
 }

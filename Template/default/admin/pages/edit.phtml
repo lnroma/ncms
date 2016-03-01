@@ -21,7 +21,10 @@
                 <tr>
                     <td><?php echo $_page['title']?></td>
                     <td><?php echo $_page['key']?></td>
-                    <td>Edit | Delete</td>
+                    <td>
+                        <a href="<?php echo Core_Helper::getUrl('pages/index/addPage/').'/id/'.$key ?>" >Edit</a>
+                        <a href="<?php echo Core_Helper::getUrl('pages/index/deletePage/').'/id/'.$key ?>" >Delete</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

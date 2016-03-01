@@ -1,0 +1,15 @@
+<div class="well">
+    <ul class="nav nav-list">
+        <?php foreach ($this->getMenu() as $key => $value): ?>
+            <li><label class="tree-toggle nav-header"><a href="<?php echo Core_App::getBaseUrl().$value['key']?>"><?php echo $value['title'] ?></a></label>
+                <ul class="nav nav-list tree col-lg-offset-2">
+                    <?php if (isset($value['child'])): ?>
+                        <?php foreach ($value['child'] as $key => $_child): ?>
+                            <li><a href="<?php echo Core_App::getBaseUrl().$_child['key']?>"><?php echo $_child['title'] ?></a></li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </ul>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

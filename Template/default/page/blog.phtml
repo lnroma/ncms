@@ -1,0 +1,19 @@
+<?php /** @var Core_Block_Abstract $this */ ?>
+<head>
+    <?php $this->getChunk('chunks/_head.phtml', 'Core_Block_Page_Head') ?>
+</head>
+<body>
+<?php $this->getChunk('chunks/_menu.phtml', 'Core_Block_Page_Menu') ?>
+<div class="clear">&nbsp;</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <?php echo $this->getData('menu') ?>
+        </div>
+        <div class="col-sm-8">
+            <?php echo $this->getData('content') ?>
+        </div>
+    </div>
+</div>
+</body>
+<?php $this->getChunk('chunks/_footer.phtml') ?>

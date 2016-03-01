@@ -7,6 +7,9 @@
  */
 class Pages_Controller_Index extends Admin_Controller_Abstract {
 
+    /**
+     * index page render
+     */
     public function indexAction() {
         $this
             ->setPage('onecollumn')
@@ -15,6 +18,9 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             ->render();
     }
 
+    /**
+     * add menu render
+     */
     public function addMenuAction() {
         $this
             ->setPage('onecollumn')
@@ -23,6 +29,9 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             ->render();
     }
 
+    /**
+     * add page render
+     */
     public function addPageAction() {
         $this
             ->setPage('onecollumn')
@@ -31,6 +40,9 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             ->render();
     }
 
+    /**
+     * save menu
+     */
     public function saveMenuAction() {
         try {
             $db = Core_Model_Mongo::getDb();
@@ -45,6 +57,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             $existCursor = $coll->find(array('key' => $_POST['parent']));
 
             if($existCursor->count() > 0) {
+
                 $data = array($_POST);
                 $dataOld = iterator_to_array($existCursor);
                 $dataOld = reset($dataOld);
@@ -56,9 +69,11 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
                         'child' => $data
                     )
                 ));
+
             } else {
                 $coll->insert($_POST);
             }
+
             Core_Model_Mongo::getConnect()->close();
             header('Location:'.$_POST['back_url']);
         } catch(Exception $err) {
@@ -66,17 +81,31 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         }
     }
 
+    /**
+     * save and update action
+     */
     public function savePageAction() {
         try {
-
+            /** @var MongoDB $db */
             $db = Core_Model_Mongo::getDb();
 
             if(array_search('pages',$db->getCollectionNames(true)) === false) {
                 $db->createCollection('pages');
             }
-
+            /** @var MongoCollection $coll */
             $coll = $db->selectCollection('pages');
-            $coll->insert($_POST);
+            // if exist id page
+            if(isset($_POST['id'])) {
+                $coll->update(
+                    array(
+                        '_id' => new MongoId($_POST['id'])
+                    ),
+                    $_POST
+                );
+            } else {
+                // insert if not exists
+                $coll->insert($_POST);
+            }
 
             Core_Model_Mongo::getConnect()->close();
 
@@ -86,11 +115,37 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         }
     }
 
-    public function dropAction() {
-        $db = Core_Model_Mongo::getDb();
-        /** @var MongoCollection $coll */
-        $coll = $db->selectCollection('menu');
-        var_dump($coll->drop());
+    /**
+     * delete page action
+     */
+    public function deletePageAction() {
+        try {
+            $param = Core_App::getParams();
+
+            if(isset($param['id'])) {
+                /** @var MongoDB $db */
+                $db = Core_Model_Mongo::getDb();
+                /** @var MongoCollection $pageCollection */
+                $pageCollection = $db->selectCollection('pages');
+                /** @var MongoCursor $document */
+                $pageCollection->remove(
+                    array(
+                        '_id' => new MongoId($param['id']
+                        )
+                    )
+                );
+            }
+            Core_Model_Mongo::getConnect()->close();
+            header('Location:'.Core_Helper::getUrl('pages/index/index'));
+        } catch(Exception $error) {
+            header('Location:'.Core_Helper::getUrl('pages/index/index'));
+        }
     }
 
+    public function dropAction()
+    {
+        $db = Core_Model_Mongo::getDb();
+        $menuCollect = $db->selectCollection('menu');
+        $menuCollect->drop();
+    }
 }

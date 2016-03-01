@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: roman
@@ -8,21 +9,53 @@
 class Pages_Block_Addpage extends Core_Block_Abstract
 {
 
+    /**
+     * Pages_Block_Addpage constructor.
+     */
     public function __construct()
     {
         $this->setTemplate('admin/pages/addpage');
     }
 
-    public function getMenu() {
+    /**
+     * get menu
+     * @return mixed
+     */
+    public function getMenu()
+    {
+        /** @var MongoDB $db */
         $db = Core_Model_Mongo::getDb();
+        /** @var MongoCollection $collection */
         $collection = $db->selectCollection('menu');
         return $collection->find();
     }
 
-    public function getPages() {
-        $db = Core_Model_Mongo::getDb();
-        $collection = $db->selectCollection('pages');
-        return $collection->find();
+    /**
+     * get page
+     * @return array|null
+     * @throws Exception
+     */
+    public function getPage()
+    {
+        try {
+            //if key id not set return empty array
+            if(!isset(Core_App::getParams()['id'])) {
+                return array();
+            }
+            /** @var MongoDB $db */
+            $db = Core_Model_Mongo::getDb();
+            /** @var MongoCollection $collection */
+            $collection = $db->selectCollection('pages');
+
+            return $collection->findOne(
+                array(
+                    '_id' => new MongoId(Core_App::getParams()['id'])
+                )
+            );
+
+        } catch (Exception $err) {
+            throw new Exception('Error with mongo db');
+        }
     }
 
 }

@@ -4,6 +4,8 @@
  * User: roman
  * Date: 09.10.15
  * Time: 22:48
+ * @method Core_Block_Abstract setData()
+ * @method mixed getData()
  */
 class Core_Block_Abstract {
 
@@ -73,9 +75,14 @@ class Core_Block_Abstract {
         }
     }
 
+    /**
+     * automatically setData and getData
+     * @param $name
+     * @param $arguments
+     * @return null
+     */
     public function __call($name, $arguments)
     {
-//        var_dump($this->_data);die;
         // TODO: Implement __call() method.
         if($name == 'setData') {
             $this->_data[$arguments[0]] = $arguments[1];
