@@ -5,7 +5,7 @@
  * Date: 28.02.16
  * Time: 22:50
  */
-class Pages_Block_Edit extends Core_Block_Abstract {
+class Pages_Block_Admin_Edit extends Core_Block_Abstract {
 
     /**
      * Pages_Block_Edit constructor.

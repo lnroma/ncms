@@ -6,7 +6,7 @@
  * Date: 29.02.16
  * Time: 0:23
  */
-class Pages_Block_Addpage extends Core_Block_Abstract
+class Pages_Block_Admin_Addpage extends Core_Block_Abstract
 {
 
     /**

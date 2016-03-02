@@ -56,7 +56,7 @@ class Pages_Controller_View extends Core_Controller_Abstract
         /** @var MongoDB $db */
         $db = Core_Model_Mongo::getDb();
         /** check exist table */
-        if(array_search('comments',$db->getCollectionNames(true)) === false) {
+        if (array_search('comments', $db->getCollectionNames(true)) === false) {
             $db->createCollection('comments');
         }
         /** @var MongoCollection $collectionComment */
@@ -72,29 +72,35 @@ class Pages_Controller_View extends Core_Controller_Abstract
 
         if ($col->count()) {
             // todo need optimization
-            $result = iterator_to_array($col);
+            $_POST['comment_tree'][] =
+                array(
+                    'name' => $_POST['name'],
+                    'comment' => $_POST['comment'],
+                );
 
-            $id = key($result);
-            $result = reset($result);
-            $allcomments = $result['allcoments'];
-            $allcomments[] = $_POST;
             $resultArray['page_id'] = $_POST['page_id'];
-            $resultArray['allcoments'] = $allcomments;
+            $resultArray['allcoments'] = $_POST;
 
+            $id = key(
+                iterator_to_array($col)
+            );
             $collectionComment->update(
                 array(
                     '_id' => new MongoId($id)
                 ),
                 $resultArray
             );
-
         } else {
+            $_POST['comment_tree'][] =
+                array(
+                    'name' => $_POST['name'],
+                    'comment' => $_POST['comment'],
+                );
             $resultArray['page_id'] = $_POST['page_id'];
-            $resultArray['allcoments'] = array(
-                $_POST
-            );
+            $resultArray['allcoments'] = $_POST;
             $collectionComment->insert($resultArray);
         }
+
         $_SESSION['message'] = 'You comment this post';
         $_SESSION['type'] = 'info';
         header('Location:' . $_POST['back_url']);

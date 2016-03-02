@@ -5,7 +5,7 @@
  * Date: 29.02.16
  * Time: 23:44
  */
-class Pages_Block_Viewmenu extends Core_Block_Abstract {
+class Pages_Block_Viewmenu extends Pages_Block_Abstract {
 
     /**
      * Pages_Block_Viewmenu constructor.

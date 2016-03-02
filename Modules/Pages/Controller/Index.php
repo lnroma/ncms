@@ -14,7 +14,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         $this
             ->setPage('onecollumn')
             ->setKey('admin_page')
-            ->setContent('Edit')
+            ->setContent('Admin/Edit')
             ->render();
     }
 
@@ -25,7 +25,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         $this
             ->setPage('onecollumn')
             ->setKey('admin_page')
-            ->setContent('Addmenu')
+            ->setContent('Admin/Addmenu')
             ->render();
     }
 
@@ -36,7 +36,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         $this
             ->setPage('onecollumn')
             ->setKey('admin_page')
-            ->setContent('Addpage')
+            ->setContent('Admin/Addpage')
             ->render();
     }
 
@@ -57,7 +57,6 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             $existCursor = $coll->find(array('key' => $_POST['parent']));
 
             if($existCursor->count() > 0) {
-
                 $data = array($_POST);
                 $dataOld = iterator_to_array($existCursor);
                 $dataOld = reset($dataOld);
