@@ -1,16 +1,16 @@
 <?php /** @var Pages_Block_Blog $this */ ?>
 <?php foreach ($this->getPages() as $_page): ?>
     <div class="panel panel-success">
-        <div class="panel-heading"><?php echo $_page['title'] ?>
-            <a class="btn btn-sm btn-primary pull-right" href="<?php echo Core_App::getBaseUrl() . $_page['key'] ?>">
+        <div class="panel-heading"><?php echo $_page->title ?>
+            <a class="btn btn-sm btn-primary pull-right" href="<?php echo Core_App::getBaseUrl() . $_page->key ?>">
                 View
             </a>
         </div>
         <div class="panel-body">
-            <?php if (isset($_page['short-content'])): ?>
-                <?php echo $_page['short-content'] ?>
+            <?php if (isset($_page->short_content)): ?>
+                <?php echo $_page->short_content ?>
             <?php else: ?>
-                <?php echo $_page['content'] ?>
+                <?php echo $_page->content ?>
             <?php endif; ?>
         </div>
     </div>

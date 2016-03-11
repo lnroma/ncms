@@ -23,11 +23,10 @@ class Pages_Block_Admin_Addpage extends Core_Block_Abstract
      */
     public function getMenu()
     {
-        /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getDb();
-        /** @var MongoCollection $collection */
-        $collection = $db->selectCollection('menu');
-        return $collection->find();
+        $connection = Core_Model_Mongo::getConnect();
+        $query = new MongoDB\Driver\Query(array());
+        $allMenu = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
+        return $allMenu->toArray();
     }
 
     /**
@@ -42,17 +41,16 @@ class Pages_Block_Admin_Addpage extends Core_Block_Abstract
             if(!isset(Core_App::getParams()['id'])) {
                 return array();
             }
-            /** @var MongoDB $db */
-            $db = Core_Model_Mongo::getDb();
-            /** @var MongoCollection $collection */
-            $collection = $db->selectCollection('pages');
 
-            return $collection->findOne(
+            $connection = Core_Model_Mongo::getConnect();
+            $query = new MongoDB\Driver\Query(
                 array(
-                    '_id' => new MongoId(Core_App::getParams()['id'])
+                    '_id' => new \MongoDB\BSON\ObjectID(Core_App::getParams()['id'])
                 )
             );
 
+            $page = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
+            return $page->toArray();
         } catch (Exception $err) {
             throw new Exception('Error with mongo db');
         }

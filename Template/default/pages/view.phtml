@@ -1,18 +1,19 @@
 <?php
 /** @var Pages_Block_View $this */
 $page = $this->getPage();
+$page = reset($page);
 ?>
 <div class="page-header">
-    <h1><?php echo $page['title'] ?></h1>
+    <h1><?php echo $page->title ?></h1>
 </div>
 <p>
-    <?php echo nl2br($page['content']) ?>
+    <?php echo nl2br($page->content) ?>
 </p>
 <form method="post" action="<?php echo Core_Helper::getUrl('pages/view/addComment') ?>" role="form">
 <?php $this->getChunk('pages/comment/comment','Pages_Block_Comment_Render'); ?>
     <input id="comm_id" type="hidden" name="parent" value="">
     <input type="hidden" name="reply" value="" id="reply">
-    <input type="hidden" name="page_id" value="<?php echo $page['_id'] ?>">
+    <input type="hidden" name="page_id" value="<?php echo $page->_id ?>">
     <input type="hidden" name="back_url"
            value="<?php echo Core_App::getBaseUrl() . trim($_SERVER['REQUEST_URI'], '/') ?>">
     <div class="form-group">

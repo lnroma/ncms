@@ -1,18 +1,21 @@
 <div class="page-header">
     <h1>Create new menu item</h1>
 </div>
-<?php $page = $this->getPage() ?>
+<?php
+$page = $this->getPage();
+$page = reset($page);
+?>
 <form role="form" action="<?php echo Core_Helper::getUrl('pages/index/savePage') ?>" method="post">
     <div class="row">
         <div class="col-sm-3">
             <div class="well">
                 <ul class="nav nav-list">
                     <?php foreach ($this->getMenu() as $key => $menu): ?>
-                        <li><label><?php echo $menu['title'] ?></label>
-                        <?php if (isset($menu['child'])): ?>
+                        <li><label><?php echo $menu->title ?></label>
+                        <?php if (isset($menu->child)): ?>
                                 <ul class="nav nav-list tree">
-                                    <?php foreach ($menu['child'] as $_child): ?>
-                                        <li><a href=""><?php echo $_child['title'] ?></a> </li>
+                                    <?php foreach ($menu->child as $_child): ?>
+                                        <li><a href=""><?php echo $_child->title ?></a> </li>
                                     <?php endforeach; ?>
                                 </ul>
                         <?php endif; ?>
@@ -24,21 +27,25 @@
         <div class="col-sm-8">
             <div class="form-group">
                 <label for="parent">Menu:</label>
-                <select class="form-control" name="menu_key" id="parent">
+                <select multiple="multiple" class="form-control" name="menu_key[]" id="parent">
                     <option value="main">Main menu</option>
+                    <?php //print_r(($page));die;?>
                     <?php foreach ($this->getMenu() as $menu): ?>
-                        <option value="<?php echo $menu['key'] ?>"<?php
-                        if (isset($page['menu_key'])) {
-                            if ($page['menu_key'] == $_child['key']) echo 'selected';
+                        <option value="<?php echo $menu->key ?>"<?php
+                        if (isset($page->menu_key)) {
+                            if(!is_array($page->menu_key)) {
+                                $page->menu_key = array($page->menu_key);
+                            }
+                            if (array_search($menu->key,$page->menu_key) !== false) echo 'selected';
                         }
-                        ?>><?php echo $menu['title'] ?></option>
-                        <?php if (isset($menu['child'])): ?>
-                            <?php foreach ($menu['child'] as $_child): ?>
-                                <option value="<?php echo $_child['key'] ?>" <?php
-                                if (isset($page['menu_key'])) {
-                                    if ($page['menu_key'] == $_child['key']) echo 'selected';
+                        ?>><?php echo $menu->title ?></option>
+                        <?php if (isset($menu->child)): ?>
+                            <?php foreach ($menu->child as $_child): ?>
+                                <option value="<?php echo $_child->key ?>" <?php
+                                if (isset($page->menu_key)) {
+                                    if (array_search($_child->key,$page->menu_key) !== false) echo 'selected';
                                 }
-                                ?>><?php echo $_child['title'] ?></option>
+                                ?>><?php echo $_child->title ?></option>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -47,24 +54,24 @@
             <div class="form-group">
                 <label for="key">Url key:</label>
                 <input id="key" name="key" class="form-control" type="text"
-                       value="<?php if (isset($page['key'])) echo $page['key'] ?>" required placeholder="Menu key">
+                       value="<?php if (isset($page->key)) echo $page->key ?>" required placeholder="Menu key">
             </div>
             <input type="hidden" name="back_url"
                    value="<?php echo Core_Helper::getUrl('pages/index/addPage') ?><?php if (isset(Core_App::getParams()['id'])) echo '/id/' . Core_App::getParams()['id'] ?>">
             <div class="form-group">
                 <label for="title">Title menu:</label>
                 <input id="title" name="title" class="form-control" type="text"
-                       value="<?php if (isset($page['title'])) echo $page['title'] ?>" required placeholder="Menu name">
+                       value="<?php if (isset($page->title)) echo $page->title ?>" required placeholder="Menu name">
             </div>
             <div class="form-group">
                 <label for="short-content">Short content:</label>
-                <textarea class="form-control" name="short-content"
-                          id="short-content"><?php if (isset($page['short-content'])) echo $page['short-content'] ?></textarea>
+                <textarea class="form-control" name="short_content"
+                          id="short-content"><?php if (isset($page->short_content)) echo $page->short_content ?></textarea>
             </div>
             <div class="form-group">
                 <label for="content">Content:</label>
                 <textarea class="form-control" name="content"
-                          id="content"><?php if (isset($page['content'])) echo $page['content'] ?></textarea>
+                          id="content"><?php if (isset($page->content)) echo $page->content ?></textarea>
             </div>
             <div class="form-group">
                 <?php if (isset(Core_App::getParams()['id'])): ?>

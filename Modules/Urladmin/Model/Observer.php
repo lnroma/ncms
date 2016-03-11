@@ -95,7 +95,12 @@ class Urladmin_Model_Observer {
      * @return mixed|string
      */
     private function _getPath() {
-        $path = str_replace($_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']);
+        if(isset($_SERVER['QUERY_STRING'])) {
+            $repl = $_SERVER['QUERY_STRING'];
+        } else {
+            $repl = '';
+        }
+        $path = str_replace($repl,'',$_SERVER['REQUEST_URI']);
         $path = trim($path,'/?');
         return $path;
     }

@@ -14,7 +14,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         $this
             ->setPage('onecollumn')
             ->setKey('admin_page')
-            ->setContent('Admin/Edit')
+            ->setContent('Admin_Edit')
             ->render();
     }
 
@@ -25,7 +25,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         $this
             ->setPage('onecollumn')
             ->setKey('admin_page')
-            ->setContent('Admin/Addmenu')
+            ->setContent('Admin_Addmenu')
             ->render();
     }
 
@@ -36,7 +36,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
         $this
             ->setPage('onecollumn')
             ->setKey('admin_page')
-            ->setContent('Admin/Addpage')
+            ->setContent('Admin_Addpage')
             ->render();
     }
 
@@ -45,32 +45,32 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
      */
     public function saveMenuAction() {
         try {
-            $db = Core_Model_Mongo::getDb();
+            $connection = Core_Model_Mongo::getConnect();
+            $query = new MongoDB\Driver\Query(array('key' => $_POST['parent']));
+            $existCursor = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
+            $existCursor = $existCursor->toArray();
+            $existCursor = reset($existCursor);
 
-            if(array_search('menu',$db->getCollectionNames(true)) === false) {
-                $db->createCollection('menu');
-            }
-
-            $coll = $db->selectCollection('menu');
-
-            /** @var MongoCursor $existArray */
-            $existCursor = $coll->find(array('key' => $_POST['parent']));
-
-            if($existCursor->count() > 0) {
+            if(count($existCursor) > 0) {
                 $data = array($_POST);
-                $dataOld = iterator_to_array($existCursor);
-                $dataOld = reset($dataOld);
-                if(isset($dataOld['child'])) {
-                    $data = array_merge($data,$dataOld['child']);
+                $dataOld = $existCursor;
+
+                if(isset($dataOld->child)) {
+                    $data = array_merge($data,$dataOld->child);
                 }
-                $coll->update(array('key' => $_POST['parent']),array(
-                    '$set' => array(
-                        'child' => $data
-                    )
-                ));
+
+                Core_Model_Mongo::update( array(
+                        '$set' => array(
+                            'child' => $data
+                        )
+                    ),
+                    'menu'
+                    ,
+                  array('key' => $_POST['parent'])
+            );
 
             } else {
-                $coll->insert($_POST);
+                Core_Model_Mongo::insert($_POST,'menu');
             }
 
             Core_Model_Mongo::getConnect()->close();
@@ -86,28 +86,15 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
     public function savePageAction() {
         try {
             /** @var MongoDB $db */
-            $db = Core_Model_Mongo::getDb();
-
-            if(array_search('pages',$db->getCollectionNames(true)) === false) {
-                $db->createCollection('pages');
-            }
-            /** @var MongoCollection $coll */
-            $coll = $db->selectCollection('pages');
-            // if exist id page
+            //if exist update
             if(isset($_POST['id'])) {
-                $coll->update(
-                    array(
-                        '_id' => new MongoId($_POST['id'])
-                    ),
-                    $_POST
-                );
+                Core_Model_Mongo::update($_POST,'pages',array(
+                    '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
+                ));
             } else {
                 // insert if not exists
-                $coll->insert($_POST);
+                Core_Model_Mongo::insert($_POST,'pages');
             }
-
-            Core_Model_Mongo::getConnect()->close();
-
             header('Location:'.$_POST['back_url']);
         } catch(Exception $err) {
             header('Location:'.$_POST['back_url']);

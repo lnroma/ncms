@@ -14,10 +14,16 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      */
     public function getMenu() {
         /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getDb();
-        /** @var MongoCollection $collection */
-        $collection = $db->selectCollection('menu');
-        return $collection->find();
+
+        $con = Core_Model_Mongo::getConnect();
+
+        $query = new MongoDB\Driver\Query(
+            array()
+        );
+
+        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
+
+        return $menuCollection->toArray();
     }
 
     /**
@@ -26,10 +32,15 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      */
     public function getPages() {
         /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getDb();
-        /** @var MongoCollection $collection */
-        $collection = $db->selectCollection('pages');
-        return $collection->find();
+        $con = Core_Model_Mongo::getConnect();
+
+        $query = new MongoDB\Driver\Query(
+            array()
+        );
+
+        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
+
+        return $menuCollection->toArray();
     }
 
 
@@ -38,16 +49,18 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      * @return array|mixed
      */
     public function getPage() {
-        $db = Core_Model_Mongo::getDb();
-        $collection = $db->selectCollection('pages');
-        $content = $collection->find(array(
-            'key' => Core_App::getParams()['id']
-        ));
+        /** @var MongoDB $db */
+        $con = Core_Model_Mongo::getConnect();
 
-        $content = iterator_to_array($content);
-        $content = reset($content);
-        Core_Model_Mongo::getConnect()->close();
-        return $content;
+        $query = new MongoDB\Driver\Query(
+            array(
+                'key' => Core_App::getParams()['id']
+            )
+        );
+
+        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
+
+        return $menuCollection->toArray();
     }
 
     /**
@@ -55,14 +68,14 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      * @return mixed
      */
     public function getComentPage($pageId) {
-        $db = Core_Model_Mongo::getDb();
-        $collection = $db->selectCollection('comments');
-        $comments = $collection->find(
-            array(
-                'page_id' => (string)$pageId
-            )
-        );
-        return $comments;
+//        $db = Core_Model_Mongo::getDb();
+//        $collection = $db->selectCollection('comments');
+//        $comments = $collection->find(
+//            array(
+//                'page_id' => (string)$pageId
+//            )
+//        );
+//        return $comments;
     }
 
 }

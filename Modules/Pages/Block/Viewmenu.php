@@ -1,11 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: roman
  * Date: 29.02.16
  * Time: 23:44
  */
-class Pages_Block_Viewmenu extends Pages_Block_Abstract {
+class Pages_Block_Viewmenu extends Pages_Block_Abstract
+{
 
     /**
      * Pages_Block_Viewmenu constructor.
@@ -19,13 +21,19 @@ class Pages_Block_Viewmenu extends Pages_Block_Abstract {
      * get all pages
      * @return array|mixed
      */
-    public function getPages() {
-        $db = Core_Model_Mongo::getDb();
-        $collection = $db->selectCollection('pages');
-        $content = $collection->find(array(
-            'menu_key' => Core_App::getParams()['id']
-        ));
+    public function getPages()
+    {
+        /** @var MongoDB $db */
+        $con = Core_Model_Mongo::getConnect();
 
-        return $content;
+        $query = new MongoDB\Driver\Query(
+            array(
+                'menu_key' => Core_App::getParams()['id']
+            )
+        );
+
+        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'] . '.pages', $query);
+
+        return $menuCollection->toArray();
     }
 }

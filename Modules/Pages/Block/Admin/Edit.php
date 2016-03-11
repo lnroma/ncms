@@ -20,9 +20,10 @@ class Pages_Block_Admin_Edit extends Core_Block_Abstract {
      * @return mixed
      */
     public function getPages() {
-        $db = Core_Model_Mongo::getDb();
-        $collection = $db->selectCollection('pages');
-        return $collection->find();
+        $connection = Core_Model_Mongo::getConnect();
+        $query = new MongoDB\Driver\Query(array());
+        $allPage = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
+        return $allPage->toArray();
     }
 
 }

@@ -21,11 +21,10 @@ class Pages_Block_Admin_Addmenu extends Core_Block_Abstract
      * @return mixed
      */
     public function getMenu() {
-        /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getDb();
-        /** @var MongoCollection $collection */
-        $collection = $db->selectCollection('menu');
-        return $collection->find();
+        $connection = Core_Model_Mongo::getConnect();
+        $query = new MongoDB\Driver\Query(array());
+        $allMenu = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
+        return $allMenu->toArray();
     }
 
 }

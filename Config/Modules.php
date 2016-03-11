@@ -18,7 +18,7 @@ class Config_Modules
             ),
             'contact' => array(
                 'config_class' => 'Contact_Config_Config',
-                'enable' => true
+                'enable' => false
             ),
             'tasks' => array(
                 'config_class' => 'Tasks_Config_Config',
@@ -36,6 +36,10 @@ class Config_Modules
                 'config_class' => 'Pages_Config_Config',
                 'enable' => true
             ),
+            'postgen' => array(
+                'config_class' => 'Postgen_Config_Config',
+                'enable' => true
+            )
         );
     }
 

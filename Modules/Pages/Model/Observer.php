@@ -6,6 +6,9 @@
  * Date: 29.02.16
  * Time: 23:32
  */
+
+use MongoDB\Driver;
+
 class Pages_Model_Observer
 {
 
@@ -16,10 +19,18 @@ class Pages_Model_Observer
      */
     public function aliasForPage($data)
     {
-        $db = Core_Model_Mongo::getDb();
-        $collection = $db->selectCollection('pages');
-        $col = $collection->find(array('key' => $this->_getPath()));
-        if ($col->count()) {
+        /** @var Driver\Manager $connect */
+        $connect = Core_Model_Mongo::getConnect();
+
+        $man = new MongoDB\Driver\Query(
+            array(
+                'key' => $this->_getPath()
+            )
+        );
+
+        $collection = $connect->executeQuery(Config_Db::getConf()['mongodb']['db'] . '.pages', $man);
+
+        if (count($collection->toArray())) {
             $data = array(
                 'controller' => 'pages',
                 'controllerName' => 'view',
@@ -27,6 +38,7 @@ class Pages_Model_Observer
                 'id' => $this->_getPath()
             );
         }
+
         return $data;
     }
 
@@ -37,22 +49,25 @@ class Pages_Model_Observer
      */
     public function aliasMenu($data)
     {
-        /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getDb();
-        $menuCollection = $db->selectCollection('menu');
-        $arrayKey = array();
+        /** @var MongoDB\Driver\Manager $db */
+        $connection = Core_Model_Mongo::getConnect();
 
+        $query = new  MongoDB\Driver\Query(
+            array()
+        );
+
+        $menuCollection = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
         // todo this code need rewrite more optimize
-        foreach (iterator_to_array($menuCollection->find()) as $menu) {
+        foreach ($menuCollection->toArray() as $menu) {
 
-            if (isset($menu['key'])) {
-                $arrayKey[] = $menu['key'];
+            if (isset($menu->key)) {
+                $arrayKey[] = $menu->key;
             }
 
-            if (isset($menu['child'])) {
-                foreach ($menu['child'] as $_child) {
-                    if (isset($_child['key'])) {
-                        $arrayKey[] = $_child['key'];
+            if (isset($menu->child)) {
+                foreach ($menu->child as $_child) {
+                    if (isset($_child->key)) {
+                        $arrayKey[] = $_child->key;
                     }
                 }
             }
@@ -80,7 +95,12 @@ class Pages_Model_Observer
      */
     private function _getPath()
     {
-        $path = str_replace($_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
+        if(isset($_SERVER['QUERY_STRING'])) {
+            $repl = $_SERVER['QUERY_STRING'];
+        } else {
+            $repl = '';
+        }
+        $path = str_replace($repl, '', $_SERVER['REQUEST_URI']);
         $path = trim($path, '/?');
         return $path;
     }

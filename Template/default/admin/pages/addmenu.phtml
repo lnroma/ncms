@@ -8,11 +8,11 @@
             <div class="well">
                 <ul class="nav nav-list">
                     <?php foreach ($this->getMenu() as $key => $menu): ?>
-                        <li><label><?php echo $menu['title'] ?></label>
-                            <?php if (isset($menu['child'])): ?>
+                        <li><label><?php echo $menu->title ?></label>
+                            <?php if (isset($menu->child)): ?>
                                 <ul class="nav nav-list tree">
-                                    <?php foreach ($menu['child'] as $_child): ?>
-                                        <li><a href=""><?php echo $_child['title'] ?></a> </li>
+                                    <?php foreach ($menu->child as $_child): ?>
+                                        <li><a href=""><?php echo $_child->title ?></a> </li>
                                     <?php endforeach; ?>
                                 </ul>
                             <?php endif; ?>
@@ -27,7 +27,7 @@
                 <select class="form-control" name="parent" id="parent">
                     <option value="main">Main menu</option>
                     <?php foreach ($this->getMenu() as $menu): ?>
-                        <option value="<?php echo $menu['key'] ?>"><?php echo $menu['title'] ?></option>
+                        <option value="<?php echo $menu->key ?>"><?php echo $menu->title ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

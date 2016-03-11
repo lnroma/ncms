@@ -109,7 +109,6 @@ class Core_App {
         self::$_controllObject = self::loadController($configModul,$params);
 
         self::dispathEvent('run_application_after',array());
-
         return true;
     }
 
@@ -174,7 +173,6 @@ class Core_App {
         }
 
         call_user_func(array($objectController,$action));
-
         return $objectController;
     }
 
@@ -286,7 +284,12 @@ class Core_App {
 
     static private function routeAliassisGenerate($params) {
         $aliasis = Config_Route::getConfig();
-        $path = str_replace($_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']);
+        if(isset($_SERVER['QUERY_STRING'])) {
+            $repl = $_SERVER['QUERY_STRING'];
+        } else {
+            $repl = '';
+        }
+        $path = str_replace($repl,'',$_SERVER['REQUEST_URI']);
         $path = trim($path,'/?');
         if(!isset($aliasis[$path])) {
             return $params;
