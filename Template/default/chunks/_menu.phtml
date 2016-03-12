@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav">
                 <?php foreach($this->getMenuModules() as $_menu): ?>
                     <li <?php if($this->getCurrentActive() == $_menu['label']) echo 'class="active"'?>>
-                        <a href="<?php echo Core_Helper::getUrl($_menu['rout']) ?>"><?php echo $_menu['label'] ?></a>
+                        <a href="<?php echo Core_Helper::getUrl($_menu['rout']) ?>"><?php echo Core_Helper::__($_menu['label']) ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>

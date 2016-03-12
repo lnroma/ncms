@@ -15,11 +15,23 @@ class Index_Config_Config
             'blocks' => 'Index_Block',
             'models' => 'Index_Model',
             'controllers' => 'Index_Controller',
-            'menu_frontend' => array(array(
-                'rout' => '',
-                'label' => 'Home',
-                'sort' => 0
-            )),
+            'menu_frontend' => array(
+                array(
+                    'rout' => '',
+                    'label' => 'Home',
+                    'sort' => 0
+                ),
+                array(
+                    'rout' => 'index/index/ru',
+                    'label' => 'Русский',
+                    'sort' => 12
+                ),
+                array(
+                    'rout' => 'index/index/english',
+                    'label' => 'English',
+                    'sort' => 13
+                )
+            ),
             'page' => array(
                 'index' => array(
                     'index' => array(

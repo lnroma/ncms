@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>Create new menu item</h1>
+    <h1><?php echo Core_Helper::__('Create new page') ?></h1>
 </div>
 <?php
 $page = $this->getPage();
@@ -26,9 +26,9 @@ $page = reset($page);
         </div>
         <div class="col-sm-8">
             <div class="form-group">
-                <label for="parent">Menu:</label>
+                <label for="parent"><?php echo Core_Helper::__('Menu')?>:</label>
                 <select multiple="multiple" class="form-control" name="menu_key[]" id="parent">
-                    <option value="main">Main menu</option>
+                    <option value="main"><?php echo Core_Helper::__('Main menu')?></option>
                     <?php //print_r(($page));die;?>
                     <?php foreach ($this->getMenu() as $menu): ?>
                         <option value="<?php echo $menu->key ?>"<?php
@@ -52,24 +52,31 @@ $page = reset($page);
                 </select>
             </div>
             <div class="form-group">
-                <label for="key">Url key:</label>
+                <label for="key"><?php echo Core_Helper::__('Url key') ?>:</label>
                 <input id="key" name="key" class="form-control" type="text"
-                       value="<?php if (isset($page->key)) echo $page->key ?>" required placeholder="Menu key">
+                       value="<?php if (isset($page->key)) echo $page->key ?>" required placeholder="<?php echo Core_Helper::__('Url key') ?>">
+            </div>
+            <div class="form-group">
+                <label for="store"><?php Core_Helper::__('Lang')?></label>
+                <select name="language">
+                    <option>ru</option>
+                    <option>en</option>
+                </select>
             </div>
             <input type="hidden" name="back_url"
                    value="<?php echo Core_Helper::getUrl('pages/index/addPage') ?><?php if (isset(Core_App::getParams()['id'])) echo '/id/' . Core_App::getParams()['id'] ?>">
             <div class="form-group">
-                <label for="title">Title menu:</label>
+                <label for="title"><?php echo Core_Helper::__('Title')?>:</label>
                 <input id="title" name="title" class="form-control" type="text"
-                       value="<?php if (isset($page->title)) echo $page->title ?>" required placeholder="Menu name">
+                       value="<?php if (isset($page->title)) echo $page->title ?>" required placeholder="<?php echo Core_Helper::__('Title')?>">
             </div>
             <div class="form-group">
-                <label for="short-content">Short content:</label>
+                <label for="short-content"><?php echo Core_Helper::__('Short content')?>:</label>
                 <textarea class="form-control" name="short_content"
                           id="short-content"><?php if (isset($page->short_content)) echo $page->short_content ?></textarea>
             </div>
             <div class="form-group">
-                <label for="content">Content:</label>
+                <label for="content"><?php echo Core_Helper::__('Content')?>:</label>
                 <textarea class="form-control" name="content"
                           id="content"><?php if (isset($page->content)) echo $page->content ?></textarea>
             </div>
@@ -77,7 +84,7 @@ $page = reset($page);
                 <?php if (isset(Core_App::getParams()['id'])): ?>
                     <input type="hidden" name="id" value="<?php echo Core_App::getParams()['id'] ?>">
                 <?php endif; ?>
-                <button type="submit" class="btn btn-success">Save page</button>
+                <button type="submit" class="btn btn-success"><?php echo Core_Helper::__('Save') ?></button>
             </div>
         </div>
     </div>

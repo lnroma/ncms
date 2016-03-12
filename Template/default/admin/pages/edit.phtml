@@ -1,19 +1,19 @@
 <div class="page-header">
-    <h1>Pages modules</h1>
+    <h1><?php echo Core_Helper::__('Pages manager')?></h1>
     <p>
         <a class="btn-success btn "
-           href="<?php echo Core_Helper::getUrl('pages/index/addPage')?>">create page</a>
+           href="<?php echo Core_Helper::getUrl('pages/index/addPage')?>"><?php echo Core_Helper::__('create page')?></a>
         <a class="btn-success btn "
-           href="<?php echo Core_Helper::getUrl('pages/index/addMenu')?>">create menu</a>
+           href="<?php echo Core_Helper::getUrl('pages/index/addMenu')?>"><?php echo Core_Helper::__('create menu')?></a>
     </p>
 </div>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead class="table-success">
         <tr>
-            <td>Title</td>
-            <td>Url</td>
-            <td>Action</td>
+            <td><?php echo Core_Helper::__('Title') ?></td>
+            <td><?php echo Core_Helper::__('Url') ?></td>
+            <td><?php echo Core_Helper::__('Action') ?></td>
         </tr>
         </thead>
         <tbody>
@@ -22,8 +22,8 @@
                     <td><?php echo $_page->title?></td>
                     <td><?php echo $_page->key?></td>
                     <td>
-                        <a href="<?php echo Core_Helper::getUrl('pages/index/addPage/').'/id/'.$_page->_id ?>" >Edit</a>
-                        <a href="<?php echo Core_Helper::getUrl('pages/index/deletePage/').'/id/'.$_page->_id ?>" >Delete</a>
+                        <a href="<?php echo Core_Helper::getUrl('pages/index/addPage/').'/id/'.$_page->_id ?>" ><?php echo Core_Helper::__('Edit') ?></a>
+                        <a href="<?php echo Core_Helper::getUrl('pages/index/deletePage/').'/id/'.$_page->_id ?>" ><?php echo Core_Helper::__('Delete') ?></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
