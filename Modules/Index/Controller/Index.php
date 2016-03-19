@@ -8,6 +8,9 @@
 class Index_Controller_Index extends Core_Controller_Abstract
 {
 
+    /**
+     * render main page
+     */
     public function indexAction() {
         $this
             ->setKey('page')
@@ -16,12 +19,18 @@ class Index_Controller_Index extends Core_Controller_Abstract
             ->render();
     }
 
+    /**
+     * set Russian lang
+     */
     public function ruAction() {
         setcookie('locale','ru');
         $_SESSION['locale'] = 'ru';
         header('location:'.Core_App::getBaseUrl());
     }
 
+    /**
+     * set lang english
+     */
     public function englishAction() {
         setcookie('locale','en');
         $_SESSION['locale'] = 'en';
