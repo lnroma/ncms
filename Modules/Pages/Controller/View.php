@@ -54,56 +54,53 @@ class Pages_Controller_View extends Core_Controller_Abstract
     public function addCommentAction()
     {
         /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getDb();
+        $db = Core_Model_Mongo::getConnect();
+//        Core_Model_Mongo::createCollection('comment8');die;
         /** check exist table */
-        if (array_search('comments', $db->getCollectionNames(true)) === false) {
-            $db->createCollection('comments');
-        }
-        /** @var MongoCollection $collectionComment */
-        $collectionComment = $db->selectCollection('comments');
-        /** @var MongoCursor $col */
-        $col = $collectionComment->find(
-            array(
-                'page_id' => $_POST['page_id']
-            )
+        $time = time();
+
+        //insert new comment to the page
+        $arrData =  array(
+            'page' => $_POST['page_id'],
+            'time' => $time,
+            'name' => $_POST['name'],
+            'comment' => $_POST['comment']
         );
 
-        $resultArray = array();
+        $connect = Core_Model_Mongo::getConnect();
 
-        if ($col->count()) {
-            // todo need optimization
-            $_POST['comment_tree'][] =
-                array(
-                    'name' => $_POST['name'],
-                    'comment' => $_POST['comment'],
-                );
+        $write = new MongoDB\Driver\BulkWrite();
+        $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY);
 
-            $resultArray['page_id'] = $_POST['page_id'];
-            $resultArray['allcoments'] = $_POST;
+        if(isset($_POST['reply']) && !empty($_POST['reply'])) {
+            $reply = $_POST['reply'];
 
-            $id = key(
-                iterator_to_array($col)
-            );
-            $collectionComment->update(
-                array(
-                    '_id' => new MongoId($id)
-                ),
-                $resultArray
+            if(isset($_POST['path']) && !empty($_POST['path'])) {
+                $path = $_POST['path'];
+            } else {
+                $path = 'replies';
+            }
+
+            $write->update(
+                array('_id' => new MongoDB\BSON\ObjectID($reply)),
+                array('$push' => array($path => $arrData) )
             );
         } else {
-            $_POST['comment_tree'][] =
-                array(
-                    'name' => $_POST['name'],
-                    'comment' => $_POST['comment'],
-                );
-            $resultArray['page_id'] = $_POST['page_id'];
-            $resultArray['allcoments'] = $_POST;
-            $collectionComment->insert($resultArray);
+            $write->insert($arrData);
+        }
+        try {
+            $connect->executeBulkWrite(Config_Db::getConf()['mongodb']['db'] . '.comments', $write, $writeConcern);
+        } catch(MongoDB\Driver\Exception\BulkWriteException $error) {
+            header('Location:' . $_POST['back_url']);
         }
 
-        $_SESSION['message'] = 'You comment this post';
-        $_SESSION['type'] = 'info';
+
         header('Location:' . $_POST['back_url']);
+    }
+
+    public function delCommentAllAction()
+    {
+
     }
 
 }

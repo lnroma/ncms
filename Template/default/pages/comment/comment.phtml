@@ -1,24 +1,45 @@
 <?php /** @var Pages_Block_Abstract $this */
-//var_dump($this->getPage()['_id']);die('123');
+$page = $this->getPage();
+$page = reset($page);
+$level = 12;
+$ofset = 0;
+//var_dump((string)$page->_id);die;
 ?>
-<div class="row">
-    <?php if ($this->getComentPage($this->getPage()['_id'])->count()): ?>
-    <?php foreach ($this->getComentPage($this->getPage()['_id']) as $_comment): ?>
-    <?php foreach ($_comment['allcoments']['comment_tree'] as $_key1 => $_comment): ?>
-        <div class="col-sm-12">
-            <div class="panel-default panel">
-                <div class="panel-heading"><?php echo $_comment['name'] ?></div>
-                <div class="panel-body"><?php echo $_comment['comment'] ?></div>
-                <div class="panel-footer"><a href="#form"
-                                             onclick="commentReply('<?php echo $_comment['name'] ?>','<?php echo $_key1 ?>')">reply</a>
+    <div class="row">
+        <?php if (count($commentaries = $this->getComentPage((string)$page->_id))): ?>
+            <!--        <pre>--><?php //print_r($commentaries); die;?><!--</pre>-->
+            <?php foreach ($commentaries as $_comment): ?>
+                <!--            --><?php //var_dump($_comment);die;?>
+                <!--                --><?php //var_dump($_comment);die; ?>
+                <div class="col-sm-12">
+                    <div class="panel-default panel">
+                        <div class="panel-heading"><?php echo $_comment->name ?></div>
+                        <div class="panel-body"><?php echo $_comment->comment ?></div>
+                        <div class="panel-footer"><a href="#form"
+                                                     onclick="commentReply('<?php echo $_comment->name ?>','<?php echo (string)$_comment->_id ?>','replies')">reply</a>
+                        </div>
+                    </div>
                 </div>
-                <input type="hidden" name="comment_tree[<?php echo $_key1 ?>][name]"
-                       value="<?php echo $_comment['name'] ?>">
-                <input type="hidden" name="comment_tree[<?php echo $_key1 ?>][comment]"
-                       value="<?php echo $_comment['comment'] ?>">
+
+                <?php if(isset($_comment->replies)) recursive($_comment->replies,$level-1,$ofset+1,(string)$_comment->_id ,'replies.') ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+<?php function recursive($replies,$level,$ofset,$replyId,$path = '')
+{
+    ?>
+    <?php foreach ($replies as $key => $_reply): ?>
+    <div class="col-sm-<?php echo $level ?> col-sm-offset-<?php echo $ofset?>">
+        <div class="panel-default panel">
+            <div class="panel-heading"><?php echo $_reply->name ?></div>
+            <div class="panel-body"><?php echo $_reply->comment ?></div>
+            <div class="panel-footer"><a href="#form"
+                                         onclick="commentReply('<?php echo $_reply->name ?>','<?php echo $replyId ?>','<?php echo $path.$key.'.replies' ?>')">reply</a>
             </div>
         </div>
-    <?php endforeach; ?>
-    <?php endforeach; ?>
-    <?php endif; ?>
-</div>
+    </div>
+    <?php if(isset($_reply->replies)): ?>
+        <?php recursive($_reply->replies,$level-1,$ofset+1,$replyId,$path.$key.'.replies.')?>
+    <?php endif ?>
+<?php endforeach; ?>
+<?php } ?>
