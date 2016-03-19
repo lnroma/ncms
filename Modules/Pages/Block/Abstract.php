@@ -50,17 +50,7 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      */
     public function getPage() {
         /** @var MongoDB $db */
-        $con = Core_Model_Mongo::getConnect();
-
-        $query = new MongoDB\Driver\Query(
-            array(
-                'key' => Core_App::getParams()['id']
-            )
-        );
-
-        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
-
-        return $menuCollection->toArray();
+        return Core_Model_Mongo::simpleSelect('key',Core_App::getParams()['id'],'pages')->toArray();
     }
 
     /**
@@ -68,14 +58,7 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      * @return mixed
      */
     public function getComentPage($pageId) {
-//        $db = Core_Model_Mongo::getDb();
-//        $collection = $db->selectCollection('comments');
-//        $comments = $collection->find(
-//            array(
-//                'page_id' => (string)$pageId
-//            )
-//        );
-//        return $comments;
+        return Core_Model_Mongo::simpleSelect('page',$pageId,'comments')->toArray();
     }
 
 }
