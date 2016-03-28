@@ -8,6 +8,9 @@
 class Admin_Controller_Dashboard extends Admin_Controller_Abstract
 {
 
+    /**
+     * index action
+     */
     public function indexAction() {
         $this
             ->setPage('admin')

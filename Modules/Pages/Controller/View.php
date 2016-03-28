@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: roman
@@ -53,10 +52,6 @@ class Pages_Controller_View extends Core_Controller_Abstract
      */
     public function addCommentAction()
     {
-        /** @var MongoDB $db */
-        $db = Core_Model_Mongo::getConnect();
-//        Core_Model_Mongo::createCollection('comment8');die;
-        /** check exist table */
         $time = time();
 
         //insert new comment to the page
@@ -72,10 +67,10 @@ class Pages_Controller_View extends Core_Controller_Abstract
         $write = new MongoDB\Driver\BulkWrite();
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY);
 
-        if(isset($_POST['reply']) && !empty($_POST['reply'])) {
+        if(!empty($_POST['reply'])) {
             $reply = $_POST['reply'];
 
-            if(isset($_POST['path']) && !empty($_POST['path'])) {
+            if(!empty($_POST['path'])) {
                 $path = $_POST['path'];
             } else {
                 $path = 'replies';
@@ -88,6 +83,7 @@ class Pages_Controller_View extends Core_Controller_Abstract
         } else {
             $write->insert($arrData);
         }
+
         try {
             $connect->executeBulkWrite(Config_Db::getConf()['mongodb']['db'] . '.comments', $write, $writeConcern);
         } catch(MongoDB\Driver\Exception\BulkWriteException $error) {
@@ -96,11 +92,6 @@ class Pages_Controller_View extends Core_Controller_Abstract
 
 
         header('Location:' . $_POST['back_url']);
-    }
-
-    public function delCommentAllAction()
-    {
-
     }
 
 }

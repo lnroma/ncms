@@ -14,9 +14,9 @@ class Contact_Controller_Index extends Core_Controller_Abstract
         $post = array();
         $post['type_input'] = Core_App::getPost('type_input');
         $post['name'] = Core_App::getPost('name');
-        $post['required'] = Core_App::getPost('required')?Core_App::getPost('required'):'';
-        $post['placeholder'] = Core_App::getPost('placeholder')?Core_App::getPost('placeholder'):'';
-        $post['show_in_greed'] = Core_App::getPost('show_in_greed')?Core_App::getPost('show_in_greed'):0 ;
+        $post['required'] = Core_App::getPost('required','');
+        $post['placeholder'] = Core_App::getPost('placeholder','');
+        $post['show_in_greed'] = Core_App::getPost('show_in_greed',0);
         $modelAttrib = new Contact_Model_Contacts_Attribute();
 
         $id = NULL;
@@ -59,11 +59,7 @@ class Contact_Controller_Index extends Core_Controller_Abstract
             die;
         }
 
-        if(!is_null(Core_App::getPost('url'))) {
-            header('Location:' . Core_App::getPost('url',false));
-        } else {
-            header('Location:'.Core_App::getBaseUrl());
-        }
+        header('Location:' . Core_App::getPost('url',Core_App::getBaseUrl(),false));
     }
 
     /**

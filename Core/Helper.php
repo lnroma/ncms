@@ -7,11 +7,22 @@
  */
 class Core_Helper {
 
+    /**
+     * get url routering
+     * @param $rout
+     * @return mixed
+     */
     static public function getUrl($rout) {
         $rout = Core_App::dispathEvent('get_url_helper',$rout);
         return $rout;
     }
 
+    /**
+     * translate string
+     * @param $string
+     * @param array ...$args
+     * @return string
+     */
     static public function __($string, ...$args) {
         $locale = 'en';
 
@@ -33,6 +44,16 @@ class Core_Helper {
         }
 
         return vsprintf($translate,$args);
+    }
+
+    /**
+     * todo realisation function for configuration system
+     * @param $key
+     * @return null
+     */
+    static public function getConfig($key)
+    {
+        return null;
     }
 
 }

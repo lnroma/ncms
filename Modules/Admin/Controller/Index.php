@@ -12,6 +12,9 @@ class Admin_Controller_Index extends Admin_Controller_Abstract
 
     }
 
+    /**
+     * login action
+     */
     public function loginAction() {
         $this
             ->setPage('login')
@@ -41,12 +44,25 @@ class Admin_Controller_Index extends Admin_Controller_Abstract
         header('Location:'.Core_App::getBaseUrl().Config_App::getConfig()['adminurl'].'/dashboard');
     }
 
+    /**
+     * render configuration page
+     */
     public function configAction() {
         $this
             ->setKey('admin_page')
             ->setPage('admin')
-            ->setContent('Config_Index')
+            ->setContentLeft('Config_Left_Left')
+            ->setContentRight('Config_Right_Right')
             ->render();
+    }
+
+    /**
+     * save configuration
+     */
+    public function saveConfigAction()
+    {
+        Core_Model_Mongo::insert($_POST);
+        header('location:'.Config_App::getConfig()['adminurl'].'/config/');
     }
 
 }

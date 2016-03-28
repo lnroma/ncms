@@ -1,0 +1,16 @@
+<?php /** @var Admin_Block_Config_Left_Form_Element $this */
+$attributes = $this->getData('attributes');
+?>
+<?php if($this->getData('type') == 'text'): ?>
+<div class="form-group">
+    <label for="<?php echo $this->getData('id') ?>"><?php echo $attributes['label']?></label>
+    <input
+        type="<?php echo $this->getData('type') ?>"
+        id="<?php echo $this->getData('id')?>"
+        class="form-control"
+        <?php if(isset($attributes['placeholder'])):?>placeholder="<?php echo $attributes['placeholder']?>"<?php endif;?>
+        <?php if(isset($attributes['value'])):?>value="<?php echo $attributes['value']?>"<?php endif;?>
+        <?php if(isset($attributes['name'])):?>name="<?php echo $attributes['name']?>"<?php endif;?>
+    />
+</div>
+<?php endif; ?>

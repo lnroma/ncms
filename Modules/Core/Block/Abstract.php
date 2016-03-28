@@ -44,7 +44,13 @@ class Core_Block_Abstract {
      */
     public function toHtml()
     {
+//        var_dump($this->getTemplate());
+//        echo '<div style="border:1px solid red; width: 100%;">
+//        <div style="background: yellowgreen;">';
+//        echo $this->getTemplate();
+//        echo '</div>';
       return include($this->getTemplate());
+//        echo '<div>';
     }
 
     /**
@@ -86,6 +92,7 @@ class Core_Block_Abstract {
         // TODO: Implement __call() method.
         if($name == 'setData') {
             $this->_data[$arguments[0]] = $arguments[1];
+            return $this;
         } elseif($name == 'getData') {
             if(isset($this->_data[$arguments[0]])) {
                 return $this->_data[$arguments[0]];

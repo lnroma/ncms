@@ -7,6 +7,9 @@
  */
 class Tasks_Model_Tasks_Attribute_Value extends Core_Model_Abstract
 {
+    /**
+     * Tasks_Model_Tasks_Attribute_Value constructor.
+     */
     public function __construct()
     {
         $this->setTableName('task_attribute_value');

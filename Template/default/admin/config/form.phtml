@@ -1,0 +1,15 @@
+<?php /** @var Admin_Block_Config_Left_Form $this */
+?>
+<div class="panel panel-success">
+    <div class="panel-heading"><?php echo $this->getData('header')?></div>
+    <div class="panel-body">
+        <form role="form" action="<?php echo $this->getData('action') ?>" method="post">
+            <?php foreach($this->getLayerElement() as $element): ?>
+                <?php /** @var Admin_Block_Config_Left_Form_Element $element */ ?>
+                <?php $element->toHtml(); ?>
+            <?php endforeach; ?>
+            <button class="btn btn-success" type="submit">Save</button>
+        </form>
+    </div>
+    <div class="panel-footer"><?php echo $this->getData('footer') ?></div>
+</div>

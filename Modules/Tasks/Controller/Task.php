@@ -7,7 +7,9 @@
  */
 class Tasks_Controller_Task extends Core_Controller_Abstract
 {
-
+    /**
+     * list action
+     */
     public function listAction() {
         $this
             ->setPage('main')

@@ -14,6 +14,7 @@ class Postgen_Controller_Index extends Core_Controller_Abstract
             ->setKey('page')
             ->setContent('Postgen')
             ->render();
+        var_dump($_SERVER);
     }
 
     public function viewRespAction() {
@@ -35,10 +36,13 @@ class Postgen_Controller_Index extends Core_Controller_Abstract
             $cookie[$_cookieField['name']] = $_cookieField['value'];
         }
 
+        $header = array();
+
         curl_setopt($curl,CURLOPT_URL,$_POST['action']);
-        curl_setopt($curl,CURLOPT_PORT,isset($_POST['port'])?$_POST['port']:80);
+        curl_setopt($curl,CURLOPT_PORT,Core_App::getPost('port',80));
         curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($curl,CURLOPT_USERAGENT,$_POST['user_agent']);
+        curl_setopt($curl,CURLOPT_HTTPHEADER,$header);
         // set post fields clear
         curl_setopt($curl,CURLOPT_POST,true);
         curl_setopt($curl,CURLOPT_POSTFIELDS,http_build_query($query));
@@ -47,6 +51,7 @@ class Postgen_Controller_Index extends Core_Controller_Abstract
 
         $result = curl_exec($curl);
         if($error = curl_error($curl)) {
+            var_dump($error);
             throw new Exception('Error request by curl');
         }
         echo $result;

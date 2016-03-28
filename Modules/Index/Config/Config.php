@@ -32,6 +32,13 @@ class Index_Config_Config
                     'sort' => 13
                 )
             ),
+            'menu_admin' => array(
+                array(
+                    'rout' => Config_App::getConfig()['adminurl'] . '/index/admin/',
+                    'label' => 'Home page',
+                    'sort' => 4,
+                ),
+            ),
             'page' => array(
                 'index' => array(
                     'index' => array(

@@ -12,13 +12,13 @@ $page = reset($page);
                 <ul class="nav nav-list">
                     <?php foreach ($this->getMenu() as $key => $menu): ?>
                         <li><label><?php echo $menu->title ?></label>
-                        <?php if (isset($menu->child)): ?>
+                            <?php if (isset($menu->child)): ?>
                                 <ul class="nav nav-list tree">
                                     <?php foreach ($menu->child as $_child): ?>
-                                        <li><a href=""><?php echo $_child->title ?></a> </li>
+                                        <li><a href=""><?php echo $_child->title ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
-                        <?php endif; ?>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -26,24 +26,24 @@ $page = reset($page);
         </div>
         <div class="col-sm-8">
             <div class="form-group">
-                <label for="parent"><?php echo Core_Helper::__('Menu')?>:</label>
+                <label for="parent"><?php echo Core_Helper::__('Menu') ?>:</label>
                 <select multiple="multiple" class="form-control" name="menu_key[]" id="parent">
-                    <option value="main"><?php echo Core_Helper::__('Main menu')?></option>
+                    <option value="main"><?php echo Core_Helper::__('Main menu') ?></option>
                     <?php //print_r(($page));die;?>
                     <?php foreach ($this->getMenu() as $menu): ?>
                         <option value="<?php echo $menu->key ?>"<?php
                         if (isset($page->menu_key)) {
-                            if(!is_array($page->menu_key)) {
+                            if (!is_array($page->menu_key)) {
                                 $page->menu_key = array($page->menu_key);
                             }
-                            if (array_search($menu->key,$page->menu_key) !== false) echo 'selected';
+                            if (array_search($menu->key, $page->menu_key) !== false) echo 'selected';
                         }
                         ?>><?php echo $menu->title ?></option>
                         <?php if (isset($menu->child)): ?>
                             <?php foreach ($menu->child as $_child): ?>
                                 <option value="<?php echo $_child->key ?>" <?php
                                 if (isset($page->menu_key)) {
-                                    if (array_search($_child->key,$page->menu_key) !== false) echo 'selected';
+                                    if (array_search($_child->key, $page->menu_key) !== false) echo 'selected';
                                 }
                                 ?>><?php echo $_child->title ?></option>
                             <?php endforeach; ?>
@@ -54,10 +54,11 @@ $page = reset($page);
             <div class="form-group">
                 <label for="key"><?php echo Core_Helper::__('Url key') ?>:</label>
                 <input id="key" name="key" class="form-control" type="text"
-                       value="<?php if (isset($page->key)) echo $page->key ?>" required placeholder="<?php echo Core_Helper::__('Url key') ?>">
+                       value="<?php if (isset($page->key)) echo $page->key ?>" required
+                       placeholder="<?php echo Core_Helper::__('Url key') ?>">
             </div>
             <div class="form-group">
-                <label for="store"><?php Core_Helper::__('Lang')?></label>
+                <label for="store"><?php Core_Helper::__('Lang') ?></label>
                 <select name="language">
                     <option>ru</option>
                     <option>en</option>
@@ -66,18 +67,28 @@ $page = reset($page);
             <input type="hidden" name="back_url"
                    value="<?php echo Core_Helper::getUrl('pages/index/addPage') ?><?php if (isset(Core_App::getParams()['id'])) echo '/id/' . Core_App::getParams()['id'] ?>">
             <div class="form-group">
-                <label for="title"><?php echo Core_Helper::__('Title')?>:</label>
-                <input id="title" name="title" class="form-control" type="text"
-                       value="<?php if (isset($page->title)) echo $page->title ?>" required placeholder="<?php echo Core_Helper::__('Title')?>">
+                <label for="title"><?php echo Core_Helper::__('Title') ?>:</label>
+                En:<input id="title" name="title[en]" class="form-control" type="text"
+                          value="<?php if (isset($page->title)) echo $page->title ?>" required
+                          placeholder="<?php echo Core_Helper::__('Title') ?>">
+                Ru:<input id="title" name="title[ru]" class="form-control" type="text"
+                          value="<?php if (isset($page->title)) echo $page->title ?>" required
+                          placeholder="<?php echo Core_Helper::__('Title') ?>">
             </div>
             <div class="form-group">
-                <label for="short-content"><?php echo Core_Helper::__('Short content')?>:</label>
-                <textarea class="form-control" name="short_content"
+                <label for="short-content"><?php echo Core_Helper::__('Short content') ?>:</label>
+                <textarea class="form-control" name="short_content[ru]"
                           id="short-content"><?php if (isset($page->short_content)) echo $page->short_content ?></textarea>
+                <textarea class="form-control" name="short_content[en]"
+                                id="short-content"><?php if (isset($page->short_content)) echo $page->short_content ?></textarea>
+
             </div>
             <div class="form-group">
-                <label for="content"><?php echo Core_Helper::__('Content')?>:</label>
-                <textarea class="form-control" name="content"
+                <label for="content"><?php echo Core_Helper::__('Content') ?>:</label>
+                <textarea class="form-control" name="content[en]"
+                          id="content"><?php if (isset($page->content)) echo $page->content ?></textarea>
+
+                <textarea class="form-control" name="content[ru]"
                           id="content"><?php if (isset($page->content)) echo $page->content ?></textarea>
             </div>
             <div class="form-group">

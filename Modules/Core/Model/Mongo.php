@@ -50,7 +50,6 @@ class Core_Model_Mongo {
         $connect = Core_Model_Mongo::getConnect();
         $write = new MongoDB\Driver\BulkWrite();
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-//        var_dump($dataArray);die;
         $write->delete($dataArray);
         $connect->executeBulkWrite(Config_Db::getConf()['mongodb']['db'].'.'.$collection,$write,$writeConcern);
     }
@@ -96,10 +95,10 @@ class Core_Model_Mongo {
     /**
      * @param $key
      * @param $value
-     * @param $dbName
+     * @param $collection
      * @return array | MongoCursor
      */
-    static function simpleSelect($key,$value,$dbName) {
+    static function simpleSelect($key,$value,$collection) {
         $con = Core_Model_Mongo::getConnect();
 
         $query = new MongoDB\Driver\Query(
@@ -107,7 +106,17 @@ class Core_Model_Mongo {
                 $key => $value
             )
         );
-        return  $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.'.$dbName,$query);
+        return  $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.'.$collection,$query);
+    }
+
+    /**
+     * get all document in collection
+     * @param $collection
+     * @return \MongoDB\Driver\Cursor
+     */
+    static function selectAll($collection) {
+        $query = new MongoDB\Driver\Query(array());
+        return self::getConnect()->executeQuery(Config_Db::getConf()['mongodb']['db'].'.'.$collection,$query);
     }
 
  }

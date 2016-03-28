@@ -187,12 +187,13 @@ class Core_App {
     /**
      * @param $key
      * @param bool $filtered
+     * @param mixed $defaultValue return default value
      * @return mixed|null
      */
-    static public function getPost($key,$filtered = true) {
+    static public function getPost($key,$defaultValue = null,$filtered = true) {
 
         if(!isset($_POST[$key])) {
-            return null;
+            return $defaultValue;
         }
 
         if(is_array($_POST[$key])) {

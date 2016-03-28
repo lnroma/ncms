@@ -8,6 +8,10 @@
 class Admin_Controller_Abstract extends Core_Controller_Abstract
 {
 
+    /**
+     * constructor
+     * Admin_Controller_Abstract constructor.
+     */
     public function __construct()
     {
         if(
@@ -19,6 +23,11 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
         }
     }
 
+    /**
+     * set page template
+     * @param $pageName
+     * @return $this
+     */
     public function setPage($pageName)
     {
         $pathToPage = 'admin/page/'.$pageName;
@@ -29,6 +38,10 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
         return $this;
     }
 
+    /**
+     * render blocks
+     * @return $this
+     */
     public function render()
     {
         $this->getBlockClass('admin_page')->toHtml();
@@ -47,6 +60,10 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
         }
     }
 
+    /**
+     * is login redirect
+     * @return null
+     */
     public function _isLoginRedirect() {
         return Core_App::getSessionData('login_redirect');
     }
