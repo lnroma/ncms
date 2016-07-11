@@ -12,6 +12,10 @@ class Config_Modules
     static public function getModulesConfig()
     {
         return array(
+            'install' => array(
+                'config_class' => 'Install_Config_Config',
+                'enable' => true
+            ),
             'index' => array(
                 'config_class' => 'Index_Config_Config',
                 'enable' => true

@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Install NaumovCMS</title>
+</head>
+<body>
+for install input you correct data to the form
+<form action="install/installSave" method="post">
+    Patch to base:<input type="text" name="base_patch" /><br/>
+    Url application:<input type="text" name="base_url" /><br/>
+    Databases:<br/>
+    Host:<input type="text" name="db[host]"><br/>
+    Name:<input type="text" name="db[name]"><br/>
+    User:<input type="text" name="db[user]"><br/>
+    Pass:<input type="password" name="db[pass]"><br/>
+    MongoDb:<br/>
+    Connect string:<input type="text" name="db[mongodb][connect]" /><br/>
+    Database name: <input type="text" name="db[mongodb][db]"/><br/>
+    <input type="submit" name="submit" value="Run install" /><br/>
+    
+</form>
+</body>
+</html>

@@ -44,7 +44,7 @@ class Core_App {
      */
     static public function setThemes($themes) {
         self::$_themes = $themes;
-        return self::$_path;
+        return self::$_themes;
     }
 
     /**
@@ -86,7 +86,7 @@ class Core_App {
      * @return bool
      */
     static public function runApplet() {
-
+        self::dispathEvent('install',array());
         self::dispathEvent('run_application_before',array());
 
         $params = self::getParams();
@@ -346,7 +346,6 @@ class Core_App {
      */
     static public function dispathEvent($eventKey,$data) {
         $modules = self::getAllModulesConfig();
-
         foreach($modules as $_mod) {
             $methods = array();
             if(isset($_mod[$eventKey])) {
@@ -384,11 +383,23 @@ function __autoload($className) {
     $classFileUserModules = Core_App::getRootPath()
         .'Local/Modules/'.trim(implode(DIRECTORY_SEPARATOR,$classPath),DIRECTORY_SEPARATOR)
         .'.php';
+
     if(file_exists($classFileUserModules)) {
         include_once($classFileUserModules);
     } elseif(file_exists($classFileModules)) {
         include_once($classFileModules);
     } elseif(file_exists($classFile)) {
         include_once($classFile);
+    } else {
+        autoloadByNamespace($className);
+    }
+}
+
+function autoloadByNamespace($className)
+{
+    $classPath = str_replace('\\','/',$className);
+    $classPath = Core_App::getRootPath().$classPath.'.php';
+    if(file_exists($classPath)) {
+        require_once $classPath;
     }
 }

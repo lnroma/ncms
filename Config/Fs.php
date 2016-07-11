@@ -1,0 +1,1 @@
+<?php return unserialize('a:2:{s:9:"base_path";s:13:"/var/www/cms/";s:8:"base_url";s:14:"localhost:8080";}');

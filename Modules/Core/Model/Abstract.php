@@ -173,7 +173,6 @@ class Core_Model_Abstract
     {
         /** @var PDO $connection */
         $res = Core_Db::getResource();
-
         if (!is_null($this->_selectArray)) {
             $selectField = '`' . implode('`.`', $this ->_selectArray) . '`';
         } else {
@@ -193,6 +192,11 @@ class Core_Model_Abstract
         }
 
         $query .= ' LIMIT ' . $this->_getStartLimit() . ',' . $this->_getOffset();
+        $queryRun = $res->query($query);
+
+        if($queryRun === false) {
+            throw new Exception($res->errorInfo()[2]);
+        }
 
         return $res->query($query)->fetchAll();
     }

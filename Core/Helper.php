@@ -56,4 +56,27 @@ class Core_Helper {
         return null;
     }
 
+    static $_configClass = null;
+
+    /**
+     * get configuration class
+     * @return \Core\Configuration|null
+     */
+    static private function _getConfigClass()
+    {
+        if(is_null(self::$_configClass)) {
+            self::$_configClass = new Core\Configuration();
+        }
+        return self::$_configClass;
+    }
+
+    static public function getDb()
+    {
+        return self::_getConfigClass()->getDb();
+    }
+
+    static public function getFs()
+    {
+        return self::_getConfigClass()->getFs();
+    }
 }

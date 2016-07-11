@@ -25,7 +25,8 @@ class Core_Db {
         if(!is_null(self::$_connection)) {
             return self::$_connection;
         } else {
-            $config = Config_Db::getConf();
+//            $config = Config_Db::getConf();
+            $config = Core_Helper::getDb();
             try {
                 self::$_connection = new PDO($config['db_host'],$config['user'],$config['pass']);
                 self::$_connection->query('SET NAMES utf8');
