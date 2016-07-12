@@ -3,7 +3,7 @@
 $class = new Contact_Block_Create();
 $contact = $class->getFieldValue();
 ?>
-<form action="<?php echo Core_App::getBaseUrl() ?>contact/save/" method="post"
+<form action="<?php echo \Core\App::getBaseUrl() ?>contact/save/" method="post"
       role="form" id="form_create" data-toggle="validator">
     <?php if (isset($contact['id'])): ?>
         <input type="hidden" name="update" value="1">

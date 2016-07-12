@@ -45,7 +45,7 @@ class Contact_Controller_Create extends Core_Controller_Abstract {
          $html = ob_get_contents();
         ob_end_clean();
 
-        if(isset(Core_App::getParams()['isAjax'])) {
+        if(isset(\Core\App::getParams()['isAjax'])) {
             echo json_encode(array(
                 'html' => $html
             ));

@@ -28,7 +28,7 @@ class Pages_Block_Viewmenu extends Pages_Block_Abstract
 
         $query = new MongoDB\Driver\Query(
             array(
-                'menu_key' => Core_App::getParams()['id']
+                'menu_key' => \Core\App::getParams()['id']
             )
         );
 

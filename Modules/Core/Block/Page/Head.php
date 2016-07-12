@@ -15,8 +15,8 @@ class Core_Block_Page_Head extends Core_Block_Abstract {
     }
 
     public function getPageConfig() {
-        $config = Core_App::getAllModulesConfig();
-        $request = Core_App::getParams();
+        $config = \Core\App::getAllModulesConfig();
+        $request = \Core\App::getParams();
         $configThisPage = $config[$request['controller']]['page'][$request['controllerName']][$request['action']];
         return $configThisPage;
     }

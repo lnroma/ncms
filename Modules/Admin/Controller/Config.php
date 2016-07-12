@@ -17,7 +17,7 @@ class Admin_Controller_Config extends Admin_Controller_Abstract
             var_dump($error);
             die;
         }
-        header('Location:'.Core_App::getBaseUrl().Config_App::getConfig()['adminurl'].'/'.'config/index');
+        header('Location:'.\Core\App::getBaseUrl().Config_App::getConfig()['adminurl'].'/'.'config/index');
     }
 
     public function saveBaseAction()

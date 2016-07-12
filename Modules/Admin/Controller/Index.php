@@ -31,8 +31,8 @@ class Admin_Controller_Index extends Admin_Controller_Abstract
         $userModel = new Admin_Model_Admin_User();
 
         $result = $userModel
-            ->addFieldToFilter('login',Core_App::getPost('username'))
-            ->addFieldToFilter('pass',md5(Core_App::getPost('password')))
+            ->addFieldToFilter('login',\Core\App::getPost('username'))
+            ->addFieldToFilter('pass',md5(\Core\App::getPost('password')))
             ->load();
 
         $result = reset($result);
@@ -41,7 +41,7 @@ class Admin_Controller_Index extends Admin_Controller_Abstract
             $_SESSION['is_admin_user'] = true;
         }
 
-        header('Location:'.Core_App::getBaseUrl().Config_App::getConfig()['adminurl'].'/dashboard');
+        header('Location:'.\Core\App::getBaseUrl().Config_App::getConfig()['adminurl'].'/dashboard');
     }
 
     /**

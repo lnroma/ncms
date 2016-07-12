@@ -172,7 +172,7 @@ class Core_Model_Abstract
     public function load($id = null)
     {
         /** @var PDO $connection */
-        $res = Core_Db::getResource();
+        $res = \Core\Db::getResource();
         if (!is_null($this->_selectArray)) {
             $selectField = '`' . implode('`.`', $this ->_selectArray) . '`';
         } else {
@@ -209,7 +209,7 @@ class Core_Model_Abstract
     public function getCount() {
 
         /** @var PDO $connection */
-        $res = Core_Db::getResource();
+        $res = \Core\Db::getResource();
 
         if (!is_null($this->_selectArray)) {
             $selectField = '`' . implode('`.`', $this ->_selectArray) . '`';
@@ -253,7 +253,7 @@ class Core_Model_Abstract
             . trim(implode(',', $arrayMask), ',')
             . ');';
         try {
-            $res = Core_Db::getResource();
+            $res = \Core\Db::getResource();
             $res->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sth = $res->prepare($query);
             $sth->execute($arrayVal);
@@ -300,7 +300,7 @@ class Core_Model_Abstract
 
         $query .=   ';';
         try {
-            $res = Core_Db::getResource();
+            $res = \Core\Db::getResource();
             $res->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sth = $res->prepare($query);
             $sth->execute($arrayVal);
@@ -320,7 +320,7 @@ class Core_Model_Abstract
      * @throws Exception
      */
     public function executeDirectQuery($query) {
-        $res = Core_Db::getResource();
+        $res = \Core\Db::getResource();
         $result = $res->query($query)->fetchAll();
         return $result;
     }
@@ -329,7 +329,7 @@ class Core_Model_Abstract
      * get last id not work not use the function
      */
     public function getLastId() {
-        $res = Core_Db::getResource();
+        $res = \Core\Db::getResource();
         $query = 'select count(*) as `last` from `' . $this->_tableName . '` order by ';
         return $res->query($query)->fetchObject();
     }

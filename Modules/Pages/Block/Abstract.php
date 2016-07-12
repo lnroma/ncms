@@ -50,7 +50,7 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      */
     public function getPage() {
         /** @var MongoDB $db */
-        return Core_Model_Mongo::simpleSelect('key',Core_App::getParams()['id'],'pages')->toArray();
+        return Core_Model_Mongo::simpleSelect('key',\Core\App::getParams()['id'],'pages')->toArray();
     }
 
     /**

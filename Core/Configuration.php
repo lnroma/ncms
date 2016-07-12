@@ -10,6 +10,11 @@ namespace Core {
      * Class Configuration
      * core configuration provider
      * @package Core
+     * @method getDb()
+     * @method getFs()
+     * @method getApp()
+     * @method getModules()
+     * @method getRoute()
      */
     class Configuration {
 
@@ -22,7 +27,7 @@ namespace Core {
          */
         public function __construct()
         {
-            $path = \Core_App::getRootPath();
+            $path = \Core\App::getRootPath();
             $this->_configuration = array(
                 'db' => $path.'Config/Db.php',
                 'fs' => $path.'Config/Fs.php',

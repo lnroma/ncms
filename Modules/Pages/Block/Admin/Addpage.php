@@ -38,14 +38,14 @@ class Pages_Block_Admin_Addpage extends Core_Block_Abstract
     {
         try {
             //if key id not set return empty array
-            if(!isset(Core_App::getParams()['id'])) {
+            if(!isset(\Core\App::getParams()['id'])) {
                 return array();
             }
 
             $connection = Core_Model_Mongo::getConnect();
             $query = new MongoDB\Driver\Query(
                 array(
-                    '_id' => new \MongoDB\BSON\ObjectID(Core_App::getParams()['id'])
+                    '_id' => new \MongoDB\BSON\ObjectID(\Core\App::getParams()['id'])
                 )
             );
 

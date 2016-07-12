@@ -12,11 +12,11 @@ class Contact_Controller_Index extends Core_Controller_Abstract
      */
     public function saveAttribAction() {
         $post = array();
-        $post['type_input'] = Core_App::getPost('type_input');
-        $post['name'] = Core_App::getPost('name');
-        $post['required'] = Core_App::getPost('required','');
-        $post['placeholder'] = Core_App::getPost('placeholder','');
-        $post['show_in_greed'] = Core_App::getPost('show_in_greed',0);
+        $post['type_input'] = \Core\App::getPost('type_input');
+        $post['name'] = \Core\App::getPost('name');
+        $post['required'] = \Core\App::getPost('required','');
+        $post['placeholder'] = \Core\App::getPost('placeholder','');
+        $post['show_in_greed'] = \Core\App::getPost('show_in_greed',0);
         $modelAttrib = new Contact_Model_Contacts_Attribute();
 
         $id = NULL;
@@ -32,7 +32,7 @@ class Contact_Controller_Index extends Core_Controller_Abstract
         $_SESSION['type'] = "success";
 
 
-        if(Core_App::getParams()['ajax']) {
+        if(\Core\App::getParams()['ajax']) {
             // load field by id
             $html = '
                 <div class="form-group">
@@ -59,7 +59,7 @@ class Contact_Controller_Index extends Core_Controller_Abstract
             die;
         }
 
-        header('Location:' . Core_App::getPost('url',Core_App::getBaseUrl(),false));
+        header('Location:' . \Core\App::getPost('url',\Core\App::getBaseUrl(),false));
     }
 
     /**
@@ -67,52 +67,52 @@ class Contact_Controller_Index extends Core_Controller_Abstract
      */
     public function deleteAction() {
 
-        if(!Core_App::getParams()['id']) {
+        if(!\Core\App::getParams()['id']) {
             $_SESSION['message'] = 'Error. You dont have id contact for delete';
             $_SESSION['type'] = 'success';
-            header('Location:'.Core_App::getBaseUrl());
+            header('Location:'.\Core\App::getBaseUrl());
         }
 
         $contMod = new Contact_Model_Contact();
 
-        $query = 'DELETE FROM `contacts_entity` WHERE `contacts_entity`.`id` = '.Core_App::getParams()['id'];
+        $query = 'DELETE FROM `contacts_entity` WHERE `contacts_entity`.`id` = '.\Core\App::getParams()['id'];
 
         $contMod->executeDirectQuery($query);
 
         $contModVal = new Contact_Model_Contacts_Attribute_Value();
         $contModVal->executeDirectQuery(
             'DELETE FROM `contacts_attribute_value`
-                WHERE `contacts_attribute_value`.`id_contact` = '.Core_App::getParams()['id']
+                WHERE `contacts_attribute_value`.`id_contact` = '.\Core\App::getParams()['id']
         );
         $_SESSION['message'] = 'This contact deleted success full';
         $_SESSION['type'] = 'info';
-        header('Location:'.Core_App::getBaseUrl());
+        header('Location:'.\Core\App::getBaseUrl());
     }
 
     /**
      * attr delete action
      */
     public function attrDelAction() {
-        if(!Core_App::getParams()['id']) {
+        if(!\Core\App::getParams()['id']) {
             $_SESSION['message'] = 'Error. You dont have id attribute for delete';
             $_SESSION['type'] = 'info';
-            header('Location:'.Core_App::getBaseUrl());
+            header('Location:'.\Core\App::getBaseUrl());
         }
 
         $contModAttr = new Contact_Model_Contacts_Attribute();
         $contModAttr->executeDirectQuery(
             'DELETE FROM `contacts_attribute`
-                WHERE `contacts_attribute`.`id` = '.Core_App::getParams()['id']
+                WHERE `contacts_attribute`.`id` = '.\Core\App::getParams()['id']
         );
 
         $contModVal = new Contact_Model_Contacts_Attribute_Value();
         $contModVal->executeDirectQuery(
             'DELETE FROM `contacts_attribute_value`
-                WHERE `contacts_attribute_value`.`id_attribute` = '.Core_App::getParams()['id']
+                WHERE `contacts_attribute_value`.`id_attribute` = '.\Core\App::getParams()['id']
         );
 
         $_SESSION['message'] = 'Attribute delete is success full';
         $_SESSION['type'] = 'info';
-        header('Location:'.Core_App::getBaseUrl());
+        header('Location:'.\Core\App::getBaseUrl());
     }
 }

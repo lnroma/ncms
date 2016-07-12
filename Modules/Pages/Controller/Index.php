@@ -106,7 +106,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
      */
     public function deletePageAction() {
         try {
-            $param = Core_App::getParams();
+            $param = \Core\App::getParams();
 
             if(isset($param['id'])) {
                 /** @var MongoDB $db */
@@ -122,9 +122,9 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
                 );
             }
             Core_Model_Mongo::getConnect()->close();
-            header('Location:'.Core_Helper::getUrl('pages/index/index'));
+            header('Location:'.\Core\Helper::getUrl('pages/index/index'));
         } catch(Exception $error) {
-            header('Location:'.Core_Helper::getUrl('pages/index/index'));
+            header('Location:'.\Core\Helper::getUrl('pages/index/index'));
         }
     }
 

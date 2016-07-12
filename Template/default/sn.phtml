@@ -1,7 +1,7 @@
 <?php /** @var Index_Block_Index $this */ ?>
 <script>
     function ajaxEdit(id) {
-        var urlQuery = '<?php echo Core_App::getBaseUrl() ?>contact/create/renderModal/id/' + id + '/isAjax/true/';
+        var urlQuery = '<?php echo \Core\App::getBaseUrl() ?>contact/create/renderModal/id/' + id + '/isAjax/true/';
         $.ajax({
             url: urlQuery,
             dataType: 'json',
@@ -62,7 +62,7 @@
                             Edit
                         </button>
                         <button class="btn btn-primary"
-                                onclick="window.location = '<?php echo Core_App::getBaseUrl() ?>contact/index/delete/id/<?php echo $_key
+                                onclick="window.location = '<?php echo \Core\App::getBaseUrl() ?>contact/index/delete/id/<?php echo $_key
                                 ?>'"
                         >Delete
                         </button>
@@ -92,7 +92,7 @@
                 <td><?php echo $_attr['name'] ?></td>
                 <td>
                     <button class="btn btn-primary"
-                            onclick="window.location = '<?php echo Core_App::getBaseUrl() ?>contact/index/attrDel/id/<?php echo $_attr['id'] ?>'">
+                            onclick="window.location = '<?php echo \Core\App::getBaseUrl() ?>contact/index/attrDel/id/<?php echo $_attr['id'] ?>'">
                         Delete
                     </button>
                 </td>
@@ -101,7 +101,7 @@
     </table>
 </div>
 <button class="btn btn-success"
-        onclick="window.location = '<?php echo Core_App::getBaseUrl() ?>contact/create/addAttribute'">Add new
+        onclick="window.location = '<?php echo \Core\App::getBaseUrl() ?>contact/create/addAttribute'">Add new
     attribute
 </button>
 

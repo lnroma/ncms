@@ -38,7 +38,7 @@ class Core_Controller_Abstract {
      * @return $this
      */
     public function setBlock($block) {
-        $params = Core_App::getConfigModul();
+        $params = \Core\App::getConfigModul();
         $this->__block = $params['blocks'].'_'.$block;
         return $this;
     }

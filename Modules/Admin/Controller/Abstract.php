@@ -16,8 +16,8 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
     {
         if(
             !$this->_isAllow()
-            && Core_App::getParams()['action'] != 'check'
-            && Core_App::getParams()['action'] != 'login'
+            && \Core\App::getParams()['action'] != 'check'
+            && \Core\App::getParams()['action'] != 'login'
         ) {
             throw new Exception_Forbiden('Forbidden');
         }
@@ -53,7 +53,7 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
      * @return bool
      */
     public function _isAllow() {
-        if(Core_App::getSessionData('is_admin_user')) {
+        if(\Core\App::getSessionData('is_admin_user')) {
             return true;
         } else {
             return false;
@@ -65,7 +65,7 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
      * @return null
      */
     public function _isLoginRedirect() {
-        return Core_App::getSessionData('login_redirect');
+        return \Core\App::getSessionData('login_redirect');
     }
 
 }

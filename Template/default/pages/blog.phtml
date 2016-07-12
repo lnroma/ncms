@@ -2,7 +2,7 @@
 <?php foreach ($this->getPages() as $_page): ?>
     <div class="panel panel-success">
         <div class="panel-heading"><?php echo $_page->title ?>
-            <a class="btn btn-sm btn-primary pull-right" href="<?php echo Core_App::getBaseUrl() . $_page->key ?>">
+            <a class="btn btn-sm btn-primary pull-right" href="<?php echo \Core\App::getBaseUrl() . $_page->key ?>">
                 View
             </a>
         </div>

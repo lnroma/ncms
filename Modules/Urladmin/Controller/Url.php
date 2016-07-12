@@ -20,7 +20,7 @@ class Urladmin_Controller_Url extends Admin_Controller_Abstract
     public function addAction() {
         $rewrite = new Urladmin_Model_Url();
         $rewrite->addDataToSave($_POST);
-        header('Location:'.Core_App::getBaseUrl().Config_App::getConfig()['adminurl'].'/url/');
+        header('Location:'.\Core\App::getBaseUrl().Config_App::getConfig()['adminurl'].'/url/');
     }
 
 }

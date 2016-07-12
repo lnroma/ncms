@@ -15,8 +15,8 @@ class Admin_Block_Config_Right_Form extends Admin_Block_Config_Left_Form
     public function __construct()
     {
         parent::__construct();
-        $this->_setHeader(Core_Helper::__('Base configuration'));
-        $this->_setFooter(Core_Helper::__('Settings base configuration url, base path or over'));
+        $this->_setHeader(\Core\Helper::__('Base configuration'));
+        $this->_setFooter(\Core\Helper::__('Settings base configuration url, base path or over'));
 
     }
 
@@ -29,16 +29,16 @@ class Admin_Block_Config_Right_Form extends Admin_Block_Config_Left_Form
         $this
             ->_addElement('text', 'baseUrl',
                 array(
-                    'label' => Core_Helper::__('Base url'),
+                    'label' => \Core\Helper::__('Base url'),
                     'name'  => 'url',
-                    'placeholder' => Core_Helper::__('base url'),
+                    'placeholder' => \Core\Helper::__('base url'),
                 )
             )
             ->_addElement('text', 'basePath',
                 array(
-                    'label' => Core_Helper::__('Base path'),
+                    'label' => \Core\Helper::__('Base path'),
                     'name'  => 'basePath',
-                    'placeholder' => Core_Helper::__('Path to base'),
+                    'placeholder' => \Core\Helper::__('Path to base'),
                 )
             )
         ;

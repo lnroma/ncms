@@ -10,13 +10,13 @@ $page = reset($page);
     <?php echo nl2br($page->content) ?>
 </p>
 <?php $this->getChunk('pages/comment/comment','Pages_Block_Comment_Render'); ?>
-<form method="post" action="<?php echo Core_Helper::getUrl('pages/view/addComment') ?>" role="form">
+<form method="post" action="<?php echo \Core\Helper::getUrl('pages/view/addComment') ?>" role="form">
     <input id="comm_id" type="hidden" name="parent" value="">
     <input type="hidden" name="reply" value="" id="reply">
     <input type="hidden" name="path" value="" id="path">
     <input type="hidden" name="page_id" value="<?php echo $page->_id ?>">
     <input type="hidden" name="back_url"
-           value="<?php echo Core_App::getBaseUrl() . trim($_SERVER['REQUEST_URI'], '/') ?>">
+           value="<?php echo \Core\App::getBaseUrl() . trim($_SERVER['REQUEST_URI'], '/') ?>">
     <div class="form-group">
         <label for="name">Your name:</label>
         <input class="form-control" id="name" name="name">

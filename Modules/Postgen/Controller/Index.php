@@ -39,7 +39,7 @@ class Postgen_Controller_Index extends Core_Controller_Abstract
         $header = array();
 
         curl_setopt($curl,CURLOPT_URL,$_POST['action']);
-        curl_setopt($curl,CURLOPT_PORT,Core_App::getPost('port',80));
+        curl_setopt($curl,CURLOPT_PORT,\Core\App::getPost('port',80));
         curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($curl,CURLOPT_USERAGENT,$_POST['user_agent']);
         curl_setopt($curl,CURLOPT_HTTPHEADER,$header);

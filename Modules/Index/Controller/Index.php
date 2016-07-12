@@ -25,7 +25,7 @@ class Index_Controller_Index extends Core_Controller_Abstract
     public function ruAction() {
         setcookie('locale','ru');
         $_SESSION['locale'] = 'ru';
-        header('location:'.Core_App::getBaseUrl());
+        header('location:'.\Core\App::getBaseUrl());
     }
 
     /**
@@ -34,6 +34,6 @@ class Index_Controller_Index extends Core_Controller_Abstract
     public function englishAction() {
         setcookie('locale','en');
         $_SESSION['locale'] = 'en';
-        header('location:'.Core_App::getBaseUrl());
+        header('location:'.\Core\App::getBaseUrl());
     }
 }

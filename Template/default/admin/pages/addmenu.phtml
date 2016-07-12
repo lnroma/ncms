@@ -1,8 +1,8 @@
 <div class="page-header">
-    <h1><?php echo Core_Helper::__('Create new menu item')?></h1>
+    <h1><?php echo \Core\Helper::__('Create new menu item')?></h1>
 </div>
 
-<form role="form" action="<?php echo Core_Helper::getUrl('pages/index/saveMenu') ?>" method="post">
+<form role="form" action="<?php echo \Core\Helper::getUrl('pages/index/saveMenu') ?>" method="post">
     <div class="row">
         <div class="col-sm-3">
             <div class="well">
@@ -23,25 +23,25 @@
         </div>
         <div class="col-sm-8">
             <div class="form-group">
-                <label for="parent"><?php echo Core_Helper::__('Parent menu')?>:</label>
+                <label for="parent"><?php echo \Core\Helper::__('Parent menu')?>:</label>
                 <select class="form-control" name="parent" id="parent">
-                    <option value="main"><?php echo Core_Helper::__('Main menu')?></option>
+                    <option value="main"><?php echo \Core\Helper::__('Main menu')?></option>
                     <?php foreach ($this->getMenu() as $menu): ?>
                         <option value="<?php echo $menu->key ?>"><?php echo $menu->title ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
-                <label for="key"><?php echo Core_Helper::__('Url key')?>:</label>
-                <input id="key" name="key" class="form-control" type="text" required placeholder="<?php echo Core_Helper::__('Url key')?>">
+                <label for="key"><?php echo \Core\Helper::__('Url key')?>:</label>
+                <input id="key" name="key" class="form-control" type="text" required placeholder="<?php echo \Core\Helper::__('Url key')?>">
             </div>
-            <input type="hidden" name="back_url" value="<?php echo Core_Helper::getUrl('pages/index/addMenu') ?>">
+            <input type="hidden" name="back_url" value="<?php echo \Core\Helper::getUrl('pages/index/addMenu') ?>">
             <div class="form-group">
-                <label for="title"><?php echo Core_Helper::__('Title')?>:</label>
-                <input id="title" name="title" class="form-control" type="text" required placeholder="<?php echo Core_Helper::__('Title')?>">
+                <label for="title"><?php echo \Core\Helper::__('Title')?>:</label>
+                <input id="title" name="title" class="form-control" type="text" required placeholder="<?php echo \Core\Helper::__('Title')?>">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success"><?php echo Core_Helper::__('Save')?></button>
+                <button type="submit" class="btn btn-success"><?php echo \Core\Helper::__('Save')?></button>
             </div>
         </div>
     </div>

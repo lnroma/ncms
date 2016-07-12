@@ -30,7 +30,7 @@ class Install_Controller_Index
      */
     protected function _runInstall()
     {
-        $moduleConfig = Core_App::getModulesConfig();
+        $moduleConfig = \Core\App::getModulesConfig();
 //        var_dump($moduleConfig);die
         $configModule = array();
         foreach($moduleConfig as $_config) {
@@ -112,7 +112,7 @@ class Install_Controller_Index
      */
     protected function _getTmpPath()
     {
-        $path = Core_App::getRootPath();
+        $path = \Core\App::getRootPath();
         if (is_null($path)) {
             $path = __FILE__ . '../../../';
         }

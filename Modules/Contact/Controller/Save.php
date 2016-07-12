@@ -12,24 +12,24 @@ class Contact_Controller_Save extends Core_Controller_Abstract {
      */
     public function indexAction() {
 
-        if(Core_App::getPost('update') == 1 && Core_App::getPost('id')) {
+        if(\Core\App::getPost('update') == 1 && \Core\App::getPost('id')) {
             $contMod = new Contact_Model_Contact();
 
-            $query = 'DELETE FROM `contacts_entity` WHERE `contacts_entity`.`id` = '.Core_App::getPost('id');
+            $query = 'DELETE FROM `contacts_entity` WHERE `contacts_entity`.`id` = '.\Core\App::getPost('id');
 
             $contMod->executeDirectQuery($query);
 
             $contModVal = new Contact_Model_Contacts_Attribute_Value();
             $contModVal->executeDirectQuery(
                 'DELETE FROM `contacts_attribute_value`
-                WHERE `contacts_attribute_value`.`id_contact` = '.Core_App::getPost('id')
+                WHERE `contacts_attribute_value`.`id_contact` = '.\Core\App::getPost('id')
             );
         }
 
-        $post = Core_App::getPost('attrib');
+        $post = \Core\App::getPost('attrib');
         // create contact entity
         $contact = array(
-            'name' => Core_App::getPost('name')
+            'name' => \Core\App::getPost('name')
         );
 
         try {
@@ -52,7 +52,7 @@ class Contact_Controller_Save extends Core_Controller_Abstract {
             $_SESSION['message'] = 'Error in proccess save your contact sorry';
             $_SESSION['type'] = 'error';
         }
-        header('Location:'.Core_App::getBaseUrl());
+        header('Location:'.\Core\App::getBaseUrl());
     }
 
 }

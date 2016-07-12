@@ -23,8 +23,8 @@ class Core_Block_Abstract {
      */
     public function setTemplate($src)
     {
-        $this->_template = Core_App::getRootPath().'Template'.DIRECTORY_SEPARATOR.
-            Core_App::getThemes().DIRECTORY_SEPARATOR.
+        $this->_template = \Core\App::getRootPath().'Template'.DIRECTORY_SEPARATOR.
+            \Core\App::getThemes().DIRECTORY_SEPARATOR.
             $src.'.phtml';
         return $this;
     }
@@ -75,7 +75,7 @@ class Core_Block_Abstract {
     public function getChunk($chanckPath,$class = null)
     {
         if(is_null($class)) {
-            include Core_App::getRootPath() . 'Template' . DIRECTORY_SEPARATOR . Core_App::getThemes() . DIRECTORY_SEPARATOR . $chanckPath;
+            include \Core\App::getRootPath() . 'Template' . DIRECTORY_SEPARATOR . \Core\App::getThemes() . DIRECTORY_SEPARATOR . $chanckPath;
         } else {
             return new $class;
         }

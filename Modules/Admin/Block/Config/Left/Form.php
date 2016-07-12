@@ -16,9 +16,9 @@ class Admin_Block_Config_Left_Form extends Core_Block_Abstract
      */
     public function __construct()
     {
-        $this->_setHeader(Core_Helper::__('Design configuration'));
-        $this->_setAction(Core_App::getBaseUrl().'/'.Config_App::getConfig()['adminurl'].'/config/saveDis/');
-        $this->_setFooter(Core_Helper::__('this is settings design, for your application'));
+        $this->_setHeader(\Core\Helper::__('Design configuration'));
+        $this->_setAction(\Core\App::getBaseUrl().'/'.Config_App::getConfig()['adminurl'].'/config/saveDis/');
+        $this->_setFooter(\Core\Helper::__('this is settings design, for your application'));
         $this->_setTemplate();
         $this->_prepareForm();
         return $this;
@@ -42,9 +42,9 @@ class Admin_Block_Config_Left_Form extends Core_Block_Abstract
         $this
             ->_addElement('text', 'dis',
                 array(
-                    'label' => Core_Helper::__('Design theme'),
+                    'label' => \Core\Helper::__('Design theme'),
                     'name'  => 'theme',
-                    'placeholder' => Core_Helper::__('theme'),
+                    'placeholder' => \Core\Helper::__('theme'),
                 )
             );
         return $this;

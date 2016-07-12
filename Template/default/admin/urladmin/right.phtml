@@ -1,14 +1,14 @@
 <div class="panel panel-success">
-    <div class="panel-heading"><?php echo Core_Helper::__('Rout grid')?></div>
+    <div class="panel-heading"><?php echo \Core\Helper::__('Rout grid')?></div>
     <div class="panel-body">
         <?php if(count($this->getAllRewrite()) > 0) : ?>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td><?php echo Core_Helper::__('id')?></td>
-                    <td><?php echo Core_Helper::__('From url')?></td>
-                    <td><?php echo Core_Helper::__('To url')?></td>
+                    <td><?php echo \Core\Helper::__('id')?></td>
+                    <td><?php echo \Core\Helper::__('From url')?></td>
+                    <td><?php echo \Core\Helper::__('To url')?></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,16 +29,16 @@
 </div>
 
 <div class="panel panel-success">
-    <div class="panel-heading"><?php echo Core_Helper::__('301 redirect')?></div>
+    <div class="panel-heading"><?php echo \Core\Helper::__('301 redirect')?></div>
     <div class="panel-body">
         <?php if(count($this->getAllRedirect()) > 0) : ?>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <td><?php echo Core_Helper::__('id')?></td>
-                        <td><?php echo Core_Helper::__('From url')?></td>
-                        <td><?php echo Core_Helper::__('To url')?></td>
+                        <td><?php echo \Core\Helper::__('id')?></td>
+                        <td><?php echo \Core\Helper::__('From url')?></td>
+                        <td><?php echo \Core\Helper::__('To url')?></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,7 +53,7 @@
                 </table>
             </div>
         <?php else: ?>
-            <?php echo Core_Helper::__('Table is empty')?>
+            <?php echo \Core\Helper::__('Table is empty')?>
         <?php endif; ?>
     </div>
 </div>

@@ -42,7 +42,7 @@ class Urladmin_Model_Observer {
         $result = reset($result);
         if(isset($result['to_url'])) {
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location:'.Core_App::getBaseUrl().trim($result['to_url']),'/');
+            header('Location:'.\Core\App::getBaseUrl().trim($result['to_url']),'/');
         }
         return $data;
     }
@@ -63,9 +63,9 @@ class Urladmin_Model_Observer {
 
         $result = reset($result);
 
-        $url = Core_App::getBaseUrl().$url;
+        $url = \Core\App::getBaseUrl().$url;
         if(isset($result['from_url'])) {
-            $url = Core_App::getBaseUrl();
+            $url = \Core\App::getBaseUrl();
             $url .= trim($result['from_url']);
         }
 

@@ -22,7 +22,7 @@ class Core_Block_Page_Menu extends Core_Block_Abstract {
      * @return array
      */
     public function getMenuModules($keyMenu = 'menu_frontend') {
-        $config = Core_App::getAllModulesConfig();
+        $config = \Core\App::getAllModulesConfig();
         $tmp = array();
 
         foreach($config as $_conf) {
@@ -53,8 +53,8 @@ class Core_Block_Page_Menu extends Core_Block_Abstract {
      * @return mixed
      */
     public function getCurrentActive() {
-        $config = Core_App::getAllModulesConfig();
-        $request = Core_App::getParams();
+        $config = \Core\App::getAllModulesConfig();
+        $request = \Core\App::getParams();
         $configThisPage = $config[$request['controller']]['page'][$request['controllerName']][$request['action']];
         return $configThisPage['activeMenu'];
     }
