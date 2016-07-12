@@ -5,11 +5,14 @@
  * Date: 27.02.16
  * Time: 19:58
  */
-class Admin_Block_Config_Left_Left extends Core_Block_Abstract {
-
-    public function __construct()
+namespace Admin\Block\Config\Left {
+    class Left extends \Core_Block_Abstract
     {
-        $this->setTemplate('admin/config/left');
-    }
 
+        public function __construct()
+        {
+            $this->setTemplate('admin/config/left');
+        }
+
+    }
 }

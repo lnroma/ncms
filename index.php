@@ -19,13 +19,13 @@ try {
     \Core\App::setThemes('default');
 // catch exception
     \Core\App::runApplet();
-} catch (Exception_Notfound $notFound) {
+} catch (\Exception\Notfound $notFound) {
     var_dump($error);
     new Core_Block_Notfound();
 } catch (PDOException $errorPdo) {
     var_dump($error);
-    new Error_Block_Error();
-} catch (Exception_Forbiden $error) {
+    new \Error_Block_Error();
+} catch (\Exception\Forbiden $error) {
     header('Location:' . \Core\App::getBaseUrl() . Config_App::getConfig()['adminurl'] . '/login');
 }
 //catch (Exception $error) {

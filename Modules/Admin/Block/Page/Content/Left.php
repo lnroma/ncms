@@ -5,12 +5,18 @@
  * Date: 27.02.16
  * Time: 20:02
  */
-class Admin_Block_Page_Content_Left extends Core_Block_Abstract
-{
-
-    public function __construct()
+namespace Admin\Block\Page\Content {
+    /**
+     * Class Left
+     * @package Admin\Block\Page\Content
+     */
+    class Left extends \Core_Block_Abstract
     {
-        $this->setTemplate('admin/dashboard/left');
-    }
 
+        public function __construct()
+        {
+            $this->setTemplate('admin/dashboard/left');
+        }
+
+    }
 }

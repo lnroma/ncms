@@ -19,7 +19,7 @@ class Admin_Controller_Abstract extends Core_Controller_Abstract
             && \Core\App::getParams()['action'] != 'check'
             && \Core\App::getParams()['action'] != 'login'
         ) {
-            throw new Exception_Forbiden('Forbidden');
+            throw new \Exception\Forbiden('Forbidden');
         }
     }
 

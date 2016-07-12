@@ -5,11 +5,14 @@
  * Date: 27.02.16
  * Time: 19:58
  */
-class Admin_Block_Config_Right_Right extends Core_Block_Abstract {
-
-    public function __construct()
+namespace Admin\Block\Config\Right {
+    class Right extends \Core_Block_Abstract
     {
-        $this->setTemplate('admin/config/right');
-    }
 
+        public function __construct()
+        {
+            $this->setTemplate('admin/config/right');
+        }
+
+    }
 }

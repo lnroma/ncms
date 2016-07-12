@@ -84,11 +84,11 @@ namespace Core {
 
         /**
          * get modules config
-         * @return Config_Modules
+         * @return \Config\Modules
          */
         static public function getModulesConfig()
         {
-            return Config_Modules::getModulesConfig();
+            return \Config\Modules::getModulesConfig();
         }
 
         /**
@@ -103,13 +103,13 @@ namespace Core {
             $params = self::getParams();
 
             if (!isset(self::getModulesConfig()[$params['controller']])) {
-                throw new Exception_Notfound('Page not found!');
+                throw new \Exception\Notfound('Page not found!');
             }
 
             $modulesConfig = self::getModulesConfig()[$params['controller']];
 
             if ($modulesConfig['enable'] == false) {
-                throw new Exception_Notfound('Modul not found');
+                throw new \Exception\Notfound('Modul not found');
             }
 
             $configModul = $modulesConfig['config_class'];
@@ -137,19 +137,19 @@ namespace Core {
          * @param $modulConfig
          * @param $params
          * @return mixed
-         * @throws Exception_Notfound
+         * @throws \Exception\Notfound
          */
         static public function loadController($modulConfig, $params)
         {
 
             if (!isset($modulConfig['controllers'])) {
-                throw new Exception_Notfound('Page not found');
+                throw new \Exception\Notfound('Page not found');
             }
 
             $controllersModul = $modulConfig['controllers'] . '_' . ucfirst($params['controllerName']);
 
             if (!class_exists($controllersModul)) {
-                throw new Exception_Notfound('Not found class controller');
+                throw new \Exception\Notfound('Not found class controller');
             }
 
             $object = self::getControllerClass($controllersModul);
@@ -175,7 +175,7 @@ namespace Core {
          * @param $objectController
          * @param $params
          * @return mixed
-         * @throws Exception_Notfound
+         * @throws \Exception\Notfound
          */
         static protected function _callControllerAction($objectController, $params)
         {
@@ -184,7 +184,7 @@ namespace Core {
             $action = $params['action'] . 'Action';
 
             if (!method_exists($objectController, $action)) {
-                throw new Exception_Notfound('Page not found');
+                throw new \Exception\Notfound('Page not found');
             }
 
             call_user_func(array($objectController, $action));

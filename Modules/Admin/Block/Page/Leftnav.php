@@ -5,11 +5,14 @@
  * Date: 27.02.16
  * Time: 17:36
  */
-class Admin_Block_Page_Leftnav extends Core_Block_Abstract {
-
-    public function __construct()
+namespace Admin\Block\Page {
+    class Leftnav extends \Core_Block_Abstract
     {
-        $this->setTemplate('admin/navigation/nav');
-    }
 
+        public function __construct()
+        {
+            $this->setTemplate('admin/navigation/nav');
+        }
+
+    }
 }
