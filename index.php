@@ -4,6 +4,7 @@
  * User: roman
  * Date: 09.10.15
  * Time: 22:46
+ * check this account active
  */
 session_start();
 
