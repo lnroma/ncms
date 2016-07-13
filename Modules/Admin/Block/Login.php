@@ -10,7 +10,7 @@ namespace Admin\Block {
      * Class Login
      * @package Admin\Block
      */
-    class Login extends \Core_Block_Abstract
+    class Login extends \Core\Block\AbstractClass
     {
 
         public function __construct()

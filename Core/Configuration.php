@@ -51,6 +51,9 @@ namespace Core {
             return array();
         }
 
+        public function test(){
+            echo 'test';die;
+        }
         /**
          * create automaticaly getter for configuration
          * @param $name
@@ -63,7 +66,8 @@ namespace Core {
                 $key = substr($name,3,strlen($name));
                 $key = strtolower($key);
                 if(isset($this->_configuration[$key])) {
-                    return include $this->_configuration[$key];
+                    $configuration = include $this->_configuration[$key];
+                    return $configuration;
                 } else {
                     return null;
                 }

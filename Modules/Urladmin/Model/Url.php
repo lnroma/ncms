@@ -5,7 +5,7 @@
  * Date: 27.02.16
  * Time: 20:45
  */
-class Urladmin_Model_Url extends Core_Model_Abstract
+class Urladmin_Model_Url extends \Core\Model\AbstractClass
 {
     const REWRITE = 0;
     const REDIRECT = 1;

@@ -5,7 +5,7 @@
  * Date: 23.02.16
  * Time: 23:07
  */
-class Core_Block_Page_Head extends Core_Block_Abstract {
+class Core_Block_Page_Head extends \Core\Block\AbstractClass {
 
     public function __construct()
     {

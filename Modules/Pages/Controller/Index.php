@@ -45,7 +45,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
      */
     public function saveMenuAction() {
         try {
-            $connection = Core_Model_Mongo::getConnect();
+            $connection = \Core\Model\Mongo::getConnect();
             $query = new MongoDB\Driver\Query(array('key' => $_POST['parent']));
             $existCursor = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
             $existCursor = $existCursor->toArray();
@@ -59,7 +59,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
                     $data = array_merge($data,$dataOld->child);
                 }
 
-                Core_Model_Mongo::update( array(
+                \Core\Model\Mongo::update( array(
                         '$set' => array(
                             'child' => $data
                         )
@@ -70,10 +70,10 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             );
 
             } else {
-                Core_Model_Mongo::insert($_POST,'menu');
+                \Core\Model\Mongo::insert($_POST,'menu');
             }
 
-            Core_Model_Mongo::getConnect()->close();
+            \Core\Model\Mongo::getConnect()->close();
             header('Location:'.$_POST['back_url']);
         } catch(Exception $err) {
             header('Location:'.$_POST['back_url']);
@@ -88,12 +88,12 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
             /** @var MongoDB $db */
             //if exist update
             if(isset($_POST['id'])) {
-                Core_Model_Mongo::update($_POST,'pages',array(
+                \Core\Model\Mongo::update($_POST,'pages',array(
                     '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
                 ));
             } else {
                 // insert if not exists
-                Core_Model_Mongo::insert($_POST,'pages');
+                \Core\Model\Mongo::insert($_POST,'pages');
             }
             header('Location:'.$_POST['back_url']);
         } catch(Exception $err) {
@@ -110,7 +110,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
 
             if(isset($param['id'])) {
                 /** @var MongoDB $db */
-                $db = Core_Model_Mongo::getDb();
+                $db = \Core\Model\Mongo::getDb();
                 /** @var MongoCollection $pageCollection */
                 $pageCollection = $db->selectCollection('pages');
                 /** @var MongoCursor $document */
@@ -121,7 +121,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
                     )
                 );
             }
-            Core_Model_Mongo::getConnect()->close();
+            \Core\Model\Mongo::getConnect()->close();
             header('Location:'.\Core\Helper::getUrl('pages/index/index'));
         } catch(Exception $error) {
             header('Location:'.\Core\Helper::getUrl('pages/index/index'));
@@ -130,7 +130,7 @@ class Pages_Controller_Index extends Admin_Controller_Abstract {
 
     public function dropAction()
     {
-        $db = Core_Model_Mongo::getDb();
+        $db = \Core\Model\Mongo::getDb();
         $menuCollect = $db->selectCollection('menu');
         $menuCollect->drop();
     }

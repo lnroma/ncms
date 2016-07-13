@@ -12,7 +12,7 @@ namespace Pages\Install {
 
         public function install()
         {
-            $model = new \Core_Model_Abstract();
+            $model = new \Core\Model\AbstractClass();
             $model->executeDirectQuery('
 CREATE TABLE IF NOT EXISTS `pages` (
   `id_entity` int(11) NOT NULL,
@@ -22,9 +22,6 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `menu_id` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'cms page\'
 ');
-
-
-            parent::install(); 
         }
 
         /**

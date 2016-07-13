@@ -5,7 +5,7 @@
  * Date: 06.03.16
  * Time: 14:39
  */
-class Postgen_Controller_Index extends Core_Controller_Abstract
+class Postgen_Controller_Index extends \Core\Controller\AbstractClass
 {
 
     public function indexAction() {

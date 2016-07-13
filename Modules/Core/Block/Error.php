@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 13:36
  */
-class Core_Block_Error extends Core_Block_Abstract
+class Core_Block_Error extends \Core\Block\AbstractClass
 {
     /**
      * Core_Block_Error constructor.

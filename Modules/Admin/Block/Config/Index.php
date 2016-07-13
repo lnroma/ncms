@@ -10,7 +10,7 @@ namespace Admin\Block\Config {
      * Class Index
      * @package Admin\Block\Config
      */
-    class Index extends \Core_Block_Abstract
+    class Index extends \Core\Block\AbstractClass
     {
         
         public function __construct()

@@ -2,7 +2,7 @@
 I'm again take `hello world` for example your need create `Block` directory on your module directory for example:
 `Modules/Hello/Hello.php`
 ```
-  class Hello_Block_Hello extends Core_Block_Abstract
+  class Hello_Block_Hello extends \Core\Block\AbstractClass
   {
       /**
        * Hello_Block_Hello constructor.

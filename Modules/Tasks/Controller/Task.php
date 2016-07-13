@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 14:26
  */
-class Tasks_Controller_Task extends Core_Controller_Abstract
+class Tasks_Controller_Task extends \Core\Controller\AbstractClass
 {
     /**
      * list action

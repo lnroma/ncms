@@ -6,7 +6,9 @@ namespace Install\Install {
      * Date: 10.07.16
      * Time: 16:05
      */
-    class Install extends \Core_Model_Abstract
+    use Core\Model\AbstractClass;
+    
+    class Install extends \Core\Model\AbstractClass
     {
         use \Install_Install_Abstract;
 
@@ -15,27 +17,18 @@ namespace Install\Install {
          */
         public function install()
         {
-            self::run();
-        }
-
-        /**
-         * run installation
-         */
-        final public static function run()
-        {
             self::runInstall();
-            self::insertVersionAndKey();
         }
 
         /**
          * insert version to table version
          */
-        final protected static function insertVersionAndKey()
+        final public function insertVersionAndKey()
         {
-            $model = new \Core_Model_Abstract();
+            $model = new AbstractClass();
             $model->setTableName('core_version');
             $model->executeDirectQuery(
-                'INSERT INTO `version` set (`version`,`key_module`) VALUE ("' . self::version() . '","' . self::key() . '")'
+                'INSERT INTO `version` (`id`, `version`, `key_module`) VALUES (NULL, "'.self::version().'", "'.self::key().'");'
             );
         }
 
@@ -44,17 +37,17 @@ namespace Install\Install {
          */
         final public static function runInstall()
         {
-            $model = new \Core_Model_Abstract();
+            $model = new AbstractClass();
             try {
                 $model
-                    ->setTableName(`core_version`)
+                    ->setTableName('core_version')
                     ->load();
-            } catch (Exception $error) {
+            } catch (\Exception $error) {
                 $model->executeDirectQuery(
                     'CREATE TABLE `version`
               ( `id` INT NOT NULL AUTO_INCREMENT,
                 `version` VARCHAR(11),
-                `key_module` VARCHAR(11),
+                `key_module` VARCHAR(32),
                 PRIMARY KEY (`id`)
               )ENGINE=InnoDB;'
                 );

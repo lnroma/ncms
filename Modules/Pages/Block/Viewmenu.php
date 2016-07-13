@@ -24,7 +24,7 @@ class Pages_Block_Viewmenu extends Pages_Block_Abstract
     public function getPages()
     {
         /** @var MongoDB $db */
-        $con = Core_Model_Mongo::getConnect();
+        $con = \Core\Model\Mongo::getConnect();
 
         $query = new MongoDB\Driver\Query(
             array(

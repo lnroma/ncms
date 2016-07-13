@@ -5,7 +5,7 @@
  * Date: 20.02.16
  * Time: 22:08
  */
-class Contact_Controller_Create extends Core_Controller_Abstract {
+class Contact_Controller_Create extends \Core\Controller\AbstractClass {
 
     /**
      * create action
@@ -36,7 +36,7 @@ class Contact_Controller_Create extends Core_Controller_Abstract {
      */
     public function renderModalAction($idEditted = null)
     {
-        $block = new Core_Block_Abstract();
+        $block = new \Core\Block\AbstractClass();
         $contactBlock = new Contact_Block_Create();
         $contactBlock->setId($idEditted);
         $block->setTemplate('contact/forms/create');

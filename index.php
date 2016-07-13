@@ -11,23 +11,44 @@ session_start();
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 
+const FLAG_DEBUG = 1;
+
 include 'Core/App.php';
 try {
-    \Core\App::setBaseUrl('http://flnau.ru/');
-// require slash in end
-    \Core\App::setRootPath(__DIR__.'/');
+    require_once __DIR__.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'autoloader.php';
+    \Core\App::setRootPath(__DIR__.DIRECTORY_SEPARATOR);
     \Core\App::setThemes('default');
-// catch exception
     \Core\App::runApplet();
 } catch (\Exception\Notfound $notFound) {
-    var_dump($error);
-    new Core_Block_Notfound();
-} catch (PDOException $errorPdo) {
-    var_dump($error);
-    new \Error_Block_Error();
+    if(FLAG_DEBUG) {
+        $block = new \Core\Block\AbstractClass();
+        $block->setData('error',$notFound);
+        $block->setAbsoluteTemplate(\Core\App::getRootPath().'Template'.DIRECTORY_SEPARATOR.'error'.DIRECTORY_SEPARATOR.'error.phtml');
+        $block->toHtml();
+    } else {
+        new Core_Block_Notfound();
+    }
+} catch (\PDOException $errorPdo) {
+    if(FLAG_DEBUG) {
+        $block = new \Core\Block\AbstractClass();
+        $block->setData('error',$errorPdo);
+        $block->setAbsoluteTemplate(\Core\App::getRootPath().'Template'.DIRECTORY_SEPARATOR.'error'.DIRECTORY_SEPARATOR.'error.phtml');
+        $block->toHtml();
+    } else {
+        new \Error_Block_Error();
+    }
 } catch (\Exception\Forbiden $error) {
-    header('Location:' . \Core\App::getBaseUrl() . Config_App::getConfig()['adminurl'] . '/login');
+    header('Location:' . \Core\App::getBaseUrl() . \Config\App::getConfig()['adminurl'] . '/login');
+} catch (\Exception $errorException) {
+    if(FLAG_DEBUG) {
+        $block = new \Core\Block\AbstractClass();
+        $block->setData('error',$errorException);
+        $block->setAbsoluteTemplate(\Core\App::getRootPath().'Template'.DIRECTORY_SEPARATOR.'error'.DIRECTORY_SEPARATOR.'error.phtml');
+        $block->toHtml();
+    }
 }
+
+
 //catch (Exception $error) {
 //    var_dump($error);
 //    new Core_Block_Error();

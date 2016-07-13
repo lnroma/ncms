@@ -6,7 +6,7 @@
  * Time: 19:58
  */
 namespace Admin\Block\Config\Left {
-    class Left extends \Core_Block_Abstract
+    class Left extends \\Core\Block\AbstractClass
     {
 
         public function __construct()

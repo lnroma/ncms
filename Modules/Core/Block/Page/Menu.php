@@ -5,7 +5,7 @@
  * Date: 24.02.16
  * Time: 1:05
  */
-class Core_Block_Page_Menu extends Core_Block_Abstract {
+class Core_Block_Page_Menu extends \Core\Block\AbstractClass {
 
     /**
      * Core_Block_Page_Menu constructor.

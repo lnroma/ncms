@@ -6,6 +6,7 @@
  * Time: 22:51
  */
 namespace Core {
+
     class App
     {
 
@@ -296,7 +297,7 @@ namespace Core {
          */
         static private function adminControllerGenerate($params)
         {
-            if ($params['controller'] == Config_App::getConfig()['adminurl']) {
+            if ($params['controller'] == \Config\App::getConfig()['adminurl']) {
                 $params['controller'] = 'admin';
             }
             return $params;
@@ -304,7 +305,7 @@ namespace Core {
 
         static private function routeAliassisGenerate($params)
         {
-            $aliasis = Config_Route::getConfig();
+            $aliasis = \Config\Route::getConfig();
             if (isset($_SERVER['QUERY_STRING'])) {
                 $repl = $_SERVER['QUERY_STRING'];
             } else {
@@ -391,44 +392,4 @@ namespace Core {
         }
     }
 
-    /**
-     * autoload  class file
-     * @param $className
-     */
-    function __autoload($className)
-    {
-        $classPath = explode('_', $className);
-        // generate paths to file
-        $classFile = \Core\App::getRootPath() .
-            trim(implode(DIRECTORY_SEPARATOR, $classPath), DIRECTORY_SEPARATOR)
-            . '.php';
-        $classFileModules = \Core\App::getRootPath() .
-            'Modules/' . trim(implode(DIRECTORY_SEPARATOR, $classPath), DIRECTORY_SEPARATOR)
-            . '.php';
-        $classFileUserModules = \Core\App::getRootPath()
-            . 'Local/Modules/' . trim(implode(DIRECTORY_SEPARATOR, $classPath), DIRECTORY_SEPARATOR)
-            . '.php';
-
-        if (file_exists($classFileUserModules)) {
-            include_once($classFileUserModules);
-        } elseif (file_exists($classFileModules)) {
-            include_once($classFileModules);
-        } elseif (file_exists($classFile)) {
-            include_once($classFile);
-        } else {
-            autoloadByNamespace($className);
-        }
-    }
-
-    function autoloadByNamespace($className)
-    {
-        $classPath = str_replace('\\', DIRECTORY_SEPARATOR, $className);
-        $classPath = \Core\App::getRootPath() . $classPath . '.php';
-        $classPathModules = \Core\App::getRootPath() . 'Modules' . DIRECTORY_SEPARATOR . $classPath . '.php';
-        if (file_exists($classPath)) {
-            require_once $classPath;
-        } elseif (file_exists($classPathModules)) {
-            require_once $classPathModules;
-        }
-    }
 }

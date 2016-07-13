@@ -5,7 +5,7 @@
  * Date: 29.02.16
  * Time: 0:23
  */
-class Pages_Block_Admin_Addmenu extends Core_Block_Abstract
+class Pages_Block_Admin_Addmenu extends \Core\Block\AbstractClass
 {
 
     /**
@@ -21,7 +21,7 @@ class Pages_Block_Admin_Addmenu extends Core_Block_Abstract
      * @return mixed
      */
     public function getMenu() {
-        $connection = Core_Model_Mongo::getConnect();
+        $connection = \Core\Model\Mongo::getConnect();
         $query = new MongoDB\Driver\Query(array());
         $allMenu = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
         return $allMenu->toArray();

@@ -5,7 +5,7 @@
  * Date: 29.02.16
  * Time: 23:39
  */
-class Pages_Controller_View extends Core_Controller_Abstract
+class Pages_Controller_View extends \Core\Controller\AbstractClass
 {
 
     /**
@@ -62,7 +62,7 @@ class Pages_Controller_View extends Core_Controller_Abstract
             'comment' => $_POST['comment']
         );
 
-        $connect = Core_Model_Mongo::getConnect();
+        $connect = \Core\Model\Mongo::getConnect();
 
         $write = new MongoDB\Driver\BulkWrite();
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY);

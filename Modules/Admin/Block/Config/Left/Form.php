@@ -7,7 +7,7 @@
  * Time: 14:45
  */
 namespace Admin\Block\Config\Left {
-    class Form extends \Core_Block_Abstract
+    class Form extends \Core\Block\AbstractClass
     {
 
         private $_layerElement = array();
@@ -18,7 +18,7 @@ namespace Admin\Block\Config\Left {
         public function __construct()
         {
             $this->_setHeader(\Core\Helper::__('Design configuration'));
-            $this->_setAction(\Core\App::getBaseUrl() . '/' . Config_App::getConfig()['adminurl'] . '/config/saveDis/');
+            $this->_setAction(\Core\App::getBaseUrl() . '/' . \\Config\App::getConfig()['adminurl'] . '/config/saveDis/');
             $this->_setFooter(\Core\Helper::__('this is settings design, for your application'));
             $this->_setTemplate();
             $this->_prepareForm();
@@ -39,7 +39,7 @@ namespace Admin\Block\Config\Left {
          */
         protected function _prepareForm()
         {
-//        var_dump(Core_Model_Mongo::selectAll('config')->toArray());die;
+//        var_dump(\Core\Model\Mongo::selectAll('config')->toArray());die;
             $this
                 ->_addElement('text', 'dis',
                     array(

@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 14:26
  */
-class Contact_Controller_Index extends Core_Controller_Abstract
+class Contact_Controller_Index extends \Core\Controller\AbstractClass
 {
     /**
      * save attribute action

@@ -5,7 +5,7 @@
  * Date: 06.03.16
  * Time: 14:47
  */
-class Postgen_Block_Postgen extends Core_Block_Abstract {
+class Postgen_Block_Postgen extends \Core\Block\AbstractClass {
 
     public function __construct()
     {

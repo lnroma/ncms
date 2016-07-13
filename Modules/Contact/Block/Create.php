@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 14:30
  */
-class Contact_Block_Create extends Core_Block_Abstract {
+class Contact_Block_Create extends \Core\Block\AbstractClass {
 
     protected $_id = null;
 

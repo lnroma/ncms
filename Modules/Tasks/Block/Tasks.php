@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 14:30
  */
-class Tasks_Block_Tasks extends Core_Block_Abstract
+class Tasks_Block_Tasks extends \Core\Block\AbstractClass
 {
     /**
      * Tasks_Block_Tasks constructor.

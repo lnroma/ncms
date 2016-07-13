@@ -31,11 +31,25 @@ class Install_Controller_Index
     protected function _runInstall()
     {
         $moduleConfig = \Core\App::getModulesConfig();
-//        var_dump($moduleConfig);die
         $configModule = array();
-        foreach($moduleConfig as $_config) {
-            $configModule[] = $_config['config_class']::getConfig()['install_script'];
-            var_dump($configModule);
+        try {
+            foreach ($moduleConfig as $_config) {
+                if(!isset($_config['config_class']::getConfig()['install_script'])) {
+                    continue;
+                }
+                /** @var \Install\Install\Install $installScript */
+                $installScript = $_config['config_class']::getConfig()['install_script'];
+                $installScript = new $installScript();
+                // run install procedure
+                $installScript->install();
+                // insert key and version to database
+                $installScript->insertVersionAndKey();
+                // remove variable
+                unset($installScript);
+            }
+        } catch (Exception $error) {
+            var_dump($error->getMessage());
+            print_r(nl2br($error->getTraceAsString()));die;
         }
     }
 
@@ -103,7 +117,7 @@ class Install_Controller_Index
             return true;
         } else {
             return false;
-        }
+        } 
     }
 
     /**

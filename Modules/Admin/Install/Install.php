@@ -6,7 +6,7 @@
  * Time: 10:04
  */
 namespace Admin\Install {
-
+    use Core\Model\AbstractClass as AbstractClassPsevdo;
     /**
      * install administration modules
      * Class Admin_Install_Install
@@ -19,7 +19,7 @@ namespace Admin\Install {
          */
         public function install()
         {
-            $model = new \Core_Model_Abstract();
+            $model = new AbstractClassPsevdo();
             $model->executeDirectQuery('
 CREATE TABLE IF NOT EXISTS `admin_user` (
   `id_entity` int(11) NOT NULL,
@@ -34,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1'
             );
-            
-            
-            parent::install();
+
         }
 
         /**

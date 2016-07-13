@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 19:31
  */
-class Contact_Model_Contacts_Attribute_Value extends Core_Model_Abstract {
+class Contact_Model_Contacts_Attribute_Value extends \Core\Model\AbstractClass {
 
     public function __construct()
     {

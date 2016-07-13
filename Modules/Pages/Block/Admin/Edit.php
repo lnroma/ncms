@@ -5,7 +5,7 @@
  * Date: 28.02.16
  * Time: 22:50
  */
-class Pages_Block_Admin_Edit extends Core_Block_Abstract {
+class Pages_Block_Admin_Edit extends \Core\Block\AbstractClass {
 
     /**
      * Pages_Block_Edit constructor.
@@ -20,7 +20,7 @@ class Pages_Block_Admin_Edit extends Core_Block_Abstract {
      * @return mixed
      */
     public function getPages() {
-        $connection = Core_Model_Mongo::getConnect();
+        $connection = \Core\Model\Mongo::getConnect();
         $query = new MongoDB\Driver\Query(array());
         $allPage = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
         return $allPage->toArray();

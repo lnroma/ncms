@@ -5,7 +5,7 @@
  * Date: 27.02.16
  * Time: 20:49
  */
-class Urladmin_Block_Content_Right extends Core_Block_Abstract
+class Urladmin_Block_Content_Right extends \Core\Block\AbstractClass
 {
 
     private $_rewrite = null;

@@ -8,7 +8,7 @@ and create the controller Hello.php in folder controller
 Modules/Hello/Controller/Hello.php
 
 ```
-  class Hello_Controller_Hello extends Core_Controller_Abstract {
+  class Hello_Controller_Hello extends \Core\Controller\AbstractClass {
 
     /**
      * index action

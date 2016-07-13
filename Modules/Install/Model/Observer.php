@@ -31,7 +31,7 @@ class Install_Model_Observer
             die;
         }
 
-        include $this->_getTmpPath().'Template/install/index.phtml';
+        include \Core\App::getRootPath().'Template/install/index.phtml';
         die;
     }
 

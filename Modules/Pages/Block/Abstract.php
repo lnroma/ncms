@@ -5,7 +5,7 @@
  * Date: 02.03.16
  * Time: 11:45
  */
-class Pages_Block_Abstract extends Core_Block_Abstract
+class Pages_Block_Abstract extends \Core\Block\AbstractClass
 {
 
     /**
@@ -15,13 +15,12 @@ class Pages_Block_Abstract extends Core_Block_Abstract
     public function getMenu() {
         /** @var MongoDB $db */
 
-        $con = Core_Model_Mongo::getConnect();
+        $con = \Core\Model\Mongo::getConnect();
 
         $query = new MongoDB\Driver\Query(
             array()
         );
-
-        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
+        $menuCollection = $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'].'.menu',$query);
 
         return $menuCollection->toArray();
     }
@@ -32,13 +31,13 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      */
     public function getPages() {
         /** @var MongoDB $db */
-        $con = Core_Model_Mongo::getConnect();
+        $con = \Core\Model\Mongo::getConnect();
 
         $query = new MongoDB\Driver\Query(
             array()
         );
 
-        $menuCollection = $con->executeQuery(Config_Db::getConf()['mongodb']['db'].'.pages',$query);
+        $menuCollection = $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'].'.pages',$query);
 
         return $menuCollection->toArray();
     }
@@ -50,7 +49,7 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      */
     public function getPage() {
         /** @var MongoDB $db */
-        return Core_Model_Mongo::simpleSelect('key',\Core\App::getParams()['id'],'pages')->toArray();
+        return \Core\Model\Mongo::simpleSelect('key',\Core\App::getParams()['id'],'pages')->toArray();
     }
 
     /**
@@ -58,7 +57,7 @@ class Pages_Block_Abstract extends Core_Block_Abstract
      * @return mixed
      */
     public function getComentPage($pageId) {
-        return Core_Model_Mongo::simpleSelect('page',$pageId,'comments')->toArray();
+        return \Core\Model\Mongo::simpleSelect('page',$pageId,'comments')->toArray();
     }
 
 }

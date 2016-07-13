@@ -5,7 +5,7 @@
  * Date: 18.02.16
  * Time: 1:05
  */
-class Index_Controller_Index extends Core_Controller_Abstract
+class Index_Controller_Index extends \Core\Controller\AbstractClass
 {
 
     /**

@@ -14,35 +14,35 @@ namespace Config {
         {
             return array(
                 'install' => array(
-                    'config_class' => 'Install_Config_Config',
+                    'config_class' => '\Install\Config\Config',
                     'enable' => true
                 ),
                 'index' => array(
-                    'config_class' => 'Index_Config_Config',
+                    'config_class' => '\Index\Config\Config',
                     'enable' => true
                 ),
                 'contact' => array(
-                    'config_class' => 'Contact_Config_Config',
+                    'config_class' => '\Contact\Config\Config',
                     'enable' => false
                 ),
                 'tasks' => array(
-                    'config_class' => 'Tasks_Config_Config',
+                    'config_class' => '\Tasks\Config\Config',
                     'enable' => false
                 ),
                 'admin' => array(
-                    'config_class' => 'Admin_Config_Config',
+                    'config_class' => '\Admin\Config\Config',
                     'enable' => true
                 ),
                 'urladmin' => array(
-                    'config_class' => 'Urladmin_Config_Config',
+                    'config_class' => '\Urladmin\Config\Config',
                     'enable' => true
                 ),
                 'pages' => array(
-                    'config_class' => 'Pages_Config_Config',
+                    'config_class' => '\Pages\Config\Config',
                     'enable' => true
                 ),
                 'postgen' => array(
-                    'config_class' => 'Postgen_Config_Config',
+                    'config_class' => '\Postgen\Config\Config',
                     'enable' => true
                 )
             );

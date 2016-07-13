@@ -5,7 +5,7 @@
  * Date: 09.10.15
  * Time: 22:48
  */
-class Index_Block_Index extends Core_Block_Abstract
+class Index_Block_Index extends \Core\Block\AbstractClass
 {
     /**
      * call block and render

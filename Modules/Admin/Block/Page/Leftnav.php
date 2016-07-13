@@ -6,7 +6,7 @@
  * Time: 17:36
  */
 namespace Admin\Block\Page {
-    class Leftnav extends \Core_Block_Abstract
+    class Leftnav extends \\Core\Block\AbstractClass
     {
 
         public function __construct()

@@ -5,12 +5,16 @@
  * Date: 27.02.16
  * Time: 14:09
  */
-class Config_App {
+namespace Config {
+    class App
+    {
 
-    static public function getConfig() {
-        return array(
-            'adminurl' => 'adminpanel',
-        );
+        static public function getConfig()
+        {
+            return array(
+                'adminurl' => 'adminpanel',
+            );
+        }
+
     }
-
 }

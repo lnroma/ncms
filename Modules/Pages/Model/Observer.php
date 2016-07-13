@@ -20,7 +20,7 @@ class Pages_Model_Observer
     public function aliasForPage($data)
     {
         /** @var Driver\Manager $connect */
-        $connect = Core_Model_Mongo::getConnect();
+        $connect = \Core\Model\Mongo::getConnect();
 
         $man = new MongoDB\Driver\Query(
             array(
@@ -28,7 +28,8 @@ class Pages_Model_Observer
             )
         );
 
-        $collection = $connect->executeQuery(Config_Db::getConf()['mongodb']['db'] . '.pages', $man);
+        $config = new \Core\Configuration();
+        $collection = $connect->executeQuery($config->getDb()['mongodb']['db'] . '.pages', $man);
 
         if (count($collection->toArray())) {
             $data = array(
@@ -50,14 +51,17 @@ class Pages_Model_Observer
     public function aliasMenu($data)
     {
         /** @var MongoDB\Driver\Manager $db */
-        $connection = Core_Model_Mongo::getConnect();
+        $connection = \Core\Model\Mongo::getConnect();
 
         $query = new  MongoDB\Driver\Query(
             array()
         );
 
-        $menuCollection = $connection->executeQuery(Config_Db::getConf()['mongodb']['db'].'.menu',$query);
+        $config = new \Core\Configuration();
+
+        $menuCollection = $connection->executeQuery($config->getDb()['mongodb']['db'].'.menu',$query);
         // todo this code need rewrite more optimize
+        $arrayKey = array();
         foreach ($menuCollection->toArray() as $menu) {
 
             if (isset($menu->key)) {

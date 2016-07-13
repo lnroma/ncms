@@ -31,7 +31,7 @@ namespace Core {
             } else {
                 $config = \Core\Helper::getDb();
                 try {
-                    self::$_connection = new PDO($config['db_host'], $config['user'], $config['pass']);
+                    self::$_connection = new \PDO($config['db_host'], $config['user'], $config['pass']);
                     self::$_connection->query('SET NAMES utf8');
                 } catch (\Exception $error) {
                     throw new \Exception($error->getMessage());

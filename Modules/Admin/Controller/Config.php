@@ -11,13 +11,13 @@ class Admin_Controller_Config extends Admin_Controller_Abstract
     public function saveDisAction()
     {
         try {
-            if(Core_Model_Mongo::simpleSelect(''))
-            Core_Model_Mongo::insert($_POST, 'config');
+            if(\Core\Model\Mongo::simpleSelect(''))
+            \Core\Model\Mongo::insert($_POST, 'config');
         } catch(Exception $error) {
             var_dump($error);
             die;
         }
-        header('Location:'.\Core\App::getBaseUrl().Config_App::getConfig()['adminurl'].'/'.'config/index');
+        header('Location:'.\Core\App::getBaseUrl().\Config\App::getConfig()['adminurl'].'/'.'config/index');
     }
 
     public function saveBaseAction()

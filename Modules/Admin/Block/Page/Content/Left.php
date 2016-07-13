@@ -10,7 +10,7 @@ namespace Admin\Block\Page\Content {
      * Class Left
      * @package Admin\Block\Page\Content
      */
-    class Left extends \Core_Block_Abstract
+    class Left extends \\Core\Block\AbstractClass
     {
 
         public function __construct()
