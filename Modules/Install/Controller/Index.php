@@ -31,7 +31,6 @@ class Install_Controller_Index
     protected function _runInstall()
     {
         $moduleConfig = \Core\App::getModulesConfig();
-        $configModule = array();
         try {
             foreach ($moduleConfig as $_config) {
                 if(!isset($_config['config_class']::getConfig()['install_script'])) {

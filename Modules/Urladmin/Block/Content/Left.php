@@ -5,12 +5,14 @@
  * Date: 27.02.16
  * Time: 20:48
  */
-class Urladmin_Block_Content_Left extends \Core\Block\AbstractClass
-{
-
-    public function __construct()
+namespace Urladmin\Block\Content {
+    class Left extends \Core\Block\AbstractClass
     {
-        $this->setTemplate('admin/urladmin/left');
-    }
 
+        public function __construct()
+        {
+            $this->setTemplate('admin/urladmin/left');
+        }
+
+    }
 }

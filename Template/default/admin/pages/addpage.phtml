@@ -69,27 +69,27 @@ $page = reset($page);
             <div class="form-group">
                 <label for="title"><?php echo \Core\Helper::__('Title') ?>:</label>
                 En:<input id="title" name="title[en]" class="form-control" type="text"
-                          value="<?php if (isset($page->title)) echo $page->title ?>" required
+                          value="<?php if (isset($page->title->en)) echo $page->title->en ?>" required
                           placeholder="<?php echo \Core\Helper::__('Title') ?>">
                 Ru:<input id="title" name="title[ru]" class="form-control" type="text"
-                          value="<?php if (isset($page->title)) echo $page->title ?>" required
+                          value="<?php if (isset($page->title->ru)) echo $page->title->ru ?>" required
                           placeholder="<?php echo \Core\Helper::__('Title') ?>">
             </div>
             <div class="form-group">
                 <label for="short-content"><?php echo \Core\Helper::__('Short content') ?>:</label>
                 <textarea class="form-control" name="short_content[ru]"
-                          id="short-content"><?php if (isset($page->short_content)) echo $page->short_content ?></textarea>
+                          id="short-content"><?php if (isset($page->short_content->en)) echo $page->short_content->en ?></textarea>
                 <textarea class="form-control" name="short_content[en]"
-                                id="short-content"><?php if (isset($page->short_content)) echo $page->short_content ?></textarea>
+                                id="short-content"><?php if (isset($page->short_content->ru)) echo $page->short_content->ru ?></textarea>
 
             </div>
             <div class="form-group">
                 <label for="content"><?php echo \Core\Helper::__('Content') ?>:</label>
                 <textarea class="form-control" name="content[en]"
-                          id="content"><?php if (isset($page->content)) echo $page->content ?></textarea>
+                          id="content"><?php if (isset($page->content->en)) echo $page->content->en ?></textarea>
 
                 <textarea class="form-control" name="content[ru]"
-                          id="content"><?php if (isset($page->content)) echo $page->content ?></textarea>
+                          id="content"><?php if (isset($page->content->ru)) echo $page->content->ru ?></textarea>
             </div>
             <div class="form-group">
                 <?php if (isset(\Core\App::getParams()['id'])): ?>

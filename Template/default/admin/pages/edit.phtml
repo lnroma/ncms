@@ -19,7 +19,7 @@
         <tbody>
             <?php foreach($this->getPages() as $key => $_page): ?>
                 <tr>
-                    <td><?php echo $_page->title?></td>
+                    <td><?php echo $_page->title->en ?></td>
                     <td><?php echo $_page->key?></td>
                     <td>
                         <a href="<?php echo \Core\Helper::getUrl('pages/index/addPage/').'/id/'.$_page->_id ?>" ><?php echo \Core\Helper::__('Edit') ?></a>

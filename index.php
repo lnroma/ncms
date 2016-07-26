@@ -16,6 +16,7 @@ const FLAG_DEBUG = 1;
 include 'Core/App.php';
 try {
     require_once __DIR__.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'autoloader.php';
+    require_once __DIR__.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
     \Core\App::setRootPath(__DIR__.DIRECTORY_SEPARATOR);
     \Core\App::setThemes('default');
     \Core\App::runApplet();

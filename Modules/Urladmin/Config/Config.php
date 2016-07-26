@@ -13,20 +13,20 @@ namespace Urladmin\Config {
         static public function getConfig()
         {
             return array(
-                'blocks' => 'Urladmin_Block',
-                'models' => 'Urladmin_Model',
-                'controllers' => 'Urladmin_Controller',
+                'blocks' => '\Urladmin\Block',
+                'models' => '\Urladmin\Model',
+                'controllers' => '\Urladmin\Controller',
                 'install_script' => '\Urladmin\Install\Install',
                 'router_load' => array(
-                    'observer' => 'Urladmin_Model_Observer',
+                    'observer' => '\Urladmin\Model\Observer',
                     'method' => 'aliasUrl'
                 ),
                 'run_application_before' => array(
-                    'observer' => 'Urladmin_Model_Observer',
+                    'observer' => '\Urladmin\Model\Observer',
                     'method' => 'redirect301'
                 ),
                 'get_url_helper' => array(
-                    'observer' => 'Urladmin_Model_Observer',
+                    'observer' => '\Urladmin\Model\Observer',
                     'method' => 'getUrlForPage'
                 ),
                 'menu_admin' => array(

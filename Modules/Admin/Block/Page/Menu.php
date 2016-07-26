@@ -6,7 +6,7 @@
  * Time: 15:47
  */
 namespace Admin\Block\Page {
-    class Menu extends \Core_Block_Page_Menu
+    class Menu extends \Core\Block\Page\Menu
     {
 
         public function getMenuModules($key = 'menu_admin')

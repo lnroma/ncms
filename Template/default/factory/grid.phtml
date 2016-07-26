@@ -1,0 +1,34 @@
+<?php
+/** @var \Core\Block\Factory\Grid @this **/
+?>
+<table class="table-bordered table">
+    <thead>
+    <tr>
+        <?php foreach ($this->getColumns() as $_column): ?>
+            <th><?php echo $_column['label'] ?></th>
+        <?php endforeach;?>
+        <?php if(count($this->_prepareAction())): ?>
+            <th><?php echo $this->getActionTitle() ?></th>
+        <?php endif ?>
+    </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->getCollection() as $_collection): ?>
+            <tr>
+                <?php foreach ($this->getColumns() as $_col): ?>
+                    <td>
+                        <?php echo $_collection->{$_col['index']} ?>
+                    </td>
+                <?php endforeach;?>
+                <?php if(count($this->_prepareAction())): ?>
+                    <td>
+                        <?php foreach ($this->_prepareAction() as $action): ?>
+                            [<a href="<?php echo $action['rout']?>/<?php echo $action['index'] ?>/<?php echo $_collection->{$action['index']} ?>"><?php echo $action['label'] ?></a>|]
+                        <?php endforeach; ?>
+                    </td>
+                <?php endif; ?>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+

@@ -35,6 +35,31 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1'
             );
 
+            $model->executeDirectQuery('ALTER TABLE `admin_user`
+  ADD PRIMARY KEY (`id_entity`);');
+
+            $model->executeDirectQuery('ALTER TABLE `admin_user_role`
+  ADD PRIMARY KEY (`entity_id`);
+');
+
+            $model->executeDirectQuery('
+  ALTER TABLE `admin_user`
+  MODIFY `id_entity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;'
+            );
+
+            $model->executeDirectQuery('
+                ALTER TABLE `admin_user_role`
+  MODIFY `entity_id` int(11) NOT NULL AUTO_INCREMENT;
+            ');
+//            echo
+//                'INSERT INTO `admin_user` ( `login`, `pass`) VALUES
+//                ("'.$_POST['admin']['user'].'", "'.md5($_POST['admin']['password']).'")';die;
+
+            $model->executeDirectQuery(
+                'INSERT INTO `admin_user` (`id_entity`, `login`, `pass`) VALUES
+                (NULL , "'.$_POST['admin']['user'].'", "'.md5($_POST['admin']['password']).'")'
+            );
+
         }
 
         /**

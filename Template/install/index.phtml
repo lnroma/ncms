@@ -1,22 +1,65 @@
 <html>
 <head>
     <title>Install NaumovCMS</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
-for install input you correct data to the form
-<form action="install/installSave" method="post">
-    Patch to base:<input type="text" name="base_patch" /><br/>
-    Url application:<input type="text" name="base_url" /><br/>
-    Databases:<br/>
-    Host:<input type="text" name="db[host]"><br/>
-    Name:<input type="text" name="db[name]"><br/>
-    User:<input type="text" name="db[user]"><br/>
-    Pass:<input type="password" name="db[pass]"><br/>
-    MongoDb:<br/>
-    Connect string:<input type="text" name="db[mongodb][connect]" /><br/>
-    Database name: <input type="text" name="db[mongodb][db]"/><br/>
-    <input type="submit" name="submit" value="Run install" /><br/>
-    
-</form>
+<div class="container">
+    <div class="alert alert-success">for install input you correct data to the form</div>
+    <form action="install/installSave" method="post">
+        <h2>Base url and directory settings</h2>
+        <fieldset class="form-group">
+            <label for="basePath">Root base directory</label>
+            <input type="text" class="form-control"  name="base_patch" id="basePath" placeholder="/var/www/your/directory">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="baseUrl">Base application url</label>
+            <input type="text" class="form-control" name="base_url"/>
+        </fieldset>
+        <h2>Databases</h2>
+        <fieldset class="form-group">
+            <label for="mysqlHost">Mysql host</label>
+            <input type="text" name="db[host]" id="mysqlHost" class="form-control">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="mysqlName">Mysql name database</label>
+            <input type="text" name="db[name]" id="mysqlName" class="form-control">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="mysqlUser">Mysql user</label>
+            <input type="text" name="db[user]" id="mysqlUser" class="form-control">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="mysqlPass">Mysql password</label>
+            <input type="password" name="db[pass]" id="mysqlPass" class="form-control">
+        </fieldset>
+        <h2>MongoDB settings</h2>
+        <fieldset class="form-group">
+            <label for="mongoDB">MongoDb connect string</label>
+            <input type="text" name="db[mongodb][connect]" id="mongoDB" class="form-control">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="mongoDBName">Database name</label>
+            <input type="text" name="db[mongodb][db]" id="mongoDBName" class="form-control">
+        </fieldset>
+        <h2>Admin accaunt</h2>
+        <fieldset class="form-group">
+            <label for="adminUser">Admin user</label>
+            <input type="text" name="admin[user]" id="adminUser" class="form-control">
+        </fieldset>
+        <fieldset class="adminPassword">
+            <label for="adminPassword">
+                Admin password
+            </label>
+            <input type="password" name="admin[password]" id="adminPassword" class="form-control">
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 </body>
 </html>

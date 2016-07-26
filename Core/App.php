@@ -9,7 +9,6 @@ namespace Core {
 
     class App
     {
-
         /**
          * this variable path to root directory
          * @var null
@@ -80,6 +79,9 @@ namespace Core {
          */
         static public function getBaseUrl()
         {
+            if(is_null(self::$_baseUrl)) {
+                self::$_baseUrl = 'http://'.trim(\Core\Helper::getFs()['base_url'].'/','http://').'/';
+            }
             return self::$_baseUrl;
         }
 
@@ -147,8 +149,7 @@ namespace Core {
                 throw new \Exception\Notfound('Page not found');
             }
 
-            $controllersModul = $modulConfig['controllers'] . '_' . ucfirst($params['controllerName']);
-
+            $controllersModul = $modulConfig['controllers'] . '\\' . ucfirst($params['controllerName']);
             if (!class_exists($controllersModul)) {
                 throw new \Exception\Notfound('Not found class controller');
             }

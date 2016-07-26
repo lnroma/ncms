@@ -18,7 +18,7 @@ namespace Admin\Block\Config\Left {
         public function __construct()
         {
             $this->_setHeader(\Core\Helper::__('Design configuration'));
-            $this->_setAction(\Core\App::getBaseUrl() . '/' . \\Config\App::getConfig()['adminurl'] . '/config/saveDis/');
+            $this->_setAction(\Core\App::getBaseUrl() . '/' . \Config\App::getConfig()['adminurl'] . '/config/saveDis/');
             $this->_setFooter(\Core\Helper::__('this is settings design, for your application'));
             $this->_setTemplate();
             $this->_prepareForm();

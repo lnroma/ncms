@@ -5,13 +5,20 @@
  * Date: 09.10.15
  * Time: 22:48
  */
-class Index_Block_Index extends \Core\Block\AbstractClass
-{
+namespace Index\Block {
     /**
-     * call block and render
+     * Class Index
+     * @package Index\Block
      */
-    public function __construct() {
-        $this->setTemplate('index');
-    }
+    class Index extends \Core\Block\AbstractClass
+    {
+        /**
+         * call block and render
+         */
+        public function __construct()
+        {
+            $this->setTemplate('index');
+        }
 
+    }
 }

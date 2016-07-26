@@ -10,10 +10,7 @@ namespace Core\Model {
     {
 
         static private $_connect = null;
-
-        private function __construct()
-        {
-        }
+        static private $_sort = array();
 
         /**
          * @return \MongoDB\Driver\Manager
@@ -41,10 +38,10 @@ namespace Core\Model {
             $connect = \Core\Model\Mongo::getConnect();
 
             $write = new \MongoDB\Driver\BulkWrite();
-            $writeConcern = new \MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY);
+            $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY);
 
             $write->insert($dataArray);
-            $connect->executeBulkWrite(Config_Db::getConf()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
+            $result = $connect->executeBulkWrite(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
         }
 
         /**
@@ -56,9 +53,9 @@ namespace Core\Model {
         {
             $connect = \Core\Model\Mongo::getConnect();
             $write = new \MongoDB\Driver\BulkWrite();
-            $writeConcern = new \MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+            $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 1000);
             $write->delete($dataArray);
-            $connect->executeBulkWrite(Config_Db::getConf()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
+            $connect->executeBulkWrite(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
         }
 
         /**
@@ -72,14 +69,14 @@ namespace Core\Model {
             $connect = \Core\Model\Mongo::getConnect();
 
             $write = new \MongoDB\Driver\BulkWrite();
-            $writeConcern = new \MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+            $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
             $write->update(
                 $query,
                 $dataArray
             );
 
-            $connect->executeBulkWrite(Config_Db::getConf()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
+            $connect->executeBulkWrite(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
         }
 
         /**
@@ -98,8 +95,7 @@ namespace Core\Model {
                 'max' => $max
             ));
             $connect = \Core\Model\Mongo::getConnect();
-            $configuration = new \Core\Configuration();
-            $connect->executeCommand($configuration->getDb()['mongodb']['db'], $command);
+            $connect->executeCommand(\Core\Helper::getDb()['mongodb']['db'], $command);
         }
 
         /**
@@ -108,19 +104,48 @@ namespace Core\Model {
          * @param $collection
          * @return array | \MongoCursor
          */
-        static function simpleSelect($key, $value, $collection)
+        static function simpleSelect($key, $value, $collection,$options = array())
         {
             $con = \Core\Model\Mongo::getConnect();
 
             $query = new \MongoDB\Driver\Query(
                 array(
-                    $key => $value
-                )
+                    $key => $value,
+                ),
+                $options
             );
 
-            $configuration = new \Core\Configuration();
+            $sort= $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $query);
+            return $sort;
+        }
 
-            return $con->executeQuery($configuration->getDb()['mongodb']['db'] . '.' . $collection, $query);
+        /**
+         * select from mongodb
+         * @param $array
+         * @param $collection
+         * @param $options
+         */
+        static function select($array,$collection,$options)
+        {
+            $con = \Core\Model\Mongo::getConnect();
+            $query = new \MongoDB\Driver\Query(
+                $array,$options
+            );
+            return $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $query);
+        }
+
+
+        /**
+         * @param $key
+         * @param $sort
+         */
+        static function setSort($key,$sort)
+        {
+            self::$_sort = array(
+                'sort' => array(
+                    $key => $sort
+                )
+            );
         }
 
         /**
@@ -131,8 +156,7 @@ namespace Core\Model {
         static function selectAll($collection)
         {
             $query = new \MongoDB\Driver\Query(array());
-            $configuration = new \Core\Configuration();
-            return self::getConnect()->executeQuery($configuration->getDb()['mongodb']['db'] . '.' . $collection, $query);
+            return self::getConnect()->executeQuery(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $query);
         }
 
     }

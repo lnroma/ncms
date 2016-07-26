@@ -5,13 +5,15 @@
  * Date: 27.02.16
  * Time: 20:45
  */
-class Urladmin_Model_Url extends \Core\Model\AbstractClass
-{
-    const REWRITE = 0;
-    const REDIRECT = 1;
-
-    public function __construct()
+namespace Urladmin\Model {
+    class Url extends \Core\Model\AbstractClass
     {
-        $this->setTableName('url_rewrite');
+        const REWRITE = 0;
+        const REDIRECT = 1;
+
+        public function __construct()
+        {
+            $this->setTableName('url_rewrite');
+        }
     }
 }

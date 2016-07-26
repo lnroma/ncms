@@ -1,0 +1,43 @@
+<?php /** @var \Core\Block\Factory\Form $this */ ?>
+<form <?php
+foreach ($this->getFormOptions() as $key => $value) {
+    echo $key . '="'
+        . $value . '"';
+}
+?> >
+    <?php foreach ($this->getFormElements() as $_element): ?>
+        <?php if ($_element['type'] == 'text'): ?>
+            <div class="form-group">
+                <label
+                    for="<?php echo $_element['options']['id'] ?>"><?php echo $_element['options']['label'] ?></label>
+                <input
+                    type="text" <?php
+                foreach ($_element['options'] as $kEl => $kVal) {
+                    if ($kEl == 'label') continue;
+                    echo $kEl . '="' . $kVal . '"';
+                }
+                ?>
+                >
+            </div>
+            <?php elseif
+            ($_element['type'] == 'textarea'): ?>
+                <label for="<?php echo $_element['options']['id'] ?>"><?php echo $_element['options']['label'] ?></label>
+                <textarea <?php
+            foreach ($_element['options'] as $kEl => $kVal) {
+                if ($kEl == 'label') continue;
+                if ($kEl == 'value') continue;
+                echo $kEl . '="' . $kVal . '"';
+            } ?> ><?php echo $_element['options']['value']?></textarea>
+            <?php elseif ($_element['type'] == 'submit'): ?>
+            <!--            <input type="submit" name="sub" value="submit">-->
+            <button
+                type="submit"
+                name="<?php echo $_element['options']['name'] ?>"
+                id="<?php echo $_element['options']['id'] ?>"
+                class="<?php echo $_element['options']['class'] ?>"
+            >
+                <?php echo $_element['options']['label'] ?>
+            </button>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</form>

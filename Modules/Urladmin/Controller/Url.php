@@ -5,22 +5,26 @@
  * Date: 27.02.16
  * Time: 20:47
  */
-class Urladmin_Controller_Url extends Admin_Controller_Abstract
-{
+namespace Urladmin\Controller {
+    class Url extends \Admin\Controller\AbstractClass
+    {
 
-    public function indexAction() {
-        $this
-            ->setPage('admin')
-            ->setKey('admin_page')
-            ->setContentLeft('Content_Left')
-            ->setContentRight('Content_Right')
-            ->render();
+        public function indexAction()
+        {
+            $this
+                ->setPage('admin')
+                ->setKey('admin_page')
+                ->setContentLeft('Content\Left')
+                ->setContentRight('Content\Right')
+                ->render();
+        }
+
+        public function addAction()
+        {
+            $rewrite = new \Urladmin\Model\Url();
+            $rewrite->addDataToSave($_POST);
+            header('Location:' . \Core\App::getBaseUrl() . \Config\App::getConfig()['adminurl'] . '/url/');
+        }
+
     }
-
-    public function addAction() {
-        $rewrite = new Urladmin_Model_Url();
-        $rewrite->addDataToSave($_POST);
-        header('Location:'.\Core\App::getBaseUrl().\Config\App::getConfig()['adminurl'].'/url/');
-    }
-
 }

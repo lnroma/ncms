@@ -1,16 +1,16 @@
-<?php /** @var Pages_Block_Blog $this */ ?>
+<?php /** @var \Pages\Block\Blog $this */ ?>
 <?php foreach ($this->getPages() as $_page): ?>
     <div class="panel panel-success">
-        <div class="panel-heading"><?php echo $_page->title ?>
+        <div class="panel-heading"><?php echo $_page->title->en ?>
             <a class="btn btn-sm btn-primary pull-right" href="<?php echo \Core\App::getBaseUrl() . $_page->key ?>">
                 View
             </a>
         </div>
         <div class="panel-body">
-            <?php if (isset($_page->short_content)): ?>
-                <?php echo $_page->short_content ?>
+            <?php if (isset($_page->short_content->en)): ?>
+                <?php echo $_page->short_content->en ?>
             <?php else: ?>
-                <?php echo $_page->content ?>
+                <?php echo $_page->content->en ?>
             <?php endif; ?>
         </div>
     </div>

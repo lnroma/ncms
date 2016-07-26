@@ -13,9 +13,9 @@ namespace Index\Config {
         static public function getConfig()
         {
             return array(
-                'blocks' => 'Index_Block',
-                'models' => 'Index_Model',
-                'controllers' => 'Index_Controller',
+                'blocks' => '\Index\Block',
+                'models' => '\Index\Model',
+                'controllers' => '\Index\Controller',
                 'menu_frontend' => array(
                     array(
                         'rout' => '',

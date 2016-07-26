@@ -26,6 +26,15 @@ namespace Urladmin\Install
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1
                 '
             );
+            $model->executeDirectQuery('
+            ALTER TABLE `url_rewrite`
+  ADD PRIMARY KEY (`id`);
+            ');
+
+            $model->executeDirectQuery('
+            ALTER TABLE `url_rewrite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+            ');
         }
 
         /**

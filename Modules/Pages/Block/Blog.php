@@ -5,14 +5,17 @@
  * Date: 29.02.16
  * Time: 23:44
  */
-class Pages_Block_Blog extends Pages_Block_Abstract {
-
-    /**
-     * Pages_Block_Blog constructor.
-     */
-    public function __construct()
+namespace Pages\Block {
+    class Blog extends \Pages\Block\AbstractClass
     {
-        $this->setTemplate('pages/blog');
-    }
 
+        /**
+         * Pages_Block_Blog constructor.
+         */
+        public function __construct()
+        {
+            $this->setTemplate('pages/blog');
+        }
+
+    }
 }

@@ -10,7 +10,7 @@ namespace Admin\Block\Config\Left\Form {
      * Class Element
      * @package Admin\Block\Config\Left\Form
      */
-    class Element extends \\Core\Block\AbstractClass
+    class Element extends \Core\Block\AbstractClass
     {
 
         public function __construct()

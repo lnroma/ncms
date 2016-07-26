@@ -10,7 +10,7 @@
                 <label for="to_url"><?php echo \Core\Helper::__('To url')?></label>
                 <input id="to_url" class="form-control" type="text" name="to_url" required>
             </div>
-            <input type="hidden" value="<?php echo Urladmin_Model_Url::REWRITE ?>" name="type">
+            <input type="hidden" value="<?php echo \Urladmin\Model\Url::REWRITE ?>" name="type">
             <button type="submit" class="btn btn-success"><?php echo \Core\Helper::__('Save')?></button>
         </form>
     </div>
@@ -28,7 +28,7 @@
                 <label for="to_url"><?php echo \Core\Helper::__('To url')?></label>
                 <input id="to_url" class="form-control" type="text" name="to_url" required>
             </div>
-            <input type="hidden" value="<?php echo Urladmin_Model_Url::REDIRECT ?>" name="type">
+            <input type="hidden" value="<?php echo \Urladmin\Model\Url::REDIRECT ?>" name="type">
             <button type="submit" class="btn btn-success"><?php echo \Core\Helper::__('Save')?></button>
         </form>
     </div>

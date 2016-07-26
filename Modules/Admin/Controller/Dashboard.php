@@ -5,20 +5,23 @@
  * Date: 27.02.16
  * Time: 16:45
  */
-class Admin_Controller_Dashboard extends Admin_Controller_Abstract
-{
+namespace Admin\Controller {
+    class Dashboard extends \Admin\Controller\AbstractClass
+    {
 
-    /**
-     * index action
-     */
-    public function indexAction() {
-        $this
-            ->setPage('admin')
-            ->setKey('admin_page')
-            ->setContentLeft('Page_Content_Left')
-            ->setContentRight('Page_Content_Right')
-            ->setLeft('Page_Leftnav')
-            ->render();
+        /**
+         * index action
+         */
+        public function indexAction()
+        {
+            $this
+                ->setPage('admin')
+                ->setKey('admin_page')
+                ->setContentLeft('Page\Content\Left')
+                ->setContentRight('Page\Content\Right')
+                ->setLeft('Page\Leftnav')
+                ->render();
+        }
+
     }
-
 }

@@ -16,7 +16,7 @@ namespace Install\Config {
                 'install_script' => '\Install\Install\Install',
                 'controllers' => 'Install_Controller',
                 'install' => array(
-                    'observer' => 'Install_Model_Observer',
+                    'observer' => '\Install\Model\Observer',
                     'method' => array(
                         'runInstall'
                     )

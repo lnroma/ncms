@@ -1,15 +1,15 @@
 <?php
-/** @var Pages_Block_View $this */
+/** @var \Pages\Block\View $this */
 $page = $this->getPage();
 $page = reset($page);
 ?>
 <div class="page-header">
-    <h1><?php echo $page->title ?></h1>
+    <h1><?php echo $page->title->en ?></h1>
 </div>
 <p>
-    <?php echo nl2br($page->content) ?>
+    <?php echo nl2br($page->content->en) ?>
 </p>
-<?php $this->getChunk('pages/comment/comment','Pages_Block_Comment_Render'); ?>
+<?php $this->getChunk('pages/comment/comment','\Pages\Block\Comment\Render'); ?>
 <form method="post" action="<?php echo \Core\Helper::getUrl('pages/view/addComment') ?>" role="form">
     <input id="comm_id" type="hidden" name="parent" value="">
     <input type="hidden" name="reply" value="" id="reply">

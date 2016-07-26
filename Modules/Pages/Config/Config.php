@@ -12,12 +12,12 @@ namespace Pages\Config {
         static public function getConfig()
         {
             return array(
-                'blocks' => 'Pages_Block',
-                'models' => 'Pages_Model',
-                'controllers' => 'Pages_Controller',
+                'blocks' => '\Pages\Block',
+                'models' => '\Pages\Model',
+                'controllers' => '\Pages\Controller',
                 'install_script' => '\Pages\Install\Install',
                 'router_load' => array(
-                    'observer' => 'Pages_Model_Observer',
+                    'observer' => '\Pages\Model\Observer',
                     'method' => array(
                         'aliasForPage',
                         'aliasMenu'

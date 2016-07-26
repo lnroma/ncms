@@ -6,7 +6,11 @@
  * Time: 20:02
  */
 namespace Admin\Block\Page\Content {
-    class Right extends \\Core\Block\AbstractClass
+    /**
+     * Class Right
+     * @package Admin\Block\Page\Content
+     */
+    class Right extends \Core\Block\AbstractClass
     {
 
         public function __construct()

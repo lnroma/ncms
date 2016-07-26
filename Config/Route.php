@@ -19,7 +19,8 @@ namespace Config {
                 $adminRout . '/url/' => 'urladmin/url/index',
                 $adminRout . '/url' => 'urladmin/url/index',
                 $adminRout . '/url/add' => 'urladmin/url/add',
-                $adminRout . '/pages/index' => 'pages/index/index'
+                $adminRout . '/pages/index' => 'pages/index/index',
+                'authgoogle' => 'customer/index/index',
             );
         }
     }

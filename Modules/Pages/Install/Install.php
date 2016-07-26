@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `menu_id` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'cms page\'
 ');
+
+            \Core\Model\Mongo::createCollection('menu');
         }
 
         /**
