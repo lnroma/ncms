@@ -44,14 +44,20 @@ namespace Core\Block\Factory {
          * @param $label
          * @return $this
          */
-        public function addSubmitButton($label)
+        public function addSubmitButton($label,$icon='')
         {
-            $this->addField('submit',array(
+            $options = array(
                 'name' => 'submit',
                 'id'   => 'submit-form',
                 'class' => 'btn btn-primary',
                 'label' => $label
-            ));
+            );
+
+            if($icon != '') {
+                $options['icon'] = $icon;
+            }
+
+            $this->addField('submit',$options);
 
             return $this;
         }

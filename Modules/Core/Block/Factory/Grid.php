@@ -10,6 +10,7 @@ namespace Core\Block\Factory
     class Grid extends \Core\Block\AbstractClass
     {
 
+        private $_collection = null;
         private $_column = array();
 
         public function __construct()
@@ -27,6 +28,37 @@ namespace Core\Block\Factory
         }
 
         /**
+         * pagination and sort options
+         * @return array
+         */
+        protected function _optionsCollection()
+        {
+            $sort = -1;
+
+            if(isset(\Core\App::getParams()['sort'])) {
+                $sortUpOrDown = \Core\App::getParams()['sort'];
+                if($sortUpOrDown == 'new_up') {
+                    $sort = -1;
+                } elseif($sortUpOrDown == 'new_down') {
+                    $sort = 1;
+                }
+            }
+
+            $page = 0;
+
+            if(isset(\Core\App::getParams()['page'])) {
+                $page = \Core\App::getParams()['page'];
+            }
+
+            return array(
+                'sort' => array(
+                    'time' => $sort
+                ),
+                'limit' => 5*($page+1),
+            );
+        }
+
+        /**
          * prepare grid
          */
         protected function _prepareGrid()
@@ -40,13 +72,14 @@ namespace Core\Block\Factory
          * @param $index
          * @return $this
          */
-        public function addColumn($id,$label,$index)
+        public function addColumn($id,$label,$index,$render= null)
         {
             $this->_column[$id] = array(
                 'label' => $label,
-                'index' => $index
+                'index' => $index,
+                'render' => $render
             );
-
+            
             return $this;
         }
 
@@ -67,7 +100,7 @@ namespace Core\Block\Factory
         {
             return array();
         }
-
+        
         /**
          * get columns
          * @return array

@@ -8,6 +8,10 @@
  */
 session_start();
 
+// set russian by default language
+setcookie('locale', 'ru');
+$_SESSION['locale'] = 'ru';
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 

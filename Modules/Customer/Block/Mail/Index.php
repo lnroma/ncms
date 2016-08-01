@@ -33,8 +33,15 @@ namespace Customer\Block\Mail {
             );
 
             $result = array();
+
+            /** @var \stdClass $_coll */
             foreach ($collection->toArray() as $_coll) {
-                $result[$_coll->to_mail] = $_coll;
+                if($_coll->to_mail != $_SESSION['customer_id']) {
+                    $_coll->sender = $_coll->to_mail;
+                } else {
+                    $_coll->sender = $_coll->from_mail;
+                }
+                $result[$_coll->sender] = $_coll;
             }
 
             return $result;
@@ -53,13 +60,17 @@ namespace Customer\Block\Mail {
             return $this;
         }
 
+        /**
+         * prepare action in greed
+         * @return array
+         */
         protected function _prepareAction()
         {
             return array(
                 array(
-                    'rout' => 'customer/mail/read',
+                    'rout' => '/customer/mail/read',
                     'label' => 'read',
-                    'index' => 'to_mail'
+                    'index' => 'sender'
                 )
             );
         }

@@ -21,6 +21,8 @@ namespace Config {
                 $adminRout . '/url/add' => 'urladmin/url/add',
                 $adminRout . '/pages/index' => 'pages/index/index',
                 'authgoogle' => 'customer/index/index',
+                '/' => 'index/index',
+                '' => 'index/index/index',
             );
         }
     }

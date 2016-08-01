@@ -19,19 +19,20 @@ namespace Index\Config {
                 'menu_frontend' => array(
                     array(
                         'rout' => '',
-                        'label' => 'Home',
+                        'label' => ' ',
+                        'icon' => 'glyphicon glyphicon-home',
                         'sort' => 0
                     ),
-                    array(
-                        'rout' => 'index/index/ru',
-                        'label' => 'Русский',
-                        'sort' => 12
-                    ),
-                    array(
-                        'rout' => 'index/index/english',
-                        'label' => 'English',
-                        'sort' => 13
-                    )
+//                    array(
+//                        'rout' => 'index/index/ru',
+//                        'label' => 'Русский',
+//                        'sort' => 12
+//                    ),
+//                    array(
+//                        'rout' => 'index/index/english',
+//                        'label' => 'English',
+//                        'sort' => 13
+//                    )
                 ),
                 'menu_admin' => array(
                     array(

@@ -16,7 +16,6 @@ namespace Customer\Model\Customer
      * @method getName() get user name
      * @method getGender() get user gender
      * @method getAge() get user age
-     * @method getAvatar() get user avatar url to pictures
      * @method getMail() get email address
      * @method getHelloText() get hello text
      * @method getAboutSelf() get about self
@@ -49,6 +48,18 @@ namespace Customer\Model\Customer
         }
 
         /**
+         * @return mixed|string
+         */
+        public function getAvatar()
+        {
+            if(isset($this->_data['avatar'])) {
+                return $this->_data['avatar'];
+            } else {
+                return \Core\App::getBaseUrl().'static/src/noavatar.jpg';
+            }
+        }
+
+        /**
          * magik getter function
          * @param $name
          * @param $arguments
@@ -60,6 +71,13 @@ namespace Customer\Model\Customer
             {
                 $key = substr($name,3,strlen($name));
                 $key = lcfirst($key);
+
+                $key = preg_replace_callback('/[A-Z]/',function ($args) {
+                    if(isset($args[0])) {
+                        return '_'.strtolower($args[0]);
+                    }
+                },$key);
+
                 if(isset($this->_data[$key])) {
                     return $this->_data[$key];
                 } else {

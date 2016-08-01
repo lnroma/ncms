@@ -6,7 +6,7 @@
  * Time: 17:02
  */
 namespace Admin\Block\Dashboard {
-    class Index extends \\Core\Block\AbstractClass
+    class Index extends \Core\Block\AbstractClass
     {
 
         public function __construct()

@@ -1,34 +1,75 @@
 <?php
-/** @var \Core\Block\Factory\Grid @this **/
+/** @var \Core\Block\Factory\Grid @this * */
 ?>
 <table class="table-bordered table">
     <thead>
     <tr>
         <?php foreach ($this->getColumns() as $_column): ?>
-            <th><?php echo $_column['label'] ?></th>
-        <?php endforeach;?>
-        <?php if(count($this->_prepareAction())): ?>
-            <th><?php echo $this->getActionTitle() ?></th>
+            <th><?php echo \Core\Helper::__($_column['label']) ?></th>
+        <?php endforeach; ?>
+        <?php if (count($this->_prepareAction())): ?>
+            <th><?php echo \Core\Helper::__($this->getActionTitle()) ?></th>
         <?php endif ?>
     </tr>
     </thead>
     <tbody>
-        <?php foreach ($this->getCollection() as $_collection): ?>
-            <tr>
-                <?php foreach ($this->getColumns() as $_col): ?>
-                    <td>
+    <?php foreach ($this->getCollection() as $_collection): ?>
+        <tr>
+            <?php foreach ($this->getColumns() as $_col): ?>
+                <td>
+                    <?php if (isset($_col['render'])): ?>
+                        <?php echo call_user_func(array($this, $_col['render']), $_collection->{$_col['index']}) ?>
+                    <?php else: ?>
                         <?php echo $_collection->{$_col['index']} ?>
-                    </td>
-                <?php endforeach;?>
-                <?php if(count($this->_prepareAction())): ?>
-                    <td>
-                        <?php foreach ($this->_prepareAction() as $action): ?>
-                            [<a href="<?php echo $action['rout']?>/<?php echo $action['index'] ?>/<?php echo $_collection->{$action['index']} ?>"><?php echo $action['label'] ?></a>|]
-                        <?php endforeach; ?>
-                    </td>
-                <?php endif; ?>
-            </tr>
-        <?php endforeach; ?>
+                    <?php endif; ?>
+                </td>
+            <?php endforeach; ?>
+            <?php if (count($this->_prepareAction())): ?>
+                <td>
+                    <?php foreach ($this->_prepareAction() as $action): ?>
+                        <?php
+                        if (isset($action['param'])) {
+                            $param = $action['param'];
+                        } else {
+                            $param = $action['index'];
+                        }
+                        ?>
+                        [
+                        <a href="<?php echo $action['rout'] ?>/<?php echo $param ?>/<?php echo $_collection->{$action['index']} ?>
+                                      "><?php echo \Core\Helper::__($action['label']) ?></a>]
+                    <?php endforeach; ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
+<?php
 
+$page = 0;
+
+if (isset(\Core\App::getParams()['page'])) {
+    $page = \Core\App::getParams()['page'];
+}
+
+$request = '';
+$collapse = '';
+
+$_request = explode('/', $_SERVER['REQUEST_URI']);
+
+if (array_search('page', $_request) !== false) {
+    $key = array_search('page', $_request) + 1;
+    $_request[$key] = $page + 1;
+    $request = implode('/', $_request);
+    $_request[$key] = 0;
+    $collapse = implode('/', $_request);
+    $request = str_replace('//', '/', $request);
+    $collapse = str_replace('//', '/', $collapse);
+} else {
+    $request = rtrim($_SERVER['REQUEST_URI'], '/') . '/page/' . ($page + 1);
+}
+
+?>
+<a href="<?php echo $request ?>" class="btn btn-default "><span class="glyphicon glyphicon-circle-arrow-down"></span>
+</a>
+<a href="<?php echo $collapse ?>" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-up"></span></a>

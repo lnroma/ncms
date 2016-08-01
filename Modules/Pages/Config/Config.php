@@ -33,7 +33,8 @@ namespace Pages\Config {
                 'menu_frontend' => array(
                     array(
                         'rout' => 'pages/view/blog',
-                        'label' => 'Pages',
+                        'label' => '',
+                        'icon'  => 'glyphicon glyphicon-book',
                         'sort' => 11,
                     ),
                 ),

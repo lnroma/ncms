@@ -32,20 +32,23 @@ namespace Customer\Config {
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/mail/index',
-                    'label' => 'Mail',
+                    'label' => '',
+                    'icon' => 'glyphicon glyphicon-envelope',
                     'sort' => 11,
                 );
 
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/index/accaunt',
-                    'label' => 'My Accaunt',
+                    'label' => '',
+                    'icon' => 'glyphicon glyphicon-user',
                     'sort' => 12,
                 );
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/index/all',
-                    'label' => 'All users',
+                    'label' => '',
+                    'icon' => 'glyphicon glyphicon-heart',
                     'sort' => 13
                 );
 
@@ -67,11 +70,19 @@ namespace Customer\Config {
                     'activeMenu' => ''
                 );
 
+
+                $configuration['page']['mail']['read'] = array(
+                    'title' => 'Read email',
+                    'description' => 'read mail',
+                    'activeMenu' => ''
+                );
+
             } else {
                 $configuration['menu_frontend'] = array(
                     array(
                         'rout' => \Customer\Block\Menu::getAuthLink(),
-                        'label' => 'Google+',
+                        'label' => '',
+                        'icon' => 'glyphicon glyphicon-log-in',
                         'sort' => 10,
                     )
                 );

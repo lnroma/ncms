@@ -6,6 +6,11 @@
  * Time: 13:25
  */
 namespace Core\Controller {
+    /**
+     * Class AbstractClass
+     * @package Core\Controller
+     * @method AbstractClass setContent()
+     */
     class AbstractClass
     {
 

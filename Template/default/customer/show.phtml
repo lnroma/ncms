@@ -1,0 +1,47 @@
+<?php
+/** @var Customer\Block\Customer\Show $this */
+/** @var Customer\Model\Customer\Information $customerInformation */
+$customerInformation = \Customer\Model\Customer::getCustomer(Core\App::getParams()['id']);
+?>
+<div class="panel panel-info" xmlns="http://www.w3.org/1999/html">
+    <div class="panel-heading"><?php echo $customerInformation->getName() ?></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="<?php echo $customerInformation->getAvatar() ?>" data-toggle="lightbox">
+                    <img src="<?php echo $customerInformation->getAvatar() ?>" height="200px" width="200px"
+                         class="img-circle"/>
+                </a>
+                <h4><?php echo $customerInformation->getHelloText() ?></h4>
+            </div>
+            <div class="col-lg-8">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><?php echo Core\Helper::__('About self') ?></div>
+                    <div class="panel-body">
+                        <?php echo $customerInformation->getAboutSelf() ?>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><?php echo Core\Helper::__('Profile') ?></div>
+                    <div class="panel-body">
+                        <?php if ($customerInformation->getGender()): ?>
+                            <?php echo Core\Helper::__('Gender') ?>:<?php echo $customerInformation->getGender() ?><br/>
+                        <?php endif; ?>
+                        <?php if ($customerInformation->getAge()): ?>
+                            <?php echo Core\Helper::__('Age') ?>:<?php echo $customerInformation->getAge() ?><br/>
+                        <?php endif; ?>
+                        <?php if ($customerInformation->getEmail()): ?>
+                            <?php echo Core\Helper::__('Email') ?>:<?php echo $customerInformation->getEmail() ?></br>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <h4>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span></button>
+        </h4>
+    </div>
+</div>
+

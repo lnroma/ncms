@@ -9,26 +9,33 @@ namespace Customer\Model {
 
     class Customer extends \Core\Model\Mongo
     {
-        static $_customer = null;
+        static $_customer = array();
 
         /**
          * get customer information from database
          * @return \Customer\Model\Customer\Information
          */
-        public static function getCustomer()
+        public static function getCustomer($id = null)
         {
-            if(self::$_customer) {
-                return self::$_customer;
+            if($id == null) {
+                $id = $_SESSION['customer_id'];
             }
+
+            if(isset(self::$_customer[$id])) {
+                return self::$_customer[$id];
+            }
+
             $customerObj = new \Customer\Model\Customer\Information();
-            $customer = self::simpleSelect('id', $_SESSION['customer_id'],'customer');
+            $customer = self::simpleSelect('id',$id ,'customer');
             $customer = $customer->toArray();
             /** @var \stdClass $customer */
             $customer = reset($customer);
             $customerArray = json_decode(json_encode($customer),true);
             $customerObj->setData($customerArray);
-            self::$_customer = $customerObj;
-            return self::$_customer;
+
+            self::$_customer[$id] = $customerObj;
+
+            return self::$_customer[$id];
         }
 
         /**

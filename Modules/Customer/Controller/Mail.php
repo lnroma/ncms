@@ -19,6 +19,16 @@ namespace Customer\Controller
                 ->render();
         }
 
+        public function readAction()
+        {
+            $this
+                ->setKey('page')
+                ->setPage('mail')
+                ->setContent('Mail\Read')
+                ->setForm('Mail\Send')
+                ->render();
+        }
+
         public function sendAction()
         {
             $this
@@ -43,7 +53,7 @@ namespace Customer\Controller
             
             \Core\Model\Mongo::insert($mailInformation,'customer_message');
             
-            header('Location:/customer/mail/index');
+            header('Location:'.\Core\App::getPost('back_url'));
         }
 
     }

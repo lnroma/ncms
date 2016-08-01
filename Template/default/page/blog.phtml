@@ -4,15 +4,17 @@
 </head>
 <body>
 <?php $this->getChunk('chunks/_menu.phtml', '\Core\Block\Page\Menu') ?>
-<div class="clear">&nbsp;</div>
-<div class="container">
-    <div class="row">
+<!--<div class="clear">&nbsp;</div>-->
+<div class="container container-fluid">
+    <div class="panel-body">
+    <div class="row" >
         <div class="col-sm-3">
             <?php echo $this->getData('menu') ?>
         </div>
         <div class="col-sm-8">
             <?php echo $this->getData('content') ?>
         </div>
+    </div>
     </div>
 </div>
 </body>

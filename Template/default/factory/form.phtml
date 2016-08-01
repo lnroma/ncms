@@ -9,7 +9,7 @@ foreach ($this->getFormOptions() as $key => $value) {
         <?php if ($_element['type'] == 'text'): ?>
             <div class="form-group">
                 <label
-                    for="<?php echo $_element['options']['id'] ?>"><?php echo $_element['options']['label'] ?></label>
+                    for="<?php echo $_element['options']['id'] ?>"><?php echo \Core\Helper::__($_element['options']['label']) ?></label>
                 <input
                     type="text" <?php
                 foreach ($_element['options'] as $kEl => $kVal) {
@@ -21,13 +21,21 @@ foreach ($this->getFormOptions() as $key => $value) {
             </div>
             <?php elseif
             ($_element['type'] == 'textarea'): ?>
-                <label for="<?php echo $_element['options']['id'] ?>"><?php echo $_element['options']['label'] ?></label>
+                <label for="<?php echo $_element['options']['id'] ?>"><?php echo \Core\Helper::__($_element['options']['label']) ?></label>
                 <textarea <?php
             foreach ($_element['options'] as $kEl => $kVal) {
                 if ($kEl == 'label') continue;
                 if ($kEl == 'value') continue;
                 echo $kEl . '="' . $kVal . '"';
             } ?> ><?php echo $_element['options']['value']?></textarea>
+            <?php elseif ($_element['type'] == 'hidden'): ?>
+                <input type="hidden"
+            <?php
+            foreach ($_element['options'] as $kEl => $kVal) {
+                if ($kEl == 'label') continue;
+                echo $kEl . '="' . $kVal . '"';
+            }
+            ?> />
             <?php elseif ($_element['type'] == 'submit'): ?>
             <!--            <input type="submit" name="sub" value="submit">-->
             <button
@@ -36,6 +44,9 @@ foreach ($this->getFormOptions() as $key => $value) {
                 id="<?php echo $_element['options']['id'] ?>"
                 class="<?php echo $_element['options']['class'] ?>"
             >
+                <?php  if(isset($_element['options']['icon'])): ?>
+                    <span class="<?php echo $_element['options']['icon'] ?>"></span>
+                <?php endif; ?>
                 <?php echo $_element['options']['label'] ?>
             </button>
         <?php endif; ?>

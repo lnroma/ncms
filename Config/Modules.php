@@ -43,7 +43,7 @@ namespace Config {
                 ),
                 'postgen' => array(
                     'config_class' => '\Postgen\Config\Config',
-                    'enable' => true
+                    'enable' => false
                 ),
                 'customer' => array(
                     'config_class' => '\Customer\Config\Config',

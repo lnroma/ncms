@@ -19,25 +19,40 @@ namespace Customer\Block\Mail {
                 )
             );
 
-            $customerInformation = \Customer\Model\Customer::getCustomer();
+            $userId = null;
 
-            $this->addField('text',array(
+            if(isset(\Core\App::getParams()['id'])) {
+                $userId = \Core\App::getParams()['id'];
+            } elseif(isset(\Core\App::getParams()['sender'])) {
+                $userId = \Core\App::getParams()['sender'];
+            }
+
+            $this->addField('hidden',array(
                 'name' => 'to_email',
                 'id' => 'to_email',
                 'class' => 'form-control',
                 'label' => 'To email',
-                'value' => \Core\App::getParams()['id']
+                'value' => $userId
             ));
 
-            $this->addField('textarea',array(
+
+            $this->addField('hidden',array(
+                'name' => 'back_url',
+                'id' => 'back_url',
+                'class' => 'form-control',
+                'label' => '',
+                'value' => $_SERVER['REQUEST_URI']
+            ));
+
+            $this->addField('text',array(
                 'name' => 'message',
                 'id' => 'message',
                 'class' => 'form-control',
-                'label' => 'Your message',
+                'label' => \Core\Helper::__('Your message'),
                 'value' => ''
             ));
 
-            $this->addSubmitButton('Send email');
+            $this->addSubmitButton('','glyphicon glyphicon-send');
         }
 
     }

@@ -48,11 +48,11 @@ namespace Customer\Block\Customer {
                 'name' => 'about_self',
                 'id' => 'customer_about',
                 'class' => 'form-control',
-                'label' => 'Your about self',
+                'label' => 'About self',
                 'value' => $customerInformation->getAboutSelf()
             ));
 
-            $this->addSubmitButton('Save information');
+            $this->addSubmitButton('','glyphicon glyphicon-floppy-disk');
         }
 
     }

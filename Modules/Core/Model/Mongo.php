@@ -134,7 +134,6 @@ namespace Core\Model {
             return $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $query);
         }
 
-
         /**
          * @param $key
          * @param $sort

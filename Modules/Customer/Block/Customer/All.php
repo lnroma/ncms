@@ -38,9 +38,10 @@ namespace Customer\Block\Customer {
         {
             return array(
                 array(
-                    'rout' => '/customer/mail/send',
+                    'rout' => '/customer/mail/read',
                     'label' => 'send mail',
-                    'index' => 'id'
+                    'index' => 'id',
+                    'param' => 'sender'
                 ),
                 array(
                     'rout' => '/customer/index/accaunt',

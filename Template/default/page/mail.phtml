@@ -1,0 +1,13 @@
+<?php /** @var \Core\Block\AbstractClass $this */ ?>
+<head>
+<?php $this->getChunk('chunks/_head.phtml','\Core\Block\Page\Head') ?>
+</head>
+<body>
+<?php $this->getChunk('chunks/_menu.phtml','\Core\Block\Page\Menu') ?>
+<div class="clear">&nbsp;</div>
+<div class="container">
+    <?php echo $this->getData('content') ?>
+    <?php echo $this->getData('form') ?>
+</div>
+</body>
+<?php $this->getChunk('chunks/_footer.phtml') ?>

@@ -46,11 +46,19 @@ namespace Customer\Controller {
         }
 
         public function accauntAction() {
-            $this
-                ->setKey('page')
-                ->setPage('main')
-                ->setContent('Customer\Index')
-                ->render();
+            if(isset(\Core\App::getParams()['id'])) {
+                $this
+                    ->setKey('page')
+                    ->setPage('main')
+                    ->setContent('Customer\Show')
+                    ->render();
+            } else {
+                $this
+                    ->setKey('page')
+                    ->setPage('main')
+                    ->setContent('Customer\Index')
+                    ->render();
+            }
         }
 
         /**
@@ -88,6 +96,14 @@ namespace Customer\Controller {
                 ->setPage('main')
                 ->setContent('Customer\All')
                 ->render();
+        }
+
+        public function clearAction()
+        {
+
+            \Core\Model\Mongo::delete(array(),'customer');
+            \Core\Model\Mongo::delete(array(),'customer_message');
+
         }
 
     }
