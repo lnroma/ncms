@@ -32,7 +32,7 @@ namespace Admin\Controller {
         public function checkAction()
         {
 
-            $userModel = new \Admin_Model_Admin_User();
+            $userModel = new \Admin\Model\Admin\User();
 
             $result = $userModel
                 ->addFieldToFilter('login', \Core\App::getPost('username'))
