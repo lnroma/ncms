@@ -27,7 +27,7 @@ namespace Install\Model {
             $request = trim($_SERVER['REQUEST_URI'], '/');
 
             if (strpos($request, 'installSave') !== false) {
-                $installController = new Install_Controller_Index();
+                $installController = new \Install\Controller\Index();
                 $installController->indexAction();
                 die;
             }

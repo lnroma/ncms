@@ -41,6 +41,9 @@ $customerInformation = \Customer\Model\Customer::getCustomer(Core\App::getParams
     <div class="panel-footer">
         <h4>
             <button class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span></button>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-folder-open"></span></button>
+            <a class="btn btn-default" href="<?php echo \Core\Helper::getUrl('customer/photo/index').'/id/'.\Core\
+                App::getParams()['id'] ?>"><span class="glyphicon glyphicon-picture"></span></a>
         </h4>
     </div>
 </div>

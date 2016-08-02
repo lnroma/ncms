@@ -101,7 +101,7 @@ namespace Customer\Controller {
         public function clearAction()
         {
 
-            \Core\Model\Mongo::delete(array(),'customer');
+//            \Core\Model\Mongo::delete(array(),'customer');
             \Core\Model\Mongo::delete(array(),'customer_message');
 
         }

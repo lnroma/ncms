@@ -54,5 +54,6 @@ return array(
     'Your age' => 'Возраст',
     'About self' => 'О себе',
     'send mail' => 'написать',
-    'accaunt' => 'профиль'
+    'accaunt' => 'профиль',
+    'not read' => 'не прочитанно'
 );

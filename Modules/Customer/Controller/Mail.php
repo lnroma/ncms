@@ -21,6 +21,30 @@ namespace Customer\Controller
 
         public function readAction()
         {
+            $arrayIdMessage = array();
+            $messageUnread = \Core\Model\Mongo::select(
+                array(
+                    'to_mail' => $_SESSION['customer_id'],
+                    'read' => false
+                ),
+                'customer_message',
+                array()
+            );
+//            var_dump($messageUnread->toArray());die;
+            // update unread message
+            foreach ($messageUnread as $_unread) {
+                \Core\Model\Mongo::update(
+                    array(
+                        '$set' => array(
+                            'read' => true
+                        )
+                    ),
+                    'customer_message',
+                    array(
+                        '_id' => $_unread->_id
+                    )
+                );
+            }
             $this
                 ->setKey('page')
                 ->setPage('mail')

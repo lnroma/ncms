@@ -19,6 +19,19 @@ foreach ($this->getFormOptions() as $key => $value) {
                 ?>
                 >
             </div>
+            <?php elseif ($_element['type'] == 'file'): ?>
+            <div class="form-group">
+                <label
+                    for="<?php echo $_element['options']['id'] ?>"><?php echo \Core\Helper::__($_element['options']['label']) ?></label>
+                <input
+                    type="file" <?php
+                foreach ($_element['options'] as $kEl => $kVal) {
+                    if ($kEl == 'label') continue;
+                    echo $kEl . '="' . $kVal . '"';
+                }
+                ?>
+                >
+            </div>
             <?php elseif
             ($_element['type'] == 'textarea'): ?>
                 <label for="<?php echo $_element['options']['id'] ?>"><?php echo \Core\Helper::__($_element['options']['label']) ?></label>

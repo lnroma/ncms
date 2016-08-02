@@ -52,10 +52,3 @@ try {
         $block->toHtml();
     }
 }
-
-
-//catch (Exception $error) {
-//    var_dump($error);
-//    new Core_Block_Error();
-//}
-

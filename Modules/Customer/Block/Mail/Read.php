@@ -48,34 +48,42 @@ namespace Customer\Block\Mail
         {
             $this
                 ->addColumn('name','Name','from_mail','render')
-                ->addColumn('message','Message','message');
+                ->addColumn('message','Message','message')
+                ->addColumn('read','Status','read','renderReadStatus');
 
             return $this;
         }
 
-        protected function _getUserInfo($userId)
-        {
-            if(isset($this->_userData[$userId])) {
-                return $this->_userData[$userId];
-            }
 
-            $userInfo = \Core\Model\Mongo::simpleSelect('id',$userId,'customer');
-            $userInfo = $userInfo->toArray();
-
-            $this->_userData[$userId] = reset($userInfo) ;
-            return $this->_userData[$userId];
-        }
-
+        /**
+         * render user collumn
+         * @param $userId
+         * @return string
+         */
         public function render($userId) {
-            $userInfo = $this->_getUserInfo($userId);
-            $name = $userInfo->name;
+            $userInfo = \Customer\Model\Customer::getCustomer($userId);
+            $name = $userInfo->getName();
+
+            $html = '<img src="'.$userInfo->getAvatar() .'" height="100px" width="100px"
+                         class="img-circle"/>';
+
             if($userId == $_SESSION['customer_id']) {
                 $name = \Core\Helper::__('I').'('.$name.')';
             }
-            $html = '
+
+            $html .= '
             <span class="glyphicon glyphicon-user">'.$name.'</span>
             ';
             return $html;
+        }
+
+        public function renderReadStatus($readStatus)
+        {
+            if($readStatus == false) {
+                return \Core\Helper::__('not read');
+            } else {
+                return \Core\Helper::__('read');
+            }
         }
 
     }

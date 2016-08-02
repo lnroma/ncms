@@ -44,7 +44,6 @@ spl_autoload_register(function ($className) {
     $classPathRoot = \Core\App::getRootPath() . $classPath . '.php';
     $classPathModules = \Core\App::getRootPath() . 'Modules' . DIRECTORY_SEPARATOR . $classPath . '.php';
     $rootDirectoryClass = \Core\App::getRootPath() . DIRECTORY_SEPARATOR .$classPath.'.php';
-
     if (file_exists($classPathRoot)) {
         require_once $classPathRoot;
     } elseif (file_exists($classPathModules)) {

@@ -14,11 +14,19 @@ namespace Customer\Block\Customer {
             $this->createForm(
                 array(
                     'action' => \Core\Helper::getUrl('customer/accaunt/save'),
-                    'method' => 'post'
+                    'method' => 'post',
+                    'enctype' => 'multipart/form-data'
                 )
             );
 
             $customerInformation = \Customer\Model\Customer::getCustomer();
+
+            $this->addField('file',array(
+                'name' => 'file',
+                'id' => 'file',
+                'class' => 'file-loading',
+                'label' => 'Upload you avatar',
+            ));
 
             $this->addField('text',array(
                 'name' => 'hello_text',

@@ -25,6 +25,13 @@ namespace Customer\Config {
                             'activeMenu' => 'Accaunt'
                         )
                     ),
+                    'photo' => array(
+                        'index' => array(
+                            'title' => 'Photo',
+                            'description' => 'Photo',
+                            'activeMenu' => 'Accaunt'
+                        )
+                    )
                 )
             );
 

@@ -54,10 +54,33 @@ namespace Customer\Block\Mail {
         protected function _prepareGrid()
         {
             $this
-                ->addColumn('name','Name','to_mail')
+                ->addColumn('name','Name','to_mail','render')
                 ->addColumn('mails','Mails','message');
 
             return $this;
+        }
+
+
+        /**
+         * render user collumn
+         * @param $userId
+         * @return string
+         */
+        public function render($userId) {
+            $userInfo = \Customer\Model\Customer::getCustomer($userId);
+            $name = $userInfo->getName();
+
+            $html = '<img src="'.$userInfo->getAvatar() .'" height="100px" width="100px"
+                         class="img-circle"/>';
+
+            if($userId == $_SESSION['customer_id']) {
+                $name = \Core\Helper::__('I').'('.$name.')';
+            }
+
+            $html .= '
+            <span class="glyphicon glyphicon-user">'.$name.'</span>
+            ';
+            return $html;
         }
 
         /**
