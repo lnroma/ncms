@@ -197,6 +197,10 @@ namespace Core\Model {
                 throw new \Exception($res->errorInfo()[2]);
             }
 
+            if(!$res->query($queryRun)) {
+                throw new \Exception('testing');
+            }
+
             return $res->query($query)->fetchAll();
         }
 
