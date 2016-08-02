@@ -7,6 +7,9 @@
  */
 namespace Customer\Controller
 {
+
+    use Ratchet\Wamp\Exception;
+
     class Mail extends \Core\Controller\AbstractClass
     {
 
@@ -21,7 +24,6 @@ namespace Customer\Controller
 
         public function readAction()
         {
-            $arrayIdMessage = array();
             $messageUnread = \Core\Model\Mongo::select(
                 array(
                     'to_mail' => $_SESSION['customer_id'],
@@ -30,8 +32,7 @@ namespace Customer\Controller
                 'customer_message',
                 array()
             );
-//            var_dump($messageUnread->toArray());die;
-            // update unread message
+
             foreach ($messageUnread as $_unread) {
                 \Core\Model\Mongo::update(
                     array(
@@ -67,17 +68,25 @@ namespace Customer\Controller
          */
         public function postSendAction()
         {
-            $mailInformation = array(
-                'to_mail' => \Core\App::getPost('to_email'),
-                'from_mail' => $_SESSION['customer_id'],
-                'message' => \Core\App::getPost('message'),
-                'time' => time(),
-                'read' => false
-            );
-            
-            \Core\Model\Mongo::insert($mailInformation,'customer_message');
-            
-            header('Location:'.\Core\App::getPost('back_url'));
+            try {
+                $mailInformation = array(
+                    'to_mail' => \Core\App::getPost('to_email'),
+                    'from_mail' => $_SESSION['customer_id'],
+                    'message' => \Core\App::getPost('message'),
+                    'time' => time(),
+                    'read' => false
+                );
+
+                \Core\Model\Mongo::insert($mailInformation, 'customer_message');
+
+                header('Location:' . \Core\App::getPost('back_url'));
+            } catch (\Exception $error) {
+                if($error->getMessage() == 'norepl') {
+                    header('Location:' . \Core\App::getPost('back_url'));
+                } else {
+                    throw new \Exception($error->getMessage());
+                }
+            }
         }
 
     }
