@@ -82,7 +82,7 @@ namespace Pages\Controller {
 //                \Core\Model\Mongo::getConnect()->close();
                 header('Location:' . $_POST['back_url']);
             } catch (\Exception $err) {
-                var_dump($err);die;
+//                var_dump($err);die;
                 header('Location:' . $_POST['back_url']);
             }
         }
