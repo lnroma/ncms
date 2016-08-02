@@ -6,6 +6,9 @@
  * Time: 20:58
  */
 namespace Customer\Controller {
+
+    use Ratchet\Wamp\Exception;
+
     /**
      * Class Index
      * @package Authgoogle\Controller
@@ -18,30 +21,38 @@ namespace Customer\Controller {
          */
         public function indexAction()
         {
-            if(isset($_GET['error'])) {
-                throw new \Exception($_GET['error']);
-            }
+            try {
+                if (isset($_GET['error'])) {
+                    throw new \Exception($_GET['error']);
+                }
 
-            if(!isset($_GET['code'])) {
-                header('Location:'.\Core\Helper::getUrl('/'));
-            }
+                if (!isset($_GET['code'])) {
+                    header('Location:' . \Core\Helper::getUrl('/'));
+                }
 
-            $client = new \Google_Client();
+                $client = new \Google_Client();
 
-            $client->setAuthConfigFile(\Core\App::getRootPath().DIRECTORY_SEPARATOR.'Config'.DIRECTORY_SEPARATOR.'google.json');
-            $client->authenticate($_GET['code']);
-            $accessToken = $client->getAccessToken();
-            $client->setAccessToken($accessToken);
+                $client->setAuthConfigFile(\Core\App::getRootPath() . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'google.json');
+                $client->authenticate($_GET['code']);
+                $accessToken = $client->getAccessToken();
+                $client->setAccessToken($accessToken);
 
-            $customer = new \Google_Service_Oauth2($client);
-            $customerInfo = $customer->userinfo->get();
-            /** @var \MongoDB\Driver\Cursor $user */
-            $user = \Core\Model\Mongo::simpleSelect('id',$customerInfo->getId(),'customer');
-            if(count($user->toArray()) == 0) {
-                $this->_createUser($customerInfo);
-            } else {
-                $_SESSION['customer_id'] = $customerInfo->getId();
-                header('Location:'.\Core\Helper::getUrl('customer/index/accaunt'));
+                $customer = new \Google_Service_Oauth2($client);
+                $customerInfo = $customer->userinfo->get();
+                /** @var \MongoDB\Driver\Cursor $user */
+                $user = \Core\Model\Mongo::simpleSelect('id', $customerInfo->getId(), 'customer');
+                if (count($user->toArray()) == 0) {
+                    $this->_createUser($customerInfo);
+                } else {
+                    $_SESSION['customer_id'] = $customerInfo->getId();
+                    header('Location:' . \Core\Helper::getUrl('customer/index/accaunt'));
+                }
+            } catch (Exception $error) {
+                if($error->getMessage() == 'norepl') {
+                    header('Location:' . \Core\Helper::getUrl('customer/index/accaunt'));
+                } else {
+                    throw new \Exception($error->getMessage());
+                }
             }
         }
 
