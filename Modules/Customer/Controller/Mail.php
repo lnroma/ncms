@@ -5,8 +5,7 @@
  * Date: 25.07.16
  * Time: 17:23
  */
-namespace Customer\Controller
-{
+namespace Customer\Controller {
 
     use Ratchet\Wamp\Exception;
 
@@ -24,27 +23,33 @@ namespace Customer\Controller
 
         public function readAction()
         {
-            $messageUnread = \Core\Model\Mongo::select(
-                array(
-                    'to_mail' => $_SESSION['customer_id'],
-                    'read' => false
-                ),
-                'customer_message',
-                array()
-            );
-
-            foreach ($messageUnread as $_unread) {
-                \Core\Model\Mongo::update(
+            try {
+                $messageUnread = \Core\Model\Mongo::select(
                     array(
-                        '$set' => array(
-                            'read' => true
-                        )
+                        'to_mail' => $_SESSION['customer_id'],
+                        'read' => false
                     ),
                     'customer_message',
-                    array(
-                        '_id' => $_unread->_id
-                    )
+                    array()
                 );
+
+                foreach ($messageUnread as $_unread) {
+                    \Core\Model\Mongo::update(
+                        array(
+                            '$set' => array(
+                                'read' => true
+                            )
+                        ),
+                        'customer_message',
+                        array(
+                            '_id' => $_unread->_id
+                        )
+                    );
+                }
+            } catch (Exception $error) {
+                if ($error != 'norepl') {
+                    throw  new \Exception($error->getMessage());
+                }
             }
             $this
                 ->setKey('page')
@@ -81,7 +86,7 @@ namespace Customer\Controller
 
                 header('Location:' . \Core\App::getPost('back_url'));
             } catch (\Exception $error) {
-                if($error->getMessage() == 'norepl') {
+                if ($error->getMessage() == 'norepl') {
                     header('Location:' . \Core\App::getPost('back_url'));
                 } else {
                     throw new \Exception($error->getMessage());
