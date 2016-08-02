@@ -26,7 +26,7 @@ namespace Customer\Block\Customer {
         protected function _prepareGrid()
         {
             $this
-                ->addColumn('name', 'Name', 'name')
+                ->addColumn('name', 'Name', 'name');
 //                ->addColumn('email', 'Email', 'email');
         }
 
