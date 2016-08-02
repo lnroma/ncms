@@ -104,7 +104,7 @@ namespace Pages\Controller {
                     \Core\Model\Mongo::insert($_POST, 'pages');
                 }
                 header('Location:' . $_POST['back_url']);
-            } catch (Exception $err) {
+            } catch (\Exception $err) {
                 header('Location:' . $_POST['back_url']);
             }
         }
