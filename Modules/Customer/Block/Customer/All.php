@@ -27,7 +27,7 @@ namespace Customer\Block\Customer {
         {
             $this
                 ->addColumn('name', 'Name', 'name')
-                ->addColumn('email', 'Email', 'email');
+//                ->addColumn('email', 'Email', 'email');
         }
 
         /**
