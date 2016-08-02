@@ -10,7 +10,7 @@ namespace Install\Install {
     
     class Install extends \Core\Model\AbstractClass
     {
-        use \Install_Install_Abstract;
+        use \Install\Install\AbstractClass;
 
         /**
          * your install scripts
