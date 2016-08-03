@@ -39,6 +39,15 @@ namespace Customer\Controller {
             header('Location:'.$_POST['url']);
         }
 
+        public function removeAction()
+        {
+            $file = \Core\App::getRootPath().'uploads'.DIRECTORY_SEPARATOR.$_SESSION['customer_id'].DIRECTORY_SEPARATOR.\Core\App::getPost('file');
+            if(file_exists($file)) {
+                unlink($file);
+            }
+            header('Location:'.\Core\App::getPost('back_url'));
+        }
+
         public function interAction()
         {
             $directory = \Core\App::getRootPath().'uploads'.DIRECTORY_SEPARATOR.$_SESSION['customer_id'];
