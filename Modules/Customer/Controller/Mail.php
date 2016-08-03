@@ -46,7 +46,7 @@ namespace Customer\Controller {
                         )
                     );
                 }
-            } catch (Exception $error) {
+            } catch (\Exception $error) {
                 
             }
             $this
