@@ -47,6 +47,7 @@ namespace Customer\Controller {
                     );
                 }
             } catch (Exception $error) {
+                
             }
             $this
                 ->setKey('page')

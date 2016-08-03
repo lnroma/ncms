@@ -30,9 +30,6 @@ $customerInformation = \Customer\Model\Customer::getCustomer(Core\App::getParams
                         <?php if ($customerInformation->getAge()): ?>
                             <?php echo Core\Helper::__('Age') ?>:<?php echo $customerInformation->getAge() ?><br/>
                         <?php endif; ?>
-                        <?php if ($customerInformation->getEmail()): ?>
-                            <?php echo Core\Helper::__('Email') ?>:<?php echo $customerInformation->getEmail() ?></br>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -40,8 +37,7 @@ $customerInformation = \Customer\Model\Customer::getCustomer(Core\App::getParams
     </div>
     <div class="panel-footer">
         <h4>
-            <button class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span></button>
-            <button class="btn btn-default"><span class="glyphicon glyphicon-folder-open"></span></button>
+            <a href="<?php echo \Core\Helper::getUrl('customer/mail/read') ?>/sender/<?php echo \Core\App::getParams()['id'] ?>" class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span></a>
             <a class="btn btn-default" href="<?php echo \Core\Helper::getUrl('customer/photo/index').'/id/'.\Core\
                 App::getParams()['id'] ?>"><span class="glyphicon glyphicon-picture"></span></a>
         </h4>
