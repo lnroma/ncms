@@ -4,37 +4,77 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <?php echo $this->getCustomerInfo()->getName() ?>
+        <!--        <div class="right">-->
+        <?php if ($_SESSION['customer_id'] == \Core\App::getParams()['id']): ?>
+            <form id="password" class="left" method="post"
+                  action="<?php echo \Core\Helper::getUrl('customer/photo/password') ?>">
+                <input type="text" class="form-control" name="password">
+                <input type="hidden" name="back_url" value="<?php $_SERVER['REQUEST_URI'] ?>">
+                <button class="btn btn-default" type="submit">Установить</button>
+                <button class="btn btn-default" onclick="$('#password').hide();$('#settings_btn').show();">Свернуть
+                </button>
+            </form>
+            <script>
+                $('#password').hide();
+            </script>
+            <button id="settings_btn" class="btn btn-default"
+                    onclick="$('#password').show();$('#settings_btn').hide();">Настройки доступа
+            </button>
+        <?php endif; ?>
+        <!--        </div>-->
     </div>
     <div class="panel-body">
-        <?php
-          if(count($this->getAllFile()) == 0) {
-              echo \Core\Helper::__('Directory is empty');
-          }
-        ?>
-        <?php foreach ($this->getAllFile() as $_file): ?>
-            <div class="row">
-                <div class="col-lg-1">
-                    <?php if ($_file['type'] == 'directory'): ?>
-                        <span class="glyphicon glyphicon-folder-open"></span>
-                    <?php else: ?>
-                        <img src="<?php echo $this->getUrlToPicture() ?><?php echo $_file['name']?>" width="70" height="70" class="img-rounded">
-                    <?php endif; ?>
+        <?php if (
+            file_exists($this->getDirectoryPath() . '.htpasswd')
+            && !isset($_SESSION[\Core\App::getParams()['id']])
+        ): ?>
+            <form action="<?php echo \Core\Helper::getUrl('customer/photo/inter') ?>" method="post">
+                <label for="pass">Введите пароль для домтупа к папке</label>
+                <input type="text" name="password" class="form-control" id="pass">
+                <input type="hidden" name="back_url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+                <input type="hidden" name="user_id" value="<?php echo \Core\App::getParams()['id'] ?>">
+                <button type="submit" class="btn btn-default">Войти</button>
+            </form>
+        <?php else: ?>
+            <?php
+            if (count($this->getAllFile()) == 0) {
+                echo \Core\Helper::__('Directory is empty');
+            }
+            ?>
+            <?php foreach ($this->getAllFile() as $_file): ?>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="<?php echo $this->getUrlToPicture() . $_file['name'] ?>"
+                             alt="">
+                    </a>
+                    <?php if ($_SESSION['customer_id'] == \Core\App::getParams()['id']): ?>
+                        <div class="btn-group" role="group">
+                            <form action="<?php echo \Core\Helper::getUrl('customer/photo/remove') ?>" method="post">
+                                <input type="hidden" name="back_url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+                                <input type="hidden" name="file" value="<?php echo $_file['name'] ?>" >
+                                <button type="submit" class="btn btn-default">Удалить</button>
+                            </form>
+                            <form action="<?php echo \Core\Helper::getUrl('customer/photo/setAvatar') ?>" method="post">
+                                <input type="hidden" name="back_url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+                                <input type="hidden" name="file" value="<?php echo $_file['name'] ?>" >
+                                <button class="btn btn-default">Аватар</button>
+                            </form>
+                        </div>
+                    <?php endif ?>
+                    <!--                <div class="btn-group" role="group">-->
+                    <!--                    <button class="btn btn-default">Комментарии</button>-->
+                    <!--                    <button class="btn btn-default">Скачать</button>-->
+                    <!--                </div>-->
                 </div>
-                <div class="col-lg-8">
-                    <?php if ($_file['type'] == 'directory'): ?>
-                    <a href='<?php echo $_SERVER['REQUEST_URI'] ?>path/<?php echo $_file['name'] ?>'><?php echo $_file['name'] ?></a>
-                    <?php else: ?>
-                    <a href="<?php echo $this->getUrlToPicture() ?><?php echo $_file['name']?>"><?php echo $_file['name'] ?></a>
-                    <?php endif;?>
-                </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
-<?php if($_SESSION['customer_id'] == \Core\App::getParams()['id']): ?>
-<form action="<?php echo \Core\Helper::getUrl('customer/photo/upload') ?>" method="post" enctype="multipart/form-data">
-    <input type="file" class="file_upload" name="file">
-    <input type="hidden" name="url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
-    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> </button>
-</form>
+<?php if ($_SESSION['customer_id'] == \Core\App::getParams()['id']): ?>
+    <form action="<?php echo \Core\Helper::getUrl('customer/photo/upload') ?>" method="post"
+          enctype="multipart/form-data">
+        <input type="file" class="file_upload" name="file">
+        <input type="hidden" name="url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-upload"></span></button>
+    </form>
 <?php endif; ?>

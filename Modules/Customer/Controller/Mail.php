@@ -46,10 +46,8 @@ namespace Customer\Controller {
                         )
                     );
                 }
-            } catch (Exception $error) {
-                if ($error->getMessage() != 'norepl') {
-                    throw  new \Exception($error->getMessage());
-                }
+            } catch (\Exception $error) {
+                
             }
             $this
                 ->setKey('page')

@@ -66,7 +66,9 @@ namespace Customer\Block\Photo
         }
 
         public function getDirectoryPath()
-        {}
+        {
+            return \Core\App::getRootPath().'uploads'.DIRECTORY_SEPARATOR.\Core\App::getParams()['id'].DIRECTORY_SEPARATOR;
+        }
 
     }
 

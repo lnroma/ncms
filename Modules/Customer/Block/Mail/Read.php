@@ -10,6 +10,12 @@ namespace Customer\Block\Mail
     class Read extends \Core\Block\Factory\Grid
     {
         private $_userData = array();
+
+        public function __construct()
+        {
+            $this->setTemplate('customer/mail/read');
+        }
+
         /**
          * get collection
          * @return \MongoDB\Driver\Cursor
@@ -48,8 +54,8 @@ namespace Customer\Block\Mail
         {
             $this
                 ->addColumn('name','Name','from_mail','render')
-                ->addColumn('message','Message','message')
-                ->addColumn('read','Status','read','renderReadStatus');
+                ->addColumn('message','Message','message');
+//                ->addColumn('read','Status','read','renderReadStatus');
 
             return $this;
         }
@@ -80,9 +86,9 @@ namespace Customer\Block\Mail
         public function renderReadStatus($readStatus)
         {
             if($readStatus == false) {
-                return \Core\Helper::__('not read');
+                return '(Не прочитанно)';
             } else {
-                return \Core\Helper::__('read');
+                return '';
             }
         }
 

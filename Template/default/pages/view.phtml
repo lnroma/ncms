@@ -17,15 +17,19 @@ $page = reset($page);
     <input type="hidden" name="page_id" value="<?php echo $page->_id ?>">
     <input type="hidden" name="back_url"
            value="<?php echo \Core\App::getBaseUrl() . trim($_SERVER['REQUEST_URI'], '/') ?>">
+    <?php if(isset($_SESSION['customer_id'])): ?>
+        <input type="hidden" id="name" name="name" value="<?php echo \Customer\Model\Customer::getCustomer()->getName() ?>" >
+    <?php else: ?>
     <div class="form-group">
         <label for="name">Your name:</label>
         <input class="form-control" id="name" name="name">
     </div>
+    <?php endif;?>
     <div class="form-group">
-        <label for="comment">Your comment:</label>
+        <label for="comment">Коментарий:</label>
         <textarea class="form-control" id="comment" name="comment"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Send you comment</button>
+    <button type="submit" class="btn btn-primary">Коментировать</button>
 </form>
 <a name="form"></a>
 
