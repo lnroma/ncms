@@ -1,1 +1,0 @@
-<?php return unserialize('a:4:{s:7:"db_host";s:32:"mysql:host=localhost;dbname=ncms";s:4:"user";s:4:"root";s:4:"pass";s:3:"123";s:7:"mongodb";a:2:{s:7:"connect";s:43:"mongodb://ncms:ncms123@localhost:27017/ncms";s:2:"db";s:4:"ncms";}}');
