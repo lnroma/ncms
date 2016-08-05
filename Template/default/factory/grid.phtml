@@ -1,6 +1,9 @@
 <?php
 /** @var \Core\Block\Factory\Grid @this * */
 ?>
+<?php foreach($this->_prepareButton() as $button): ?>
+<a href="<?php echo $button['href'] ?>" class="btn btn-default"><?php echo $button['title'] ?></a>
+<?php endforeach; ?>
 <table class="table-bordered table">
     <thead>
     <tr>

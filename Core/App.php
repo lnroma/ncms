@@ -150,6 +150,7 @@ namespace Core {
             }
 
             $controllersModul = $modulConfig['controllers'] . '\\' . ucfirst($params['controllerName']);
+
             if (!class_exists($controllersModul)) {
                 throw new \Exception\Notfound('Not found class controller');
             }

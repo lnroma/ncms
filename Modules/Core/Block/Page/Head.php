@@ -21,6 +21,7 @@ namespace Core\Block\Page {
             $config = \Core\App::getAllModulesConfig();
             $request = \Core\App::getParams();
             $configThisPage = $config[$request['controller']]['page'][$request['controllerName']][$request['action']];
+            $configThisPage = \Core\App::dispathEvent('render_seo_meta',$configThisPage);
             return $configThisPage;
         }
 

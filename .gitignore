@@ -2,4 +2,7 @@
 index.php
 vendor/
 uploads/
-Config/
+Config/App.php
+Config/Db.php
+Config/Fs.php
+Config/google.json

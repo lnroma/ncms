@@ -21,6 +21,11 @@ namespace Pages\Controller {
                 ->render();
         }
 
+        public function seoAction()
+        {
+            die('this is seo');
+        }
+
         /**
          * add menu render
          */

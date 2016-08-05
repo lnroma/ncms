@@ -100,6 +100,14 @@ namespace Core\Block\Factory
         {
             return array();
         }
+
+        /**
+         * @return array
+         */
+        protected function _prepareButton()
+        {
+            return array();
+        }
         
         /**
          * get columns

@@ -28,7 +28,7 @@ namespace Pages\Config {
                         'rout' => \Config\App::getConfig()['adminurl'] . '/pages',
                         'label' => 'Pages',
                         'sort' => 10,
-                    ),
+                    )
                 ),
                 'menu_frontend' => array(
                     array(
