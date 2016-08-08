@@ -52,6 +52,10 @@ namespace Config {
                 'seo' => array(
                     'config_class' => '\Seo\Config\Config',
                     'enable' => true
+                ),
+                'forum' => array(
+                    'config_class' => '\Forum\Config\Config',
+                    'enable' => true
                 )
             );
         }

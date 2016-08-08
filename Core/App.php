@@ -222,7 +222,7 @@ namespace Core {
 
                 foreach ($_POST[$key] as $_key => $_post) {
                     if ($filtered) {
-                        $result[$_key] = filter_var($_post, FILTER_SANITIZE_SPECIAL_CHARS);
+                        $result[$_key] = filter_g($_post, FILTER_SANITIZE_SPECIAL_CHARS);
                     } else {
                         $result[$_key] = $_post;
                     }

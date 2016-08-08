@@ -22,6 +22,8 @@ namespace Config {
                 $adminRout . '/pages/index' => 'pages/index/index',
                 $adminRout . '/seo/index' => 'seo/index/index',
                 $adminRout . '/seo/add' => 'seo/index/add',
+                $adminRout . '/forum/index' => 'forum/admin/index',
+                $adminRout . '/forum/add' => 'forum/admin/add',
                 'authgoogle' => 'customer/index/index',
                 '/' => 'index/index',
                 '' => 'index/index/index',

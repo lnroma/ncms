@@ -22,6 +22,7 @@ namespace Urladmin\Model {
                 ->addFieldToFilter('type', \Urladmin\Model\Url::REWRITE)
                 ->load();
             $result = reset($result);
+//            var_dump($result);die;
             if (isset($result['to_url'])) {
                 $routTo = explode('/', $result['to_url']);
                 $data['controller'] = $routTo[0];

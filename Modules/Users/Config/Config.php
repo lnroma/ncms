@@ -17,7 +17,7 @@ namespace Users\Config {
             return array(
                 'blocks' => '\Users\Block',
                 'models' => '\Users\Model',
-                'controllers' => '\Users\Controller\'
+                'controllers' => '\Users\Controller\\'
             );
         }
     }

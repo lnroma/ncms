@@ -55,8 +55,15 @@ namespace Customer\Config {
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/index/all',
                     'label' => '',
-                    'icon' => 'glyphicon glyphicon-heart',
+                    'icon' => 'glyphicon glyphicon-list',
                     'sort' => 13
+                );
+
+                $configuration['menu_frontend'][] = array(
+                    'rout' => 'customer/index/logout',
+                    'label' => '',
+                    'icon' => 'glyphicon glyphicon-log-out',
+                    'sort' => 25,
                 );
 
                 $configuration['page']['mail']['index'] = array(
@@ -83,6 +90,7 @@ namespace Customer\Config {
                     'description' => 'read mail',
                     'activeMenu' => ''
                 );
+
 
             } else {
                 $configuration['menu_frontend'] = array(

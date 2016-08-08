@@ -1,12 +1,7 @@
 <?php
-/** @var \Core\Block\Factory\Grid @this * */
+/** @var \Customer\Block\Mail\Read @this * */
 ?>
-<?php echo $this->_getTitle() ?>
-<?php foreach ($this->_prepareButton() as $button): ?>
-    <a href="<?php echo $button['href'] ?>" class="btn btn-default"><?php echo $button['title'] ?></a>
-<?php endforeach; ?>
 <table class="table-bordered table">
-    <col width="200px">
     <thead>
     <tr>
         <?php foreach ($this->getColumns() as $_column): ?>
@@ -26,6 +21,7 @@
                         <?php echo call_user_func(array($this, $_col['render']), $_collection->{$_col['index']}) ?>
                     <?php else: ?>
                         <?php echo $_collection->{$_col['index']} ?>
+                        <?php echo $this->renderReadStatus($_collection->read) ?>
                     <?php endif; ?>
                 </td>
             <?php endforeach; ?>

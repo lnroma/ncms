@@ -16,8 +16,30 @@ $pageInfo =  $this->getPageConfig();
 <script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/js/bootstrap.js' ?>"></script>
 <script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/js/validator.js' ?>"></script>
 <script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/tree/src/easyTree.js' ?>"></script>
+<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/js/jquery-fieldselection/jquery-fieldselection.min.js'?>"></script>
 <script>
     $(function() {
         $('#form_create').validator()
     });
+
+    $.fn.extend({
+        insertAtCaret: function(myValue){
+            var obj;
+            if( typeof this[0].name !='undefined' ) obj = this[0];
+            else obj = this;
+//             if ($.browser.mozilla || $.browser.webkit) {
+                var startPos = obj.selectionStart;
+                var endPos = obj.selectionEnd;
+                var scrollTop = obj.scrollTop;
+                obj.value = obj.value.substring(0, startPos)+myValue+obj.value.substring(endPos,obj.value.length);
+                obj.focus();
+                obj.selectionStart = startPos + myValue.length;
+                obj.selectionEnd = startPos + myValue.length;
+                obj.scrollTop = scrollTop;
+//            } else {
+//                obj.value += myValue;
+//                obj.focus();
+//            }
+        }
+    })
 </script>

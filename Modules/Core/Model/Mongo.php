@@ -11,7 +11,7 @@ namespace Core\Model {
 
         static private $_connect = null;
         static private $_sort = array();
-
+        
         /**
          * @return \MongoDB\Driver\Manager
          */
@@ -42,6 +42,7 @@ namespace Core\Model {
 
             $write->insert($dataArray);
             $result = $connect->executeBulkWrite(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $write, $writeConcern);
+            return $result;
         }
 
         /**
@@ -117,6 +118,25 @@ namespace Core\Model {
 
             $sort= $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'] . '.' . $collection, $query);
             return $sort;
+        }
+
+        /**
+         * eq mysql licke
+         * @param $key
+         * @param $value
+         * @param $collection
+         * @return \MongoDB\Driver\Cursor
+         */
+        static function simpleSearch($key,$value,$collection)
+        {
+            $con = \Core\Model\Mongo::getConnect();
+
+            $query = new \MongoDB\Driver\Query(
+               array(
+                   $key => '/.*'.$value.'.*/'
+               )
+            );
+            return $con->executeQuery(\Core\Helper::getDb()['mongodb']['db'].'.'.$collection,$query);
         }
 
         /**

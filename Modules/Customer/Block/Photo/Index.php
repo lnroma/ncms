@@ -22,7 +22,12 @@ namespace Customer\Block\Photo
          */
         public function getUrlToPicture()
         {
-            return \Core\App::getBaseUrl().'/uploads/'.\Core\App::getParams()['id'].'/';
+            $id = $_SESSION['customer_id'];
+            if(isset(\Core\App::getParams()['id'])) {
+                $id = \Core\App::getParams()['id'];
+            }
+
+            return \Core\App::getBaseUrl().'/uploads/'.$id .'/';
         }
 
         protected function _prepareDirectory($directory)
@@ -36,7 +41,11 @@ namespace Customer\Block\Photo
          */
         public function getAllFile()
         {
-            $directory = \Core\App::getRootPath().'uploads'.DIRECTORY_SEPARATOR.\Core\App::getParams()['id'].DIRECTORY_SEPARATOR;
+            $id = $_SESSION['customer_id'];
+            if(isset(\Core\App::getParams()['id'])) {
+                $id = \Core\App::getParams()['id'];
+            }
+            $directory = \Core\App::getRootPath().'uploads'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR;
 
             $glob = array();
 

@@ -1,0 +1,15 @@
+<?php /** @var \Core\Block\AbstractClass $this */ ?>
+<head>
+<?php $this->getChunk('chunks/_head.phtml','\Core\Block\Page\Head') ?>
+</head>
+<body>
+<?php $this->getChunk('chunks/_menu.phtml','\Core\Block\Page\Menu') ?>
+<div class="container">
+    <?php echo $this->getData('message') ?>
+    <?php echo $this->getData('content') ?>
+    <?php if(isset($_SESSION['customer_id'])): ?>
+    <?php echo $this->getData('form') ?>
+    <?php endif;?>
+</div>
+</body>
+<?php $this->getChunk('chunks/_footer.phtml') ?>

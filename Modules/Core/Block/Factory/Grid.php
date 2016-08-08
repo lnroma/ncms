@@ -54,7 +54,7 @@ namespace Core\Block\Factory
                 'sort' => array(
                     'time' => $sort
                 ),
-                'limit' => 5*($page+1),
+                'limit' => 20*($page+1),
             );
         }
 
@@ -120,6 +120,11 @@ namespace Core\Block\Factory
             }
 
             return $this->_column;
+        }
+
+        protected function _getTitle()
+        {
+            return '';
         }
 
         /**

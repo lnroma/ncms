@@ -11,6 +11,8 @@ namespace Customer\Model {
     {
         static $_customer = array();
 
+        const ENTITY = 'customer';
+
         /**
          * get customer information from database
          * @return \Customer\Model\Customer\Information

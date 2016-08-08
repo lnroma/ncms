@@ -1,0 +1,20 @@
+<?php /** @var \Forum\Block\Trade\Message\Trade $this */ ?>
+<?php $postInfo = $this->getPostInfo() ?>
+<?php $postInfo = $postInfo->toArray() ?>
+<?php $postInfo = reset($postInfo) ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <?php echo $postInfo->title ?>
+    </div>
+    <div class="panel-body">
+        <?php echo $postInfo->message ?>
+    </div>
+    <div class="panel-footer">
+        Автор:<?php echo \Customer\Model\Customer::getCustomer($postInfo->owner)->getName();  ?><br/>
+        <?php if(isset($_SESSION['customer_id']) && $postInfo->owner == $_SESSION['customer_id']): ?>
+            [<a href="<?php echo \Core\Helper::getUrl('forum/index/add') ?>/trade/<?php echo \Core\App::getParams()['trade']?>/trade_id/<?php echo \Core\App::getParams()['trade_id']?>">
+                редактировать
+            </a>]
+        <?php endif; ?>
+    </div>
+</div>
