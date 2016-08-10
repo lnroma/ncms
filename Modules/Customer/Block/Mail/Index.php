@@ -77,9 +77,7 @@ namespace Customer\Block\Mail {
                 $name = \Core\Helper::__('I').'('.$name.')';
             }
 
-            $html .= '
-            <span class="glyphicon glyphicon-user">'.$name.'</span>
-            ';
+            $html .= '<br/>'.$name;
             return $html;
         }
 
