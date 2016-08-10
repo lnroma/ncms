@@ -10,6 +10,10 @@ namespace Forum\Block\Trade;
 class View extends \Core\Block\Factory\Grid
 {
 
+    /**
+     * get collection
+     * @return \MongoDB\Driver\Cursor
+     */
     public function getCollection()
     {
         return \Core\Model\Mongo::select(
@@ -19,6 +23,16 @@ class View extends \Core\Block\Factory\Grid
             \Forum\Model\Forum\Trade::COLLECTION,
             $this->_optionsCollection()
         );
+    }
+
+    public function getCount()
+    {
+        $common = \Core\Model\Mongo::simpleSelect(
+            'trade',
+            \Core\App::getParams()['trade'],
+            \Forum\Model\Forum\Trade::COLLECTION
+        );
+        return count($common->toArray());
     }
 
     public function _prepareGrid()

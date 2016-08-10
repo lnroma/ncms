@@ -23,7 +23,7 @@
             <?php foreach ($this->getColumns() as $_col): ?>
                 <td>
                     <?php if (isset($_col['render'])): ?>
-                        <?php echo call_user_func(array($this, $_col['render']), $_collection->{$_col['index']}) ?>
+                        <?php echo call_user_func(array($this, $_col['render']), $_collection->{$_col['index']},$_collection) ?>
                     <?php else: ?>
                         <?php echo $_collection->{$_col['index']} ?>
                     <?php endif; ?>
@@ -49,33 +49,31 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-<?php
-
-$page = 0;
-
-if (isset(\Core\App::getParams()['page'])) {
-    $page = \Core\App::getParams()['page'];
-}
-
-$request = '';
-$collapse = '';
-
-$_request = explode('/', $_SERVER['REQUEST_URI']);
-
-if (array_search('page', $_request) !== false) {
-    $key = array_search('page', $_request) + 1;
-    $_request[$key] = $page + 1;
-    $request = implode('/', $_request);
-    $_request[$key] = 0;
-    $collapse = implode('/', $_request);
-    $request = str_replace('//', '/', $request);
-    $collapse = str_replace('//', '/', $collapse);
-} else {
-    $request = rtrim($_SERVER['REQUEST_URI'], '/') . '/page/' . ($page + 1);
-}
-
-?>
-<a href="<?php echo $request ?>" class="btn btn-default "><span class="glyphicon glyphicon-circle-arrow-down"></span>
-</a>
-<a href="<?php echo $collapse ?>" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-up"></span></a>
 <a onclick="window.location.reload()" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> </a>
+<?php $commonPage = $this->getPageCount() ?>
+<?php for ($p = 0; $p < $commonPage; $p++): ?>
+    <?php
+
+    $request = '';
+    $collapse = '';
+
+    $_request = explode('/', $_SERVER['REQUEST_URI']);
+
+    if (array_search('page', $_request) !== false) {
+        $key = array_search('page', $_request) + 1;
+        $_request[$key] = $p;
+        $request = implode('/', $_request);
+        $_request[$key] = 0;
+        $collapse = implode('/', $_request);
+        $request = str_replace('//', '/', $request);
+        $collapse = str_replace('//', '/', $collapse);
+    } else {
+        $request = rtrim($_SERVER['REQUEST_URI'], '/') . '/page/' . $p;
+    }
+    ?>
+    <?php if ($p == 0): ?>
+        <a href="<?php echo $collapse ?>" class="btn btn-default"><?php echo $p ?></a>
+    <?php else: ?>
+        <a href="<?php echo $request ?>" class="btn btn-default"><?php echo $p ?></a>
+    <?php endif; ?>
+<?php endfor; ?>

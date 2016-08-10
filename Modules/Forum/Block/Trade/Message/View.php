@@ -21,6 +21,21 @@ class View extends \Core\Block\Factory\Grid
         );
     }
 
+    /**
+     * get count
+     * @return int
+     */
+    public function getCount()
+    {
+        $common = \Core\Model\Mongo::simpleSelect(
+            'post_id'
+            ,\Core\App::getParams()['trade_id']
+            ,\Forum\Model\Forum\Trade\Message::COLLECTION
+        );
+
+        return count($common->toArray());
+    }
+
     public function _prepareGrid()
     {
         $this
@@ -28,11 +43,19 @@ class View extends \Core\Block\Factory\Grid
             ->addColumn('message','Сообщение','message');
     }
 
-    public function render($index)
+    public function render($index,$collection)
     {
         $user = \Customer\Model\Customer::getCustomer($index);
         $render = '<img width="100px"  src="'.$user->getAvatar().'" /><br/>';
+        $render .= date('Y|m|d',$collection->time).'<br/>';
+        $render .= date('H:i',$collection->time).'<br/>';
         return $render.$user->getName();
+    }
+
+    public function renderMessage($message,$collection)
+    {
+        $render = $message.'<div class="panel-footer">testing|mesting</div>';
+        return $render;
     }
 
 }

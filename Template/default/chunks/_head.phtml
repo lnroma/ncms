@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <?php
 /** @var \Core\Block\Page\Head $this */
-$pageInfo =  $this->getPageConfig();
+$pageInfo = $this->getPageConfig();
 ?>
 <title><?php echo isset($pageInfo['title']) ? $pageInfo['title'] : '' ?></title>
 <meta charset="UTF-8">
 <!--<link rel="stylesheet" href="--><?php //echo \Core\App::getBaseUrl().'static/main.css' ?><!--" />-->
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/function.js' ?>"></script>
-<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/tree/css/easyTree.css' ?>"></script>
+<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl() . 'static/function.js' ?>"></script>
+<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl() . 'static/tree/css/easyTree.css' ?>"></script>
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="/favicon.ico" type="image/png">
-<link rel="stylesheet" href="<?php echo \Core\App::getBaseUrl()?>static/css/bootstrap.css" />
+<link rel="stylesheet" href="<?php echo \Core\App::getBaseUrl() ?>static/css/bootstrap.css"/>
+<link rel="stylesheet" href="<?php echo \Core\App::getBaseUrl() ?>static/css/custom.css"/>
+<script src="https://use.fontawesome.com/9c8399df5c.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/js/bootstrap.js' ?>"></script>
-<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/js/validator.js' ?>"></script>
-<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/tree/src/easyTree.js' ?>"></script>
-<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl().'static/js/jquery-fieldselection/jquery-fieldselection.min.js'?>"></script>
+<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl() . 'static/js/bootstrap.js' ?>"></script>
+<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl() . 'static/js/validator.js' ?>"></script>
+<script type="text/javascript" src="<?php echo \Core\App::getBaseUrl() . 'static/tree/src/easyTree.js' ?>"></script>
+<script type="text/javascript"
+        src="<?php echo \Core\App::getBaseUrl() . 'static/js/jquery-fieldselection/jquery-fieldselection.min.js' ?>"></script>
 <script>
-    $(function() {
+    $(function () {
         $('#form_create').validator()
     });
 
     $.fn.extend({
-        insertAtCaret: function(myValue){
+        insertAtCaret: function (myValue) {
             var obj;
-            if( typeof this[0].name !='undefined' ) obj = this[0];
+            if (typeof this[0].name != 'undefined') obj = this[0];
             else obj = this;
-//             if ($.browser.mozilla || $.browser.webkit) {
-                var startPos = obj.selectionStart;
-                var endPos = obj.selectionEnd;
-                var scrollTop = obj.scrollTop;
-                obj.value = obj.value.substring(0, startPos)+myValue+obj.value.substring(endPos,obj.value.length);
-                obj.focus();
-                obj.selectionStart = startPos + myValue.length;
-                obj.selectionEnd = startPos + myValue.length;
-                obj.scrollTop = scrollTop;
-//            } else {
-//                obj.value += myValue;
-//                obj.focus();
-//            }
+            var startPos = obj.selectionStart;
+            var endPos = obj.selectionEnd;
+            var scrollTop = obj.scrollTop;
+            obj.value = obj.value.substring(0, startPos) + myValue + obj.value.substring(endPos, obj.value.length);
+            obj.focus();
+            obj.selectionStart = startPos + myValue.length;
+            obj.selectionEnd = startPos + myValue.length;
+            obj.scrollTop = scrollTop;
         }
     })
 </script>

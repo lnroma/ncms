@@ -12,6 +12,7 @@ namespace Core\Block\Factory
 
         private $_collection = null;
         private $_column = array();
+        private $_limit =5;
 
         public function __construct()
         {
@@ -25,6 +26,27 @@ namespace Core\Block\Factory
         public function getCollection()
         {
             return array();
+        }
+
+        public function getCount()
+        {
+            return 0;
+        }
+
+        /**
+         * set document on one page
+         * @param $number
+         * @return $this
+         */
+        public function setDocumentPerPage($number)
+        {
+            $this->_limit = $number;
+            return $this;
+        }
+
+        public function getPageCount()
+        {
+            return ceil($this->getCount()/$this->_limit);
         }
 
         /**
@@ -54,7 +76,8 @@ namespace Core\Block\Factory
                 'sort' => array(
                     'time' => $sort
                 ),
-                'limit' => 20*($page+1),
+                'skip' => $this->_limit*($page),
+                'limit' => $this->_limit,
             );
         }
 

@@ -46,6 +46,8 @@ foreach ($this->getFormOptions() as $key => $value) {
                             class="glyphicon glyphicon-bold"></span></button>
                     <button type="button" id="italic" class="btn btn-default"><span
                             class="glyphicon glyphicon-italic"></span></button>
+                    <button type="button" id="quote" class="btn btn-default"> <i class="fa fa-quote-left"></i></button>
+<!--                    fi-quote-->
                 </div>
             </div>
             <div class="panel-body">
@@ -165,5 +167,10 @@ foreach ($this->getFormOptions() as $key => $value) {
     $('#italic').on('click', function () {
         var select = $('#message').getSelection();
         $('#message').insertAtCaret('<i>' + select.text + '</i>');
+    });
+
+    $('#quote').on('click', function () {
+        var select = $('#message').getSelection();
+        $('#message').insertAtCaret('<blockquote>' + select.text + '</blockquote>');
     });
 </script>
