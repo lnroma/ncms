@@ -34,7 +34,7 @@ namespace Index\Block {
                 'q=barnaul&APPID=b56f458955dd11e1bceb67e5b952b367' .
                 '&units=metric' .
                 '&lang=ru' .
-                '&cnt=12'
+                '&cnt=4'
             );
 
             $temperature = json_decode($information);
