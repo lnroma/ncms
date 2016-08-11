@@ -39,30 +39,30 @@ namespace Customer\Config {
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/mail/index',
-                    'label' => '',
-                    'icon' => 'glyphicon glyphicon-envelope',
+                    'label' => 'Почта',
+                    'icon' => '',
                     'sort' => 11,
                 );
 
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/index/accaunt',
-                    'label' => '',
-                    'icon' => 'glyphicon glyphicon-user',
+                    'label' => 'Мой аккаунт',
+                    'icon' => '',
                     'sort' => 12,
                 );
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/index/all',
-                    'label' => '',
-                    'icon' => 'glyphicon glyphicon-list',
+                    'label' => 'Пользователи',
+                    'icon' => '',
                     'sort' => 13
                 );
 
                 $configuration['menu_frontend'][] = array(
                     'rout' => 'customer/index/logout',
-                    'label' => '',
-                    'icon' => 'glyphicon glyphicon-log-out',
+                    'label' => 'Выход',
+                    'icon' => '',
                     'sort' => 25,
                 );
 
@@ -96,8 +96,8 @@ namespace Customer\Config {
                 $configuration['menu_frontend'] = array(
                     array(
                         'rout' => \Customer\Block\Menu::getAuthLink(),
-                        'label' => '',
-                        'icon' => 'glyphicon glyphicon-log-in',
+                        'label' => 'Войти Google+',
+                        'icon' => '',
                         'sort' => 10,
                     )
                 );

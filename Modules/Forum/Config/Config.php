@@ -66,7 +66,7 @@ class Config
             array(
                 'rout' => '/forum/index/index',
                 'label' => 'Форум',
-                'icon' => 'glyphicon glyphicon-bullhorn',
+                'icon' => '',
                 'sort' => 100,
             )
         );

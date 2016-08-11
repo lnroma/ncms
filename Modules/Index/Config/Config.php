@@ -19,8 +19,8 @@ namespace Index\Config {
                 'menu_frontend' => array(
                     array(
                         'rout' => '',
-                        'label' => ' ',
-                        'icon' => 'glyphicon glyphicon-home',
+                        'label' => 'Домой',
+                        'icon' => '',
                         'sort' => 0
                     ),
                 ),
