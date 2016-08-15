@@ -46,6 +46,7 @@ namespace Seo\Controller {
                         '_id' => new \MongoDB\BSON\ObjectID(\Core\App::getPost('id'))
                     ));
                 } else {
+                    file_put_contents('logMongo.log','mongo save good',FILE_APPEND);
                     \Core\Model\Mongo::insert($_POST, \Seo\Model\Entity::COLLECTION);
                 }
             } catch (\Exception $error) {
@@ -55,7 +56,6 @@ namespace Seo\Controller {
                 }
                 header('Location:'.\Core\App::getPost('back_url'));
             }
-            file_put_contents('logMongo.log','mongo save good',FILE_APPEND);
             header('Location:'.\Core\App::getPost('back_url'));
         }
 

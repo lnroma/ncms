@@ -27,6 +27,11 @@ namespace Seo\Block\Admin {
                 ->addColumn('title','Title','title');
         }
 
+        public function getCount()
+        {
+            return count($this->getCollection()->toArray());
+        }
+
         protected function _prepareAction()
         {
             return array(
