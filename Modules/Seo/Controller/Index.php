@@ -55,6 +55,7 @@ namespace Seo\Controller {
                 }
                 header('Location:'.\Core\App::getPost('back_url'));
             }
+            file_put_contents('logMongo.log','mongo save good',FILE_APPEND);
             header('Location:'.\Core\App::getPost('back_url'));
         }
 
