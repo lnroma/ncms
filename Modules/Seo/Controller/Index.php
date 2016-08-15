@@ -49,6 +49,7 @@ namespace Seo\Controller {
                     \Core\Model\Mongo::insert($_POST, \Seo\Model\Entity::COLLECTION);
                 }
             } catch (\Exception $error) {
+                file_put_contents('logMongo.log',$error->getMessage(),FILE_APPEND);
                 if($error->getMessage() != 'norepl') {
                     throw new Exception($error->getMessage());
                 }
