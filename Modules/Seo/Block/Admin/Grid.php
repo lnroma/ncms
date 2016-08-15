@@ -29,7 +29,8 @@ namespace Seo\Block\Admin {
 
         public function getCount()
         {
-            return count($this->getCollection());
+            $collection = \Core\Model\Mongo::selectAll(\Seo\Model\Entity::COLLECTION);
+            return count($collection->toArray());
         }
 
         protected function _prepareAction()
