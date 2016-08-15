@@ -29,7 +29,7 @@ namespace Seo\Block\Admin {
 
         public function getCount()
         {
-            return count($this->getCollection()->toArray());
+            return count($this->getCollection());
         }
 
         protected function _prepareAction()
