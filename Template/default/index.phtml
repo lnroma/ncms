@@ -90,3 +90,11 @@
         </div>
     </div>
 </div>
+<?php
+ini_set('error_reporting','E_ERROR');
+$page = $_GET['page'];
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$site =22411;
+$tl_get_file=file("http://www.towerlinks.ru/coder.php?site=".$site."&page=".$page."&ppage=5&url=".urlencode($url));
+foreach ($tl_get_file as $tl_line=>$tl_text) { echo iconv("WINDOWS-1251","UTF-8",$tl_text)."\n"; }
+?>
