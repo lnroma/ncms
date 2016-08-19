@@ -92,7 +92,13 @@ $page = reset($page);
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',
                 'insertdatetime media table contextmenu paste code'
-            ]
+            ],
+            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+            image_advtab: true ,
+
+            external_filemanager_path:"/filemanager/",
+            filemanager_title:"Responsive Filemanager" ,
+            external_plugins: { "filemanager" : "/filemanager/plugin.min.js"}
         });
     }
 </script>
