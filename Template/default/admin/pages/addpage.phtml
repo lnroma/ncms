@@ -86,6 +86,13 @@ $page = reset($page);
 </form>
 <script>
     window.onload = function(){
-        tinymce.init({ selector:'#tiny_edit' });
+        tinymce.init({
+            selector:'#tiny_edit',
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code'
+            ]
+        });
     }
 </script>
