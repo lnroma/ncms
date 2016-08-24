@@ -1,129 +1,119 @@
 <?php /** @var \Index\Block\Index $this */ ?>
-    <center><h1>altaifisher.ru богатство водоёмов Алтая</h1></center>
-    <h2 style="font-size: 16px;">Сообщество рыболовов Алтая, это место для тех кто, делится своими впечатлениями о
-        поездках на природу,
-        рыбалке, активном образе жизни, законах, запретах,сдесь вы можете продать снасти и купить снасти для своей
-        рыбалке! </h2>
+<center><h1>altaifisher.ru богатство водоёмов Алтая</h1></center>
+<h2 style="font-size: 16px;">Сообщество рыболовов Алтая, это место для тех кто, делится своими впечатлениями о
+    поездках на природу,
+    рыбалке, активном образе жизни, законах, запретах,сдесь вы можете продать снасти и купить снасти для своей
+    рыбалке! </h2>
 
-    <div class="row">
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Заработай на отчётах о рыбалке!
+        </div>
+        <div class="panel panel-body">
+            И так всё просто пишем отчёт о рыбалке,
+            отписываемся сдесь, и в конце каждого месяца получаем выплаты,
+            в размере от 10-80 рублей в зависимости от интересности отчёта,
+            основанного на анализе просмотров и оставленных комментраиев.
+            <a href="http://altaifisher.ru/forum/index/view/trade/othety/trade_id/57bd840ffed56a1e13754479">
+                подробнее>>
+            </a>
+        </div>
+    </div>
+</div>
+
+<h3>Подборка анекдотов:</h3>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Мужик приходит к своему другу и говорит:<br/>
+            - Дай ружьё, соседа завалить хочу, зла уже не хватает. <br/>
+            Друг в шоке:<br/>
+            - Он чё тебе сделал?!!<br/>
+            - Да ты представляешь, я еду на рыбалку - он мою жену ебет, я ночую дома - он мои сети проверяет!<br/>
+        </div>
+
+        <div class="panel-footer">
+            <a href="http://altaifisher.ru/forum/index/view/trade/anekdoty/trade_id/57aca210fed56a04741c7cc7">[Больше
+                анекдотов]</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <iframe width="300" src="https://www.youtube.com/embed/jBp-Fc76zE8" frameborder="0"
+                    allowfullscreen></iframe>
+            <iframe width="300" src="https://www.youtube.com/embed/t_F4iivAiyY" frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div class="panel-footer">
+            <a href="http://altaifisher.ru/forum/index/view/trade/video/trade_id/57af69d3fed56a0477680747">[Смотреть
+                больше]</a>
+        </div>
+    </div>
+</div>
+<h3>Реклама</h3>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <script language="JavaScript" charset="UTF-8" src="http://z1480.takru.com/in.php?id=1488813"></script>
+        </div>
+    </div>
+</div>
+<h3>Погода в крае:</h3>
+
+<div class="row">
+    <?php $phobos = $this->getPhobos() ?>
+    <?php foreach ($phobos as $_ph): ?>
+
+        <div class="col-lg-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <?php echo $_ph['date'] ?>
+                </div>
+                <div class="panel-body">
+                    <img src="<?php echo $_ph['icon'] ?>"/>
+                    <br/>
+                    <?php echo $_ph['weather'] ?>
+                    <br/>
+                    температура:<?php echo $_ph['temperature'] ?>
+                    ветер:<br/>
+                    &nbsp; -скорость:<?php echo $_ph['wind']['speed'] ?><br/>
+                    &nbsp; -азимут:<?php echo $_ph['wind']['deg'] ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Заработай на отчётах о рыбалке!
+                Клёв рыбы
             </div>
-            <div class="panel panel-body">
-                И так всё просто пишем отчёт о рыбалке,
-                отписываемся сдесь, и в конце каждого месяца получаем выплаты,
-                в размере от 10-80 рублей в зависимости от интересности отчёта,
-                основанного на анализе просмотров и оставленных комментраиев.
-                <a href="http://altaifisher.ru/forum/index/view/trade/othety/trade_id/57bd840ffed56a1e13754479">
-                    подробнее>>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <h3>Подборка анекдотов:</h3>
-
-    <div class="row">
-        <div class="panel panel-default">
             <div class="panel-body">
-                Мужик приходит к своему другу и говорит:<br/>
-                - Дай ружьё, соседа завалить хочу, зла уже не хватает. <br/>
-                Друг в шоке:<br/>
-                - Он чё тебе сделал?!!<br/>
-                - Да ты представляешь, я еду на рыбалку - он мою жену ебет, я ночую дома - он мои сети проверяет!<br/>
-            </div>
-
-            <div class="panel-footer">
-                <a href="http://altaifisher.ru/forum/index/view/trade/anekdoty/trade_id/57aca210fed56a04741c7cc7">[Больше
-                    анекдотов]</a>
+                <div style="text-align:center;width:300px;height:240px">
+                    <a href="http://orybe.com" title="Лунный прогноз клёва рыбы">Лунный прогноз клёва рыбы</a><br/>
+                    <iframe src='http://orybe.com/widget_luna_klev.php' width='300' height='240' scrolling='no'
+                            frameborder='0'></iframe>
+                </div>
+                <p>
             </div>
         </div>
     </div>
-
-    <div class="row">
+    <div class="col-lg-6">
         <div class="panel panel-default">
+            <div class="panel-heading">
+                Немного о правилах сообщества
+            </div>
             <div class="panel-body">
-                <iframe width="300" src="https://www.youtube.com/embed/jBp-Fc76zE8" frameborder="0"
-                        allowfullscreen></iframe>
-                <iframe width="300" src="https://www.youtube.com/embed/t_F4iivAiyY" frameborder="0"
-                        allowfullscreen></iframe>
-            </div>
-            <div class="panel-footer">
-                <a href="http://altaifisher.ru/forum/index/view/trade/video/trade_id/57af69d3fed56a0477680747">[Смотреть
-                    больше]</a>
+                1. Материться не воспрещаеться ( воспрещаеться использования мата, как ругательство адрессованное к
+                другому участнку сообщества)
+                </br>
+                2. Публикация материалов не относящихся к теме сообщества. </br>
+                3. Приветствуеться отчёта с водоёмов Алтая.</br>
             </div>
         </div>
     </div>
-    <h3>Реклама</h3>
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <script language="JavaScript" charset="UTF-8" src="http://z1480.takru.com/in.php?id=1488813"></script>
-            </div>
-        </div>
-    </div>
-    <h3>Погода в крае:</h3>
-
-    <div class="row">
-        <?php $phobos = $this->getPhobos() ?>
-        <?php foreach ($phobos as $_ph): ?>
-
-            <div class="col-lg-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <?php echo $_ph['date'] ?>
-                    </div>
-                    <div class="panel-body">
-                        <img src="<?php echo $_ph['icon'] ?>"/>
-                        <br/>
-                        <?php echo $_ph['weather'] ?>
-                        <br/>
-                        температура:<?php echo $_ph['temperature'] ?>
-                        ветер:<br/>
-                        &nbsp; -скорость:<?php echo $_ph['wind']['speed'] ?><br/>
-                        &nbsp; -азимут:<?php echo $_ph['wind']['deg'] ?>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Клёв рыбы
-                </div>
-                <div class="panel-body">
-                    <div style="text-align:center;width:300px;height:240px">
-                        <a href="http://orybe.com" title="Лунный прогноз клёва рыбы">Лунный прогноз клёва рыбы</a><br/>
-                        <iframe src='http://orybe.com/widget_luna_klev.php' width='300' height='240' scrolling='no'
-                                frameborder='0'></iframe>
-                    </div>
-                    <p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Немного о правилах сообщества
-                </div>
-                <div class="panel-body">
-                    1. Материться не воспрещаеться ( воспрещаеться использования мата, как ругательство адрессованное к
-                    другому участнку сообщества)
-                    </br>
-                    2. Публикация материалов не относящихся к теме сообщества. </br>
-                    3. Приветствуеться отчёта с водоёмов Алтая.</br>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php
-ini_set('error_reporting', 'E_ERROR');
-$page = $_GET['page'];
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$site = 22411;
-$tl_get_file = file("http://www.towerlinks.ru/coder.php?site=" . $site . "&page=" . $page . "&ppage=5&url=" . urlencode($url));
-foreach ($tl_get_file as $tl_line => $tl_text) {
-    echo iconv("WINDOWS-1251", "UTF-8", $tl_text) . "\n";
-}
-?>
+</div>
